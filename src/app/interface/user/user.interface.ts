@@ -1,3 +1,5 @@
+import { IHostMember } from './../host/host-member.interface';
+
 export interface IUser {
   _id?: string;
   fname?: string;
@@ -14,6 +16,6 @@ export interface IUser {
   postalCode?: string;
   lat?: number;
   long?: number;
-  reporterId?: string;
-  hosts?: string[];
+  reporterID?: string;
+  hosts?: IHostMember[];
 }

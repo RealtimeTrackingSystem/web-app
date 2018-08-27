@@ -9,20 +9,20 @@ import * as _ from 'lodash';
 import { ISession } from '../interface/session/session.interface';
 import { ISessionCreate } from '../interface/session/session-create.interface';
 import { IUserNew } from '../interface/user/user-new.interface';
-import { BACKEND_URL } from '../config';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class SessionService {
 
-  private authUrl = `${BACKEND_URL}/v1/api/auth`;
+  private authUrl = environment.API_URL + '/api/auth';
   constructor(
     private http: Http
   ) { }
 
   Register (userNew: IUserNew): Observable<ISession> {
-    const headers = new Headers({ 'Content-Type': 'application/json'});
+    const headers = new Headers({'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    return this.http.post(`${this.authUrl}/register`, userNew, options)
+    return this.http.post(this.authUrl + '/signup', userNew, options)
     .map(response => response.json())
     .share()
   }
@@ -30,9 +30,8 @@ export class SessionService {
   Login (sessionCreate: ISessionCreate): Observable<ISession> {
     const headers = new Headers({ 'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    return this.http.post(`${this.authUrl}/login`, sessionCreate, options)
+    return this.http.post(this.authUrl + '/signin', sessionCreate, options)
     .map(response => response.json())
-    .map(data => this.GetData(data))
     .share()
   }
 
@@ -51,22 +50,16 @@ export class SessionService {
   ChangePassword(changePassword: IChangePassword): Observable<any> {
     const headers = new Headers({ 'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    return this.http.put(`${BACKEND_URL}/v1/api/user/password`, changePassword, options)
+    return this.http.put(this.authUrl + '/v1/api/user/password', changePassword, options)
     .map(response => response.json())
-    .map(data => this.GetData(data))
     .share();
   }
 
   ForgotPassword(email: string): Observable<any> {
     const headers = new Headers({ 'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    return this.http.post(`${BACKEND_URL}/v1/api/user/password`, {email}, options)
+    return this.http.post(this.authUrl + '/v1/api/user/password', {email}, options)
     .map(response => response.json())
-    .map(data => this.GetData(data))
     .share();
-  }
-
-  GetData (data) {
-    return data.data;
   }
 }
