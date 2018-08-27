@@ -8,11 +8,13 @@ import { HostService } from './host.service';
 import { ReportService } from './report.service';
 import { ReporterService } from './reporter.service';
 import { DialogService } from './dialog.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
-    HttpModule
+    HttpModule,
+    HttpClientModule
   ],
   declarations: []
 })
