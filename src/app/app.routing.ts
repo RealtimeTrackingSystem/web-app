@@ -39,6 +39,8 @@ export const AppRoutes: Routes = [
       },
       {
         path: '',
+        canActivate: [SessionGuard],
+        canActivateChild: [SessionGuard],
         component: PublicLayoutComponent,
         children: [
           {

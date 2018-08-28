@@ -1,3 +1,4 @@
+import { IHostMember } from './../../interface/host/host-member.interface';
 import { IUser } from './../../interface/user/user.interface';
 import { HostService } from './../../services/host.service';
 import { IHost } from './../../interface/host/host.interface';
@@ -58,7 +59,10 @@ export class UserDataActionCreator {
       );
   }
 
-  PopulateHosts (hosts: IHost[]): Observable<IHost[]> {
+  PopulateHosts (hosts: IHostMember[]): Observable<IHost[]> {
+    if (hosts.length < 1) {
+      return of([]);
+    }
     const getHosts = host => {
       return this.hostService.GetHostById(host._id)
         .pipe(

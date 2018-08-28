@@ -67,22 +67,19 @@ export class SessionActionCreator {
             });
           } else if (result.httpCode === 201) {
             const session: ISession = {
-              token: result.token,
-              user: result.user
+              token: result.payload.token,
+              user: result.payload.user
             }
             this.sessionService.SessionSave(session);
             this.ngRedux.dispatch({
               type: SESSION_CREATE_FULFILLED,
               payload: {
-                token: result.token,
-                user: result.user
+                token: result.payload.token,
+                user: result.payload.user
               }
             });
           }
         }),
-        map(result => ({
-          payload: result.payload
-        })),
         flatMap(
           result => {
             return forkJoin(
@@ -93,7 +90,12 @@ export class SessionActionCreator {
             );
           }
         ),
-        map(result => result[0])
+        map(result => {
+          if (Array.isArray(result)) {
+            return result[0];
+          }
+          return result;
+        })
       );
   }
 
@@ -136,6 +138,45 @@ export class SessionActionCreator {
                 this.userDataActionCreator.PopulateReporter(result.payload.user.reporterID),
                 this.userDataActionCreator.PopulateHosts(result.payload.user.hosts),
                 this.userDataActionCreator.PopulateUser(result.payload.user)
+              );
+            } else {
+              return of(result);
+            }
+          }
+        ),
+        map(result => {
+          if (Array.isArray(result)) {
+            return result[0];
+          }
+          return result;
+        })
+      );
+  }
+
+  SessionCheck (): Observable<ISession> {
+    return of(this.sessionService.SessionRead())
+      .pipe(
+        tap(result => {
+          if (result) {
+            const session: ISession = {
+              token: result.token,
+              user: result.user
+            }
+            this.sessionService.SessionSave(session);
+            this.ngRedux.dispatch({
+              type: SESSION_CREATE_FULFILLED,
+              payload: result
+            });
+          }
+        }),
+        flatMap(
+          result => {
+            if (result) {
+              return forkJoin(
+                of(result),
+                this.userDataActionCreator.PopulateReporter(result.user.reporterID),
+                this.userDataActionCreator.PopulateHosts(result.user.hosts),
+                this.userDataActionCreator.PopulateUser(result.user)
               );
             } else {
               return of(result);
