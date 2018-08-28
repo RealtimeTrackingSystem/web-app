@@ -1,109 +1,220 @@
+
 <div class="wrapper wrapper-full-page">
-  <nav class="navbar navbar-primary navbar-transparent navbar-fixed-top">
+  <div class="page-header register-page header-filter" filter-color="black" style="background-image: url('./assets/img/register.jpg'); background-size: cover; background-position: top center;">
     <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-example">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/dashboard">Straat.info</a>
-      </div>
-      <div class="collapse navbar-collapse" id="menu-example">
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="/dashboard">
-              <i class="material-icons">dashboard</i> Dashboard
-            </a>
-          </li>
-          <li class="active">
-            <a href="/auth/register">
-              <i class="material-icons">person_add</i> Register
-            </a>
-          </li>
-          <li class="">
-            <a href="/auth/login">
-              <i class="material-icons">fingerprint</i> Login
-            </a>
-          </li>
-          <li class="">
-            <a href="/auth/lock">
-              <i class="material-icons">lock_open</i> Lock
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <div class="full-page login-page" filter-color="black">
-    <div class="content">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 col-sm-6 col-md-offset-2 col-sm-offset-3">
-            <form [formGroup]="signUpForm" (submit)="submit()">
-              <div class="card card-login card-hidden">
-                <div class="card-header text-center" data-background-color="blue">
-                  <h4 class="card-title">Register</h4>
-                </div>
-                <div class="card-content">
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="material-icons">face</i>
-                    </span>
-                    <app-input-basic length="20" formControlName="loginName" [c]="signUpForm.controls.loginName" [optional]="true" idd="loginName" placeholder=""
-                      type="email" text="Email or Username:"></app-input-basic>
-                  </div>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="material-icons">info</i>
-                    </span>
-                    <app-input-basic length="20" formControlName="password" [c]="signUpForm.controls.password" [optional]="true" idd="password"
-                      placeholder="" type="password" text="Password:"></app-input-basic>
-                  </div>
-                </div>
-                <div class="footer text-center">
-                  <button type="submit" class="btn btn-info btn-wd btn-lg">Login</button>
-                <!--  <p><a (click)="forgotPasswordToggle()">forgot password?</a></p>-->
+      <div class="row">
+        <div class="col-md-10 ml-auto mr-auto">
+          <div class="card card-signup">
+            <h2 class="card-title text-center">Register</h2>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 mr-auto">
+                  <form [formGroup]="registrationForm" (submit)="submit()" class="form">
+                    <div class="row">
+                      <div class="col-md-5 mr-auto">
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="material-icons">face</i>
+                              </span>
+                            </div>
+                            <input formControlName="username" type="text" class="form-control" placeholder="Username">
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="material-icons">mail</i>
+                              </span>
+                            </div>
+                            <input formControlName="email" type="text" class="form-control" placeholder="Email...">
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="material-icons">face</i>
+                              </span>
+                            </div>
+                            <input formControlName="fname" type="text" placeholder="First Name" class="form-control">
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="material-icons">face</i>
+                              </span>
+                            </div>
+                            <input formControlName="lname" type="text" placeholder="Last Name" class="form-control">
+                          </div>
+                        </div>
+                      
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="material-icons">face</i>
+                              </span>
+                            </div>
+                            <input formControlName="gender" type="text" placeholder="Gender" class="form-control">
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="material-icons">face</i>
+                              </span>
+                            </div>
+                            <input formControlName="alias" type="text" placeholder="Alias / Nickname" class="form-control">
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="material-icons">face</i>
+                              </span>
+                            </div>
+                            <input formControlName="street" type="text" placeholder="Street" class="form-control">
+                          </div>
+                        </div>
+                      </div><!--col-md-6-->
+
+                      <div class="col-md-5 mr-auto">
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="material-icons">face</i>
+                              </span>
+                            </div>
+                            <input formControlName="barangay" type="text" class="form-control" placeholder="Barangay">
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="material-icons">face</i>
+                              </span>
+                            </div>
+                            <input formControlName="city" type="text" class="form-control" placeholder="City">
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="material-icons">face</i>
+                              </span>
+                            </div>
+                            <input formControlName="region" type="text" placeholder="Region" class="form-control">
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="material-icons">face</i>
+                              </span>
+                            </div>
+                            <input formControlName="country" type="text" placeholder="Country" class="form-control">
+                          </div>
+                        </div>
+                      
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="material-icons">face</i>
+                              </span>
+                            </div>
+                            <input formControlName="zip" type="text" placeholder="Zip" class="form-control">
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="material-icons">lock_outline</i>
+                              </span>
+                            </div>
+                            <input formControlName="password" type="password" placeholder="Password..." class="form-control">
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="material-icons">lock_outline</i>
+                              </span>
+                            </div>
+                            <input formControlName="passwordConfirmation" type="password" placeholder="Confirm Password" class="form-control">
+                          </div>
+                        </div>
+
+                      </div><!--col-md-6-->
+                    </div>
+                    <br />
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-info btn-round mt-4">Register</button>
+                    </div>
+                  </form>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <footer class="footer">
-        <div class="container">
-          <nav class="pull-left">
-            <!-- <ul>
-              <li>
-                <a href="#">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  Company
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  Portfolio
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  Blog
-                </a>
-              </li>
-            </ul> -->
-          </nav>
-          <p class="copyright pull-right">
-            &copy; {{test | date: 'yyyy'}}
-            Seqretary b.v., alle rechten voorbehouden
-          </p>
+    <footer class="footer ">
+      <div class="container">
+        <!--<nav class="pull-left">
+          <ul>
+            <li>
+              <a href="https://www.creative-tim.com">
+                Creative Tim
+              </a>
+            </li>
+            <li>
+              <a href="https://creative-tim.com/about-us">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="http://blog.creative-tim.com">
+                Blog
+              </a>
+            </li>
+            <li>
+              <a href="https://www.creative-tim.com/license">
+                Licenses
+              </a>
+            </li>
+          </ul>
+        </nav>-->
+        <div class="copyright pull-right">
+          &copy;
+            {{test | date: 'yyyy'}}, made with <i class="material-icons">favorite</i> by
+          <a href="#" target="_blank">Realtime Report Tracking System</a> web application
         </div>
-      </footer>
-      <div class="full-page-background" style="background-image: url(../../../assets/img/login.jpeg) "></div>
+      </div>
+    </footer>
   </div>
 </div>

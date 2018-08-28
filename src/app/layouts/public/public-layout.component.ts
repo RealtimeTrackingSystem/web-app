@@ -26,8 +26,8 @@ export class PublicLayoutComponent implements OnInit, AfterViewInit {
     this.location = location;
   }
   ngOnInit() {
-    if (this.router.url === '/host') {
-      this.router.navigate(['/host/dashboard']);
+    if (this.router.url === '/public') {
+      this.router.navigate(['/public/dashboard']);
     }
     const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');
     const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
