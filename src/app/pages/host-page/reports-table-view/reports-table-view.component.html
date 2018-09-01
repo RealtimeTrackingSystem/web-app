@@ -1,0 +1,18 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <app-reports-table
+        [reports]="($reports | async)"
+        [count]="($count | async)"
+        [page]="($page | async)"
+        [limit]="($limit | async)"
+        (nextPage)="nextPage()"
+        (prevPage)="prevPage()"
+        (firstPage)="firstPage()"
+        (lastPage)="lastPage()"
+        (goToPage)="goToPage($event)"
+        (reportDetails)="reportDetails($event)"
+      ></app-reports-table>
+    </div>
+  </div>
+</div>

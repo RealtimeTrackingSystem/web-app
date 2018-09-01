@@ -62,6 +62,14 @@ export function userDataDestroy (state: IUserDataStore) {
     user: null,
     hostMemberships: [],
     reporter: null,
+    activeHost: null,
     error: null
+  });
+}
+
+export function setActiveHost (state: IUserDataStore, action) {
+  return tassign<IUserDataStore, IUserDataStore>(state, {
+    ...state,
+    activeHost: action.payload.activeHost
   });
 }

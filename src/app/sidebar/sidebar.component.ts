@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
 
 declare const $: any;
@@ -11,6 +11,7 @@ export interface RouteInfo {
     icontype: string;
     collapse?: string;
     children?: ChildrenItems[];
+    usedBy: string
 }
 
 export interface ChildrenItems {
@@ -22,13 +23,36 @@ export interface ChildrenItems {
 
 // Menu Items
 export const ROUTES: RouteInfo[] = [
+    // public
     {
-        path: '/dashboard',
+        path: '/public/dashboard',
         title: 'Dashboard',
         type: 'link',
-        icontype: 'dashboard'
+        icontype: 'dashboard',
+        usedBy: 'public'
+    },
+    // host
+    {
+        path: '/host/dashboard',
+        title: 'Dashboard',
+        type: 'link',
+        icontype: 'dashboard',
+        usedBy: 'host'
+    },
+    {
+        path: '/host/reports',
+        title: 'Reports List',
+        type: 'sub',
+        icontype: 'information',
+        collapse: 'host/reports',
+        children: [
+            {path: 'table', title: 'Table View', ab: 'TV'},
+            {path: 'map', title: 'Map View', ab: 'MV'}
+        ],
+        usedBy: 'host'
     }
 ];
+
 @Component({
     selector: 'app-sidebar-cmp',
     templateUrl: 'sidebar.component.html',
@@ -36,7 +60,7 @@ export const ROUTES: RouteInfo[] = [
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
-
+    @Input() routeGroup: string;
     isMobileMenu() {
         if ($(window).width() > 991) {
             return false;
@@ -45,7 +69,7 @@ export class SidebarComponent implements OnInit {
     };
 
     ngOnInit() {
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
+        this.menuItems = ROUTES.filter(menuItem => menuItem.usedBy === this.routeGroup);
     }
     updatePS(): void  {
         if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {

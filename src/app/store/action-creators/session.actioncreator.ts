@@ -86,7 +86,8 @@ export class SessionActionCreator {
               of(result.payload),
               this.userDataActionCreator.PopulateReporter(result.payload.user.reporterID),
               this.userDataActionCreator.PopulateHosts(result.payload.user.hosts),
-              this.userDataActionCreator.PopulateUser(result.payload.user)
+              this.userDataActionCreator.PopulateUser(result.payload.user),
+              this.userDataActionCreator.PopulateActiveHost()
             );
           }
         ),
@@ -137,7 +138,8 @@ export class SessionActionCreator {
                 of(result.payload),
                 this.userDataActionCreator.PopulateReporter(result.payload.user.reporterID),
                 this.userDataActionCreator.PopulateHosts(result.payload.user.hosts),
-                this.userDataActionCreator.PopulateUser(result.payload.user)
+                this.userDataActionCreator.PopulateUser(result.payload.user),
+                this.userDataActionCreator.PopulateActiveHost()
               );
             } else {
               return of(result);
@@ -176,7 +178,8 @@ export class SessionActionCreator {
                 of(result),
                 this.userDataActionCreator.PopulateReporter(result.user.reporterID),
                 this.userDataActionCreator.PopulateHosts(result.user.hosts),
-                this.userDataActionCreator.PopulateUser(result.user)
+                this.userDataActionCreator.PopulateUser(result.user),
+                this.userDataActionCreator.PopulateActiveHost()
               );
             } else {
               return of(result);

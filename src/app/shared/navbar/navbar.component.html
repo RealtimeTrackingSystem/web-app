@@ -16,7 +16,7 @@
       <span class="navbar-toggler-icon icon-bar"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navigation">
-      <form class="navbar-form">
+      <!--<form class="navbar-form">
         <div class="input-group no-border">
           <input type="text" value="" class="form-control" placeholder="Search...">
           <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
@@ -24,8 +24,8 @@
             <div class="ripple-container"></div>
           </button>
         </div>
-      </form>
-      <ul class="navbar-nav">
+      </form>-->
+      <!--<ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" href="#pablo">
             <i class="material-icons">dashboard</i>
@@ -58,7 +58,18 @@
             </p>
           </a>
         </li>
-      </ul>
+      </ul>-->
+      <form class="navbar-form">
+        <div class="dropdown">
+          <button href="#" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="true" >
+              {{activeHost ? activeHost.hostMember.name : 'NO HOST SELECTED'}} | Change Active Host
+              <b class="caret"></b>
+          </button>
+          <ul class="dropdown-menu">
+              <li *ngFor="let hostMembership of hostMemberships"><a (click)="changeHost(hostMembership)">{{hostMembership.hostMember.name}}</a></li>
+          </ul>
+        </div>
+      </form>
     </div>
   </div>
 </nav>

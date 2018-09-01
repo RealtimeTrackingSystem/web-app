@@ -1,0 +1,63 @@
+
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-rose card-header-icon">
+        <div class="card-icon">
+          <i class="material-icons">info</i>
+        </div>
+        <h4 class="card-title">Report Detail</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="reportDetailForm">
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width">
+                <input matInput formControlName="_id" type="text" placeholder="ID">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput formControlName="title" type="text" placeholder="TITLE">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput formControlName="description" type="text" placeholder="DESCRIPTION">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput formControlName="location" type="text" placeholder="LOCATION">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput formControlName="lat" type="text" placeholder="LATITUDE">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput formControlName="long" type="text" placeholder="LONGITUDE">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput formControlName="_reporter" type="text" placeholder="REPORTER">
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width">
+                <input matInput formControlName="_host" type="text" placeholder="HOST">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput formControlName="status" type="text" placeholder="STATUS">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput formControlName="people" type="text" placeholder="PEOPLE">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput formControlName="properties" type="text" placeholder="PROPERTIES">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput formControlName="tags" type="text" placeholder="TAGS">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput formControlName="createdAt" type="text" placeholder="Date Reported">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput formControlName="updatedAt" type="text" placeholder="Date Updated">
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

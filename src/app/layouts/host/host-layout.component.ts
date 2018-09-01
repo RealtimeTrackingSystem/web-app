@@ -6,6 +6,12 @@ import 'rxjs/add/operator/filter';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import PerfectScrollbar from 'perfect-scrollbar';
 
+import { UserDataActionCreator } from './../../store/action-creators/user-data.actioncreator';
+import { select } from '@angular-redux/store';
+import { IHostMemberships } from '../../store/user-data.store';
+import { Observable } from 'rxjs';
+import { RouteInfo } from '../../interface/route/route-info.interface';
+
 declare const $: any;
 
 @Component({
@@ -22,7 +28,15 @@ export class HostLayoutComponent implements OnInit, AfterViewInit {
 
   @ViewChild('sidebar') sidebar: any;
   @ViewChild(NavbarComponent) navbar: NavbarComponent;
-  constructor(private router: Router, location: Location) {
+  @select(s => s.userData.hostMemberships) hostMemberships: Observable<IHostMemberships[]>;
+  @select(s => s.userData.activeHost) activeHost: Observable<IHostMemberships>;
+
+
+  constructor(
+    private router: Router,
+    location: Location,
+    private userDataActionCreator: UserDataActionCreator
+  ) {
     this.location = location;
   }
   ngOnInit() {
@@ -86,5 +100,13 @@ export class HostLayoutComponent implements OnInit, AfterViewInit {
       bool = true;
     }
     return bool;
+  }
+
+  setHost($event) {
+    this.userDataActionCreator.ChangeActiveHost($event)
+      .toPromise()
+      .then((hostMembership: IHostMemberships) => {
+        this.router.navigate(['/host/dashboard']);
+      });
   }
 }
