@@ -1,3 +1,4 @@
+import { IHostMemberships } from './../user-data.store';
 import { IHostMember } from './../../interface/host/host-member.interface';
 import { IUser } from './../../interface/user/user.interface';
 import { HostService } from './../../services/host.service';
@@ -15,7 +16,8 @@ import {
   USER_DATA_POPULATE_REPORTER_SUCCESS,
   USER_DATA_POPULATE_REPORTER_ERROR,
   USER_DATA_POPULATE_HOST_SUCCESS,
-  USER_DATA_POPULATE_USER_SUCCESS
+  USER_DATA_POPULATE_USER_SUCCESS,
+  SET_ACTIVE_HOST
 } from '../actions/user-data.action';
 import { IReporter } from '../../interface';
 
@@ -98,5 +100,40 @@ export class UserDataActionCreator {
         })
       );
   }
-}
 
+  PopulateActiveHost (): Observable<IHostMemberships> {
+    const hostMembership = JSON.parse(localStorage.getItem('activeHost'));
+    return of(hostMembership)
+      .pipe(
+        tap(result => {
+          if (result) {
+            this.ngRedux.dispatch({
+              type: SET_ACTIVE_HOST,
+              payload: {
+                activeHost: result
+              }
+            });
+          }
+        })
+      );
+  }
+
+  ChangeActiveHost (hostMembership: IHostMemberships): Observable<IHostMemberships> {
+    localStorage.setItem('activeHost', JSON.stringify(hostMembership));
+    return of (hostMembership)
+      .pipe(
+        tap(result => {
+          this.ngRedux.dispatch({
+            type: SET_ACTIVE_HOST,
+            payload: {
+              activeHost: result
+            }
+          });
+        })
+      );
+  }
+
+  checkUserData () {
+    return of(this.ngRedux.getState().userData);
+  }
+}

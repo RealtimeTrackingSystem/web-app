@@ -14,7 +14,7 @@ export class SessionGuard implements CanActivate, CanActivateChild {
     private sessionActionCreator: SessionActionCreator
   ) {}
 
-  canActivate(
+  canActivate (
   ): Observable<boolean> | Promise<boolean> | boolean {
     return this.sessionActionCreator.SessionCheck()
         .toPromise()
@@ -32,7 +32,7 @@ export class SessionGuard implements CanActivate, CanActivateChild {
         });
   }
 
-  canActivateChild(
+  canActivateChild (
   ): Observable<boolean> | Promise<boolean> | boolean {
     const session: ISession = JSON.parse(localStorage.getItem('session'));
     if (!session || !session.token) {

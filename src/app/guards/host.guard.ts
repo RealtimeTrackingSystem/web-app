@@ -1,48 +1,60 @@
+import { map } from 'rxjs/operators';
+import { IHostMemberships } from './../store/user-data.store';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivateChild } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import swal from 'sweetalert2';
-import { ISession } from 'app/interface/session/session.interface';
-
+import { UserDataActionCreator } from '../store/action-creators/user-data.actioncreator';
 
 @Injectable()
 export class HostGuard implements CanActivate, CanActivateChild {
 
-  private session: ISession = JSON.parse(localStorage.getItem('session'));
-
   constructor (
-    private router: Router
+    private router: Router,
+    private userDataActionCreator: UserDataActionCreator
   ) {}
 
   canActivate(
   ): Observable<boolean> | Promise<boolean> | boolean {
-    // if (!this.session || !this.session.token || (this.session.user._role.accessLevel !== 2 )) {
-    //   swal({
-    //     type: 'error',
-    //     title: 'Invalid URL',
-    //     text: 'This content is not available.',
-    //   }).then(() => {
-    //     this.router.navigate([`${this.session.user._role.code.toLowerCase()}/login`]);
-    //   });
-    // } else {
-    //   return true;
-    // }
-    return true;
+    return this.userDataActionCreator.checkUserData()
+      .pipe(
+        map(userData => userData.activeHost)
+      )
+      .toPromise()
+      .then((activeHost: IHostMemberships) => {
+        if (!activeHost) {
+          swal({
+            type: 'warning',
+            title: 'No Host selected',
+            text: 'Please select a host',
+          }).then(() => {
+            this.router.navigate(['/public/dashboard']);
+          });
+        } else {
+          return true;
+        }
+      });
   }
 
   canActivateChild(
   ): Observable<boolean> | Promise<boolean> | boolean {
-    // if (!this.session || !this.session.token || (this.session.user._role.accessLevel !== 2 )) {
-    //   swal({
-    //     type: 'error',
-    //     title: 'Invalid URL',
-    //     text: 'This content is not available.',
-    //   }).then(() => {
-    //     this.router.navigate(['auth/login']);
-    //   });
-    // } else {
-    //   return true;
-    // }
-    return true;
+    return this.userDataActionCreator.checkUserData()
+      .pipe(
+        map(userData => userData.activeHost)
+      )
+      .toPromise()
+      .then((activeHost: IHostMemberships) => {
+        if (!activeHost) {
+          swal({
+            type: 'warning',
+            title: 'No Host selected',
+            text: 'Please select a host',
+          }).then(() => {
+            this.router.navigate(['/public/dashboard']);
+          });
+        } else {
+          return true;
+        }
+      });
   }
 }
