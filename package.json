@@ -12,8 +12,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start": "node server.js",
-    "build": "ng build aot --prod",
-    "postinstall": "ng build aot --prod"
+    "build": "ng build --prod",
+    "postinstall": "ng build --prod"
   },
   "private": true,
   "dependencies": {
