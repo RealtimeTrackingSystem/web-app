@@ -64,7 +64,7 @@ export class ReportsTableViewComponent implements OnInit {
     //   .then();
   }
 
-  gotToPage (event) {
+  goToPage (event) {
     console.log('go to page', event);
   }
 
