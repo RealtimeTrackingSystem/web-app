@@ -1,4 +1,4 @@
-import { IHostMemberships } from './../../store/user-data.store';
+import { IHostMemberships } from './../../interface';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';

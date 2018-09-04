@@ -1,4 +1,4 @@
-import { IHostMemberships } from './../../store/user-data.store';
+import { IHostMemberships } from './../../interface';
 import { Component, OnInit, Renderer, ViewChild, ElementRef, Directive, Input, Output, EventEmitter } from '@angular/core';
 import { ROUTES } from '../.././sidebar/sidebar.component';
 import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from '@angular/router';

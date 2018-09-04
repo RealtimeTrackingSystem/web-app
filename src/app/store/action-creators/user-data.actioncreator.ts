@@ -1,4 +1,4 @@
-import { IHostMemberships } from './../user-data.store';
+import { IHostMemberships } from './../../interface';
 import { IHostMember } from './../../interface/host/host-member.interface';
 import { IUser } from './../../interface/user/user.interface';
 import { HostService } from './../../services/host.service';

@@ -8,7 +8,8 @@ export function getReportsSuccess (state: IReportStore, action) {
     ...state,
     limit: action.payload.limit,
     page: action.payload.page,
-    count: action.payload.count
+    count: action.payload.count,
+    reports: action.payload.reports
   });
 }
 

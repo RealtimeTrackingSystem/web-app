@@ -23,9 +23,9 @@ export interface IReportStore {
 export const REPORT_INITIAL_STATE: IReportStore = {
   reports: [],
   reportDetails: null,
-  limit: null,
-  page: null,
-  count: null,
+  limit: 0,
+  page: 0,
+  count: 0,
   spinner: false,
   error: null,
   success: null

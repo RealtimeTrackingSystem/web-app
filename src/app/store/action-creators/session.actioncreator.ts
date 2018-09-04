@@ -1,11 +1,8 @@
 import { USER_DATA_DESTROY } from './../actions/user-data.action';
-import { IChangePassword } from './../../interface/session/change-password.interface';
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgRedux } from '@angular-redux/store';
-import * as Redux from 'redux';
 import { of, forkJoin } from 'rxjs';
-import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 
 import { IAppState } from '../app.store';
@@ -18,27 +15,15 @@ import { IUserNew } from '../../interface/user/user-new.interface';
 import { tap, catchError, map, flatMap, mergeAll, zip, zipAll, concat } from 'rxjs/operators'
 
 import {
-  SESSION_CREATE_ATTEMPT,
   SESSION_CREATE_FULFILLED,
-  SESSION_CHECK_FULFILLED,
   SESSION_CREATE_FAILED,
-  SESSION_CHECK_ATTEMPT,
-  SESSION_CHECK_FAILED,
   SESSION_DESTROY_FULFILLED,
   SESSION_REGISTRATION_FAILED
 } from '../actions/session.action';
-import { IReporter } from '../../interface';
-
 
 @Injectable()
 
 export class SessionActionCreator {
-
-  private loginSubscription: Subscription = null;
-  private registerSubscription: Subscription = null;
-  private errorMessage: string = null;
-  private changePasswordSubscription: Subscription = null;
-  private forgotPasswordSubscription: Subscription = null;
   constructor (
     private ngRedux: NgRedux<IAppState>,
     private router: Router,
@@ -171,6 +156,62 @@ export class SessionActionCreator {
             });
           }
         }),
+        flatMap(
+          result => {
+            if (result) {
+              return forkJoin(
+                of(result),
+                this.userDataActionCreator.PopulateReporter(result.user.reporterID),
+                this.userDataActionCreator.PopulateHosts(result.user.hosts),
+                this.userDataActionCreator.PopulateUser(result.user),
+                this.userDataActionCreator.PopulateActiveHost()
+              );
+            } else {
+              return of(result);
+            }
+          }
+        ),
+        map(result => {
+          if (Array.isArray(result)) {
+            return result[0];
+          }
+          return result;
+        })
+      );
+  }
+
+  SessionRehydrate (): Observable<ISession> {
+    return this.sessionService.Rehydrate()
+      .pipe(
+        catchError(error => of(error.error)),
+        tap(result => {
+          if (result.status === 401) {
+            this.ngRedux.dispatch({
+              type: SESSION_CREATE_FAILED,
+              payload: {
+                error: result.statusText
+              }
+            });
+          } else if (result.status === 'SUCCESS') {
+            const session: ISession = {
+              token: result.payload.token,
+              user: result.payload.user
+            }
+            this.sessionService.SessionSave(session);
+            this.ngRedux.dispatch({
+              type: SESSION_CREATE_FULFILLED,
+              payload: result.payload
+            });
+          } else {
+            this.ngRedux.dispatch({
+              type: SESSION_CREATE_FAILED,
+              payload: {
+                error: 'Internal Server Error'
+              }
+            });
+          }
+        }),
+        map(result => result.payload),
         flatMap(
           result => {
             if (result) {

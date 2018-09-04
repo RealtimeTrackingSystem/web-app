@@ -8,13 +8,14 @@ import { map, flatMap } from 'rxjs/operators';
 import { of, forkJoin } from 'rxjs';
 import { IAppState } from '../../../store/app.store';
 import { NgRedux } from '@angular-redux/store';
+import { ITable } from '../../../interface';
 
 @Component({
   selector: 'app-reports-table-view',
   templateUrl: './reports-table-view.component.html',
   styleUrls: ['./reports-table-view.component.scss']
 })
-export class ReportsTableViewComponent implements OnInit {
+export class ReportsTableViewComponent implements OnInit, ITable {
 
   @select(s => s.report.reports) $reports: Observable<IReport[]>;
   @select(s => s.report.count) $count: Observable<number>;
@@ -58,14 +59,16 @@ export class ReportsTableViewComponent implements OnInit {
   }
 
   lastPage () {
-    // const {count, limit, page} = this.ngRedux.getState().report;
-    // const lastPage = Math.ceil(count / limit);
-    // this.reportActionCreator.GetReports(lastPage, 10).toPromise()
-    //   .then();
+    const {count, limit} = this.ngRedux.getState().report;
+    const lastPage = Math.ceil(count / limit) - 1;
+    this.pageNumber = lastPage;
+    this.reportActionCreator.GetReports(lastPage, 10).toPromise()
+      .then();
   }
 
-  goToPage (event) {
-    console.log('go to page', event);
+  goToPage (pageNumber: number) {
+    this.pageNumber = pageNumber;
+    this.reportActionCreator.GetReports(pageNumber, 10).toPromise().then();
   }
 
   reportDetails (event) {

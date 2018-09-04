@@ -31,11 +31,15 @@ export class HostService {
     }
   }
 
-  GetHosts (): Observable<any> {
+  GetHosts (page: number = 0, limit: number = 10, filter = null): Observable<any> {
+    let query = '?limit=' + limit + '&page=' + page;
+    if (filter) {
+      query += '&filter=' + filter;
+    }
     const headers = new HttpHeaders()
       .append('Content-Type', 'application/json')
       .append('Authorization', this.GetSessionToken());
-    return this.http.get(this.hostUrl, {
+    return this.http.get(this.hostUrl + query, {
       headers: headers
     });
   }
@@ -45,6 +49,15 @@ export class HostService {
       .append('Content-Type', 'application/json')
       .append('Authorization', this.GetSessionToken());
     return this.http.get(this.hostUrl + '/' + _id, {
+      headers: headers
+    });
+  }
+
+  SendHostRequest(_id: string): Observable<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.post(this.hostUrl + '/requests/' + _id, null, {
       headers: headers
     });
   }

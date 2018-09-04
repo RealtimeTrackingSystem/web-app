@@ -8,7 +8,7 @@ import PerfectScrollbar from 'perfect-scrollbar';
 
 import { UserDataActionCreator } from './../../store/action-creators/user-data.actioncreator';
 import { select } from '@angular-redux/store';
-import { IHostMemberships } from '../../store/user-data.store';
+import { IHostMemberships } from '../../interface';
 import { Observable } from 'rxjs';
 import { RouteInfo } from '../../interface/route/route-info.interface';
 

@@ -1,8 +1,8 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <app-reports-table
-        [reports]="($reports | async)"
+      <app-hosts-list
+        [hosts]="($hosts | async)"
         [count]="($count | async)"
         [page]="($page | async)"
         [limit]="($limit | async)"
@@ -11,8 +11,8 @@
         (firstPage)="firstPage()"
         (lastPage)="lastPage()"
         (goToPage)="goToPage($event)"
-        (details)="reportDetails($event)"
-      ></app-reports-table>
+        (addButton)="sendRequestToHost($event)"
+      ></app-hosts-list>
     </div>
   </div>
 </div>

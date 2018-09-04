@@ -1,5 +1,5 @@
 import { map } from 'rxjs/operators';
-import { IHostMemberships } from './../store/user-data.store';
+import { IHostMemberships } from './../interface';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivateChild } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
