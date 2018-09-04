@@ -110,14 +110,7 @@ export class ReportActionCreator {
           error: null,
           success: result.status,
           spinner: false
-        })),
-        flatMap(result => {
-          return forkJoin(
-            of(result),
-            this.GetReportDatas(result.reports)
-          )
-        }),
-        map(result => result[0])
+        }))
       );
   }
 

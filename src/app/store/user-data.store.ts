@@ -1,7 +1,4 @@
-import { IReporter } from './../interface/reporter/reporter.interface';
-import { IHostMember } from './../interface/host/host-member.interface';
-import { IHost } from './../interface/host/host.interface';
-import { ISession } from '../interface';
+import { IHostMemberships, IReporter } from './../interface';
 import { IUser } from '../interface';
 import {
   USER_DATA_DESTROY,
@@ -18,10 +15,6 @@ export interface IUserDataError {
   message: string;
 }
 
-export interface IHostMemberships {
-  host: IHost;
-  hostMember: IHostMember;
-}
 export interface IUserDataStore {
   user: IUser;
   hostMemberships: IHostMemberships[];

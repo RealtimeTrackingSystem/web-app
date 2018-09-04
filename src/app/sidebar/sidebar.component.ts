@@ -31,6 +31,20 @@ export const ROUTES: RouteInfo[] = [
         icontype: 'dashboard',
         usedBy: 'public'
     },
+    {
+        path: '/public/host-list',
+        title: 'Host List',
+        type: 'link',
+        icontype: 'view_list',
+        usedBy: 'public'
+    },
+    {
+        path: '/public/host-new',
+        title: 'New Host',
+        type: 'link',
+        icontype: 'playlist_add',
+        usedBy: 'public'
+    },
     // host
     {
         path: '/host/dashboard',

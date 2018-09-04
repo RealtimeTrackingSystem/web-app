@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IChangePassword } from './../interface/session/change-password.interface';
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -16,7 +17,8 @@ export class SessionService {
 
   private authUrl = environment.API_URL + '/api/auth';
   constructor(
-    private http: Http
+    private http: Http,
+    private httpClient: HttpClient
   ) { }
 
   Register (userNew: IUserNew): Observable<ISession> {
@@ -28,12 +30,26 @@ export class SessionService {
   }
 
   Login (sessionCreate: ISessionCreate): Observable<ISession> {
-    console.log(this.authUrl);
     const headers = new Headers({ 'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
     return this.http.post(this.authUrl + '/signin', sessionCreate, options)
     .map(response => response.json())
     .share()
+  }
+
+  Rehydrate (): Observable<any> {
+    // const headers = new Headers({ 'Content-Type': 'application/json'});
+    // headers.append('Authorization', this.SessionRead().token);
+    // const options = new RequestOptions({headers: headers});
+    // return this.http.get(this.authUrl + '/rehydrate', options)
+    // .map(response => response.json())
+    // .share()
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.SessionRead().token);
+    return this.httpClient.get(this.authUrl + '/rehydrate', {
+      headers: headers
+    });
   }
 
   SessionSave(session: ISession): void {
