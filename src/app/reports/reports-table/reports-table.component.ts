@@ -14,9 +14,6 @@ export class ReportsTableComponent extends TableClass implements OnInit, OnChang
 
   @Input() reports: IReport[];
 
-  public isNext: boolean = this.page * this.limit < this.count;
-  public isPrev: boolean = this.page > 0;
-  public pages = [0];
   public filteredReports: IReport[];
 
   constructor() {

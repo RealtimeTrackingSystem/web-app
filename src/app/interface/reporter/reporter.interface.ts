@@ -1,14 +1,15 @@
 export interface IReporter {
+    _id: string;
+    username: string;
+    email: string;
     fname: string;
     lname: string;
     alias: string;
-    age: number;
     street: string;
     barangay: string;
     city: string;
     region: string;
     country: string;
     zip: string;
-    createdAt: Date;
-    updatedAt: Date;
+    reporterID: string;
 }

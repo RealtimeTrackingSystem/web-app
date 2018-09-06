@@ -17,6 +17,7 @@ export class HostsListComponent extends TableClass implements OnInit {
   }
 
   ngOnInit() {
+    this.pages = this.getPages(Math.ceil(Number(this.count) / Number(this.limit)));
   }
 
   addToolTip (hostName) {

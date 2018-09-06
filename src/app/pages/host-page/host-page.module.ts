@@ -6,7 +6,9 @@ import { HostRoutes } from './host-page.routing';
 import { DashboardModule } from '../../dashboard/dashboard.module';
 import { ReportsTableViewComponent } from './reports-table-view/reports-table-view.component';
 import { ReportsModule } from '../../reports';
+import { ReportersModule } from '../../reporters';
 import { ReportDetailViewComponent } from './report-detail-view/report-detail-view.component';
+import { PendingHostRequestViewComponent } from './pending-host-request-view/pending-host-request-view.component';
 
 @NgModule({
   imports: [
@@ -15,11 +17,13 @@ import { ReportDetailViewComponent } from './report-detail-view/report-detail-vi
     FormsModule,
     ReactiveFormsModule,
     DashboardModule,
-    ReportsModule
+    ReportsModule,
+    ReportersModule
   ],
   declarations: [
     ReportsTableViewComponent,
-    ReportDetailViewComponent
+    ReportDetailViewComponent,
+    PendingHostRequestViewComponent
   ],
   entryComponents: [
   ]
