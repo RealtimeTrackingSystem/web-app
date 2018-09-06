@@ -16,6 +16,7 @@
                 <th>Description</th>
                 <th>Status</th>
                 <th>Location</th>
+                <th>Host</th>
                 <th>Date Reported</th>
                 <th class="text-right">Actions</th>
               </tr>
@@ -27,6 +28,7 @@
                   <td>{{row.description}}</td>
                   <td>{{row.status}}</td>
                   <td>{{row.location}}</td>
+                  <td>{{row._host.name}}</td>
                   <td>{{row.createdAt}}</td>
                   <td class="td-actions text-right">
                     <button mat-raised-button type="button" (click)="onClickDetails(row)" class="btn btn-info">

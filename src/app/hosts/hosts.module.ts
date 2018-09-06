@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HostsListComponent } from './hosts-list/hosts-list.component';
 import { MaterialModule } from '../app.module';
+import { NewHostComponent } from './new-host/new-host.component';
 
 
 @NgModule({
@@ -15,10 +16,12 @@ import { MaterialModule } from '../app.module';
     ReactiveFormsModule
   ],
   declarations: [
-    HostsListComponent
+    HostsListComponent,
+    NewHostComponent
   ],
   exports: [
-    HostsListComponent
+    HostsListComponent,
+    NewHostComponent
   ]
 })
 export class HostsModule { }

@@ -76,8 +76,8 @@ export class UserDataActionCreator {
             this.ngRedux.dispatch({
               type: USER_DATA_POPULATE_HOST_SUCCESS,
               payload: {
-                host: host,
-                hostMember: result
+                host: result,
+                hostMember: host
               }
             });
           })

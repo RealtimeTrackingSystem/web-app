@@ -31,7 +31,7 @@ export class ReportsTableViewComponent implements OnInit, ITable {
   ) { }
 
   ngOnInit() {
-    this.reportActionCreator.GetReports(this.pageNumber, 10).toPromise()
+    this.reportActionCreator.GetReports(this.pageNumber, 10, [], ['host']).toPromise()
       .then();
   }
 
@@ -40,7 +40,7 @@ export class ReportsTableViewComponent implements OnInit, ITable {
     if (limit * (page + 1) < count) {
       const pageNumber = this.pageNumber + 1;
       this.pageNumber += 1;
-      this.reportActionCreator.GetReports(pageNumber, 10).toPromise().then();
+      this.reportActionCreator.GetReports(pageNumber, 10, [], ['host']).toPromise().then();
     }
   }
 
@@ -48,13 +48,13 @@ export class ReportsTableViewComponent implements OnInit, ITable {
     if (this.pageNumber !== 0) {
       const pageNumber = this.pageNumber - 1;
       this.pageNumber -= 1;
-      this.reportActionCreator.GetReports(pageNumber, 10).toPromise().then();
+      this.reportActionCreator.GetReports(pageNumber, 10, [], ['host']).toPromise().then();
     }
   }
 
   firstPage () {
     this.pageNumber = 0;
-    this.reportActionCreator.GetReports(0, 10).toPromise()
+    this.reportActionCreator.GetReports(0, 10, [], ['host']).toPromise()
       .then();
   }
 
@@ -62,13 +62,13 @@ export class ReportsTableViewComponent implements OnInit, ITable {
     const {count, limit} = this.ngRedux.getState().report;
     const lastPage = Math.ceil(count / limit) - 1;
     this.pageNumber = lastPage;
-    this.reportActionCreator.GetReports(lastPage, 10).toPromise()
+    this.reportActionCreator.GetReports(lastPage, 10, [], ['host']).toPromise()
       .then();
   }
 
   goToPage (pageNumber: number) {
     this.pageNumber = pageNumber;
-    this.reportActionCreator.GetReports(pageNumber, 10).toPromise().then();
+    this.reportActionCreator.GetReports(pageNumber, 10, [], ['host']).toPromise().then();
   }
 
   reportDetails (event) {

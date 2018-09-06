@@ -61,4 +61,13 @@ export class HostService {
       headers: headers
     });
   }
+
+  AddNewHost (host: IHost): Observable<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.post(this.hostUrl, host, {
+      headers: headers
+    });
+  }
 }

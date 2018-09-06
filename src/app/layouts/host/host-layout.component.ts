@@ -7,10 +7,14 @@ import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import PerfectScrollbar from 'perfect-scrollbar';
 
 import { UserDataActionCreator } from './../../store/action-creators/user-data.actioncreator';
-import { select } from '@angular-redux/store';
+import { select, NgRedux } from '@angular-redux/store';
 import { IHostMemberships } from '../../interface';
 import { Observable } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
 import { RouteInfo } from '../../interface/route/route-info.interface';
+import { IAppState } from '../../store/app.store';
+
+import * as _ from 'lodash';
 
 declare const $: any;
 
@@ -25,17 +29,18 @@ export class HostLayoutComponent implements OnInit, AfterViewInit {
   private yScrollStack: number[] = [];
   url: string;
   location: Location;
-
+  public hostMemberships: Observable<IHostMemberships[]>;
   @ViewChild('sidebar') sidebar: any;
   @ViewChild(NavbarComponent) navbar: NavbarComponent;
-  @select(s => s.userData.hostMemberships) hostMemberships: Observable<IHostMemberships[]>;
+  @select(s => s.userData.hostMemberships) $hostMemberships: Observable<IHostMemberships[]>;
   @select(s => s.userData.activeHost) activeHost: Observable<IHostMemberships>;
 
 
   constructor(
     private router: Router,
     location: Location,
-    private userDataActionCreator: UserDataActionCreator
+    private userDataActionCreator: UserDataActionCreator,
+    private ngRedux: NgRedux<IAppState>
   ) {
     this.location = location;
   }
@@ -43,6 +48,14 @@ export class HostLayoutComponent implements OnInit, AfterViewInit {
     if (this.router.url === '/host') {
       this.router.navigate(['/host/dashboard']);
     }
+    this.hostMemberships = this.$hostMemberships
+        .pipe(
+          map(result => {
+            return result.filter(h => {
+              return !h.hostMember.isBlocked;
+            })
+          })
+        );
     const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');
     const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
     this.location.subscribe((ev: PopStateEvent) => {

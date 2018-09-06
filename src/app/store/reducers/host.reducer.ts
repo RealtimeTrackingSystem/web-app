@@ -18,3 +18,30 @@ export function getHostsFailed (state: IHostStore, action) {
     error: action.payload.error
   });
 }
+
+export function sendHostRequestSuccess (state: IHostStore, action) {
+  return tassign<IHostStore, IHostStore>(state, {
+    ...state
+  });
+}
+
+export function sendHostRequestFailed (state: IHostStore, action) {
+  return tassign<IHostStore, IHostStore>(state, {
+    ...state,
+    error: action.payload.error
+  });
+}
+
+export function createHostSuccess (state: IHostStore, action) {
+  return tassign<IHostStore, IHostStore>(state, {
+    ...state,
+    hosts: state.hosts.concat([action.payload.host])
+  });
+}
+
+export function createHostFailed (state: IHostStore, action) {
+  return tassign<IHostStore, IHostStore>(state, {
+    ...state,
+    error: action.payload.error
+  });
+}

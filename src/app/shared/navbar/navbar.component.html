@@ -60,13 +60,13 @@
         </li>
       </ul>-->
       <form class="navbar-form">
-        <div class="dropdown">
+        <div *ngIf="hostMemberships.length > 0" class="dropdown">
           <button href="#" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="true" >
               {{activeHost ? activeHost.host.name : 'NO HOST SELECTED'}} | Change Active Host
               <b class="caret"></b>
           </button>
           <ul class="dropdown-menu">
-              <li *ngFor="let hostMembership of hostMemberships"><a (click)="changeHost(hostMembership)">{{hostMembership.hostMember.name}}</a></li>
+              <li *ngFor="let hostMembership of hostMemberships"><a (click)="changeHost(hostMembership)">{{hostMembership.host.name}}</a></li>
           </ul>
         </div>
       </form>
