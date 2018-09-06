@@ -64,6 +64,13 @@ export const ROUTES: RouteInfo[] = [
             {path: 'map', title: 'Map View', ab: 'MV'}
         ],
         usedBy: 'host'
+    },
+    {
+        path: '/host/requests',
+        title: 'Pending Requests',
+        type: 'link',
+        icontype: 'notification_important',
+        usedBy: 'host'
     }
 ];
 

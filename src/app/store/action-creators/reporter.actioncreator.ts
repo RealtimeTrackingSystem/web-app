@@ -3,44 +3,68 @@ import { Router } from '@angular/router';
 import { NgRedux } from '@angular-redux/store';
 import { IAppState } from '../app.store';
 import {
-REPORTER_CREATE_ATTEMPT,
-REPORTER_CREATE_FAILED,
-REPORTER_CREATE_FULFILLED,
-REPORTER_DELETE_ATTEMPT,
-REPORTER_DELETE_FAILED,
-REPORTER_DELETE_FULFILLED,
-REPORTER_GET_ATTEMPT,
-REPORTER_GET_FAILED,
-REPORTER_GET_FULFILLED,
-REPORTER_SELECT_ATTEMPT,
-REPORTER_SELECT_FAILED,
-REPORTER_SELECT_FULFILLED,
-REPORTER_UPDATE_ATTEMPT,
-REPORTER_UPDATE_FAILED,
-REPORTER_UPDATE_FULFILLED
+  REPORTER_GET_PENDING_REQUEST_FAILED,
+  REPORTER_GET_PENDING_REQUEST_SUCCESS
 } from '../actions/reporter.action';
-import { Subscription } from 'rxjs/Subscription';
+import { tap, catchError, map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 import { ReporterService } from '../../services';
 import { IReporter } from '../../interface/reporter/reporter.interface';
 
 
 @Injectable()
 
-export class ReporterActionCreator implements OnDestroy {
+export class ReporterActionCreator {
 
-    private errorMessage: string;
-    private getLatestReporterSubscription: Subscription = null;
-    private updateReporterSubscription: Subscription = null;
-    private deleteReporterSubscription: Subscription = null;
-    private getReporterByIdSubscription: Subscription = null;
-    private getOneReporterSubscription: Subscription = null;
+  constructor(
+    private ngRedux: NgRedux<IAppState>,
+    private reporterService: ReporterService
+  ) { }
 
-    constructor(
-        private ngRedux: NgRedux<IAppState>,
-        private reporterService: ReporterService
-    ) { }
+  GetPendingHostRequests (hostID: string, page = 0, limit = 10): Observable<any> {
+    return this.reporterService.GetHostPendingRequest(hostID, page, limit)
+      .pipe(
+        catchError(error => of(error.error)),
+        tap(result => {
+          if (result.httpCode !== 200) {
+            this.ngRedux.dispatch({
+              type: REPORTER_GET_PENDING_REQUEST_FAILED,
+              payload: {
+                error: result.message
+              }
+            });
+          }
+          if (result.httpCode === 200) {
+            this.ngRedux.dispatch({
+              type: REPORTER_GET_PENDING_REQUEST_SUCCESS,
+              payload: {
+                reporters: result.users,
+                page: page,
+                limit: limit,
+                count: result.count
+              }
+            });
+          }
+        }),
+        map(result => {
+          const reporters: IReporter[] = result.users.map((r: IReporter) => ({
+            _id: r._id,
+            username: r.username,
+            email: r.email,
+            fname: r.fname,
+            lname: r.lname,
+            alias: r.alias,
+            street: r.street,
+            barangay: r.barangay,
+            city: r.city,
+            region: r.region,
+            country: r.country,
+            zip: r.zip,
+            reporterID: r.reporterID
+          }));
+          return reporters;
+        })
+      );
+  }
 
-    ngOnDestroy() {
-        console.log('destroy');
-    }
 }

@@ -11,7 +11,9 @@ export class TableClass {
   @Output() lastPage = new EventEmitter<any>();
   @Output() goToPage = new EventEmitter<any>();
   @Output() details = new EventEmitter<any>();
-
+  public isNext: boolean = this.page * this.limit < this.count;
+  public isPrev: boolean = this.page > 0;
+  public pages = [0];
   constructor () {}
 
   getPages (pageTotal): number[] {

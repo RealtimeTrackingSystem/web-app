@@ -31,10 +31,12 @@ export class HostListViewComponent implements OnInit, ITable {
 
   ngOnInit() {
     this.userData = this.ngRedux.getState().userData;
-    this.hostFilter
-      = '_id:'
-      + this.userData.hostMemberships.map(hm => hm.host._id).join(',')
-      + ':false';
+    if (this.userData.hostMemberships.length > 0) {
+      this.hostFilter
+        = '_id:'
+        + this.userData.hostMemberships.map(hm => hm.host._id).join(',')
+        + ':false';
+    }
     this.hostActionCreator.GetHosts(this.pageNumber, 10, this.hostFilter)
       .toPromise()
       .then();

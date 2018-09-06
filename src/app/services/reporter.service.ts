@@ -15,38 +15,48 @@ import { HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class ReporterService {
 
-    private reporterUrl = environment.API_URL + `/api/reporters`;
+  private reporterUrl = environment.API_URL + `/api/reporters`;
+  private hostUrl = environment.API_URL + `/api/hosts`;
 
-    constructor(
-        private http: HttpClient,
-        private sessionService: SessionService
-    ) { }
+  constructor(
+    private http: HttpClient,
+    private sessionService: SessionService
+  ) { }
 
-    private GetSessionToken(): string {
-        const session: ISession = this.sessionService.SessionRead();
-        if (!session) {
-            return 'invalid token';
-        } else {
-            return session.token;
-        }
+  private GetSessionToken(): string {
+    const session: ISession = this.sessionService.SessionRead();
+    if (!session) {
+      return 'invalid token';
+    } else {
+      return session.token;
     }
+  }
 
-    GetReporterById(_id: string): Observable<any> {
-        const headers = new HttpHeaders()
-            .append('Content-Type', 'application/json')
-            .append('Authorization', this.GetSessionToken());
-        return this.http.get(this.reporterUrl + '/' + _id, {
-            headers: headers
-        });
-    }
+  GetReporterById(_id: string): Observable<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.get(this.reporterUrl + '/' + _id, {
+      headers: headers
+    });
+  }
 
-    GetReporters(): Observable<any> {
-        const headers = new HttpHeaders()
-            .append('Content-Type', 'application/json')
-            .append('Authorization', this.GetSessionToken());
-        return this.http.get(this.reporterUrl, {
-            headers: headers
-        });
-    }
+  GetReporters(): Observable<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.get(this.reporterUrl, {
+      headers: headers
+    });
+  }
 
+  GetHostPendingRequest(hostID: string, page = 0, limit = 10): Observable<any> {
+    const query = '?page=' + page + '&limit=' + limit;
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.get(this.hostUrl + '/requests/' + hostID + query, {
+      headers: headers
+    });
+  }
 }
