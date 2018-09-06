@@ -32,8 +32,12 @@ export class ReportService {
     }
   }
 
-  GetReports(page: number = 0, limit: number = 10, tags: string[] = []): Observable<any> {
+  GetReports(page: number = 0, limit: number = 10, tags: string[] = [], resources: string[] = []): Observable<any> {
+    const validResources = resources.filter(resource => this.VALID_RESOURCES.indexOf(resource) > -1);
     let query = '?page=' + page + '&limit=' + limit;
+    if (validResources.length > 0) {
+      query += '&resources=' + validResources.join(',');
+    }
     if (tags.length > 0) {
       query += '&tags' + tags.join(',');
     }

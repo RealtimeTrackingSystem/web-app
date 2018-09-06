@@ -11,6 +11,7 @@ import { UserDataActionCreator } from './../../store/action-creators/user-data.a
 import { select } from '@angular-redux/store';
 import { IHostMemberships } from '../../interface';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 declare const $: any;
 
@@ -25,10 +26,10 @@ export class PublicLayoutComponent implements OnInit, AfterViewInit {
   private yScrollStack: number[] = [];
   url: string;
   location: Location;
-
+  public hostMemberships: Observable<IHostMemberships[]>;
   @ViewChild('sidebar') sidebar: any;
   @ViewChild(NavbarComponent) navbar: NavbarComponent;
-  @select(s => s.userData.hostMemberships) hostMemberships: Observable<IHostMemberships[]>;
+  @select(s => s.userData.hostMemberships) $hostMemberships: Observable<IHostMemberships[]>;
   @select(s => s.userData.activeHost) activeHost: Observable<IHostMemberships>;
   constructor(
     private router: Router,
@@ -41,6 +42,14 @@ export class PublicLayoutComponent implements OnInit, AfterViewInit {
     if (this.router.url === '/public') {
       this.router.navigate(['/public/dashboard']);
     }
+    this.hostMemberships = this.$hostMemberships
+        .pipe(
+          map(result => {
+            return result.filter(h => {
+              return !h.hostMember.isBlocked;
+            })
+          })
+        );
     const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');
     const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
     this.location.subscribe((ev: PopStateEvent) => {

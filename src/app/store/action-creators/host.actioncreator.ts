@@ -14,7 +14,9 @@ import {
   HOST_GET_FAILED,
   HOST_GET_SUCCESS,
   HOST_SEND_REQUEST_FAILED,
-  HOST_SEND_REQUEST_SUCCESS
+  HOST_SEND_REQUEST_SUCCESS,
+  HOST_CREATE_FAILED,
+  HOST_CREATE_SUCCESS
 } from '../actions/host.action';
 
 
@@ -83,6 +85,40 @@ export class HostActionCreator {
           } else if (result.httpCode === 201) {
             this.ngRedux.dispatch({
               type: HOST_SEND_REQUEST_SUCCESS
+            });
+          }
+        }),
+        flatMap(() => {
+          return this.sessionActionCreator.SessionRehydrate()
+        })
+      );
+  }
+
+  CreateHost (host: IHost): Observable<any> {
+    return this.hostService.AddNewHost(host)
+      .pipe(
+        catchError(error => of(error.error)),
+        tap(result => {
+          if (result.httpCode === 400) {
+            this.ngRedux.dispatch({
+              type: HOST_CREATE_FAILED,
+              payload: {
+                error: result.message
+              }
+            });
+          } else if (result.httpCode === 500) {
+            this.ngRedux.dispatch({
+              type: HOST_CREATE_FAILED,
+              payload: {
+                error: result.message
+              }
+            });
+          } else if (result.httpCode === 201) {
+            this.ngRedux.dispatch({
+              type: HOST_CREATE_SUCCESS,
+              payload: {
+                host: result.host
+              }
             });
           }
         }),

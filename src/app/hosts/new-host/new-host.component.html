@@ -1,0 +1,178 @@
+<div class="ml-auto mr-auto">
+  <div class="card card-signup">
+    <h2 class="card-title text-center">Create New Host</h2>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12 mr-auto">
+          <form [formGroup]="newHostForm" (submit)="submit()" class="form">
+            <div class="row">
+              <div class="col-md-5 mr-auto">
+
+                <div class="form-group has-default">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">info</i>
+                      </span>
+                    </div>
+                    <input formControlName="name" type="text" class="form-control" placeholder="Name">
+                  </div>
+                </div>
+
+                <div class="form-group has-default">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">mail</i>
+                      </span>
+                    </div>
+                    <input formControlName="email" type="text" class="form-control" placeholder="Email">
+                  </div>
+                </div>
+
+                <div class="form-group has-default">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">info</i>
+                      </span>
+                    </div>
+                    <input formControlName="location" type="text" placeholder="Location" class="form-control">
+                  </div>
+                </div>
+
+                <div class="form-group has-default">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">info</i>
+                      </span>
+                    </div>
+                    <input formControlName="description" type="text" placeholder="Description" class="form-control">
+                  </div>
+                </div>
+              
+                <div class="form-group has-default">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">info</i>
+                      </span>
+                    </div>
+                    <input formControlName="hostNature" type="text" placeholder="Host Nature" class="form-control">
+                  </div>
+                </div>
+
+                <div class="form-group has-default">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">info</i>
+                      </span>
+                    </div>
+                    <input formControlName="tags" type="text" placeholder="Tags" class="form-control">
+                  </div>
+                </div>
+
+                <div class="form-group has-default">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">info</i>
+                      </span>
+                    </div>
+                    <input formControlName="long" type="text" placeholder="Longitude" class="form-control">
+                  </div>
+                </div>
+              </div><!--col-md-6-->
+
+              <div class="col-md-5 mr-auto">
+                <div class="form-group has-default">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">info</i>
+                      </span>
+                    </div>
+                    <input formControlName="lat" type="text" class="form-control" placeholder="Latitude">
+                  </div>
+                </div>
+
+                <div class="form-group has-default">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">info</i>
+                      </span>
+                    </div>
+                    <input formControlName="street" type="text" class="form-control" placeholder="Street">
+                  </div>
+                </div>
+
+                <div class="form-group has-default">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">info</i>
+                      </span>
+                    </div>
+                    <input formControlName="barangay" type="text" placeholder="Barangay" class="form-control">
+                  </div>
+                </div>
+
+                <div class="form-group has-default">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">info</i>
+                      </span>
+                    </div>
+                    <input formControlName="city" type="text" placeholder="City" class="form-control">
+                  </div>
+                </div>
+              
+                <div class="form-group has-default">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">info</i>
+                      </span>
+                    </div>
+                    <input formControlName="region" type="text" placeholder="Region" class="form-control">
+                  </div>
+                </div>
+
+                <div class="form-group has-default">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">info</i>
+                      </span>
+                    </div>
+                    <input formControlName="country" type="test" placeholder="Country" class="form-control">
+                  </div>
+                </div>
+
+                <div class="form-group has-default">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">info</i>
+                      </span>
+                    </div>
+                    <input formControlName="zip" type="test" placeholder="Zip" class="form-control">
+                  </div>
+                </div>
+
+              </div><!--col-md-6-->
+            </div>
+            <br />
+            <div class="text-center">
+              <button type="submit" class="btn btn-info btn-round mt-4">+ Add New Host</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

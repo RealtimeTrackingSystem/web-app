@@ -6,6 +6,7 @@ import { PublicRoutes } from './public-page.routing';
 import { DashboardModule } from '../../dashboard/dashboard.module';
 import { HostListViewComponent } from './host-list-view/host-list-view.component';
 import { HostsModule } from '../../hosts';
+import { NewHostViewComponent } from './new-host-view/new-host-view.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { HostsModule } from '../../hosts';
     HostsModule
   ],
   declarations: [
-    HostListViewComponent
+    HostListViewComponent,
+    NewHostViewComponent
   ],
   entryComponents: [
   ]
