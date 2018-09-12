@@ -4,9 +4,11 @@ import { NgRedux } from '@angular-redux/store';
 import { IAppState } from '../app.store';
 import {
   REPORTER_GET_PENDING_REQUEST_FAILED,
-  REPORTER_GET_PENDING_REQUEST_SUCCESS
+  REPORTER_GET_PENDING_REQUEST_SUCCESS,
+  REPORTER_ACCEPT_REQUEST_FAILED,
+  REPORTER_ACCEPT_REQUEST_SUCCESS
 } from '../actions/reporter.action';
-import { tap, catchError, map } from 'rxjs/operators';
+import { tap, catchError, map, flatMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { ReporterService } from '../../services';
 import { IReporter } from '../../interface/reporter/reporter.interface';
@@ -63,6 +65,37 @@ export class ReporterActionCreator {
             reporterID: r.reporterID
           }));
           return reporters;
+        })
+      );
+  }
+
+  AcceptRequest (hostId: string, reporter: IReporter): Observable<any> {
+    return this.reporterService.AcceptUserRequest(hostId, reporter._id)
+      .pipe(
+        catchError(error => of(error.error)),
+        tap(result => {
+          if (result.httpCode !== 201) {
+            this.ngRedux.dispatch({
+              type: REPORTER_ACCEPT_REQUEST_FAILED,
+              payload: {
+                error: result.message
+              }
+            });
+          }
+          if (result.httpCode === 201) {
+            this.ngRedux.dispatch({
+              type: REPORTER_ACCEPT_REQUEST_SUCCESS,
+              payload: {
+                reporter: reporter
+              }
+            });
+          }
+        }),
+        flatMap(result => {
+          if (result.httpCode === 201) {
+            const reporterStore = this.ngRedux.getState().reporter;
+            return this.GetPendingHostRequests(hostId, reporterStore.page, reporterStore.limit);
+          }
         })
       );
   }

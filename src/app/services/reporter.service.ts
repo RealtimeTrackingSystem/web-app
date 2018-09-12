@@ -59,4 +59,15 @@ export class ReporterService {
       headers: headers
     });
   }
+
+  AcceptUserRequest (hostId: string, userId: string): Observable<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.put(this.hostUrl + '/requests/' + hostId, {
+        userId: userId
+      }, {
+        headers: headers
+      });
+  }
 }

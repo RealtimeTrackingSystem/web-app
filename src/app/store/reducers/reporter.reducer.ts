@@ -18,3 +18,16 @@ export function getPendingHostRequestFailed (state: IReporterStore, action) {
     error: action.payload.error
   });
 }
+
+export function acceptRequestSuccess (state: IReporterStore, action) {
+  return tassign<IReporterStore, IReporterStore>(state, {
+    ...state
+  });
+}
+
+export function acceptRequestFailed (state: IReporterStore, action) {
+  return tassign<IReporterStore, IReporterStore>(state, {
+    ...state,
+    error: action.payload.error
+  });
+}
