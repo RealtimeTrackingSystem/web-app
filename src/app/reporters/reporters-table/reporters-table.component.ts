@@ -1,5 +1,5 @@
 import { IReporter } from './../../interface';
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 
 import { TableClass } from '../../classes';
 
@@ -11,6 +11,7 @@ import { TableClass } from '../../classes';
 export class ReportersTableComponent extends TableClass implements OnInit {
 
   @Input() reporters: IReporter[]
+  @Output() clickCheck = new EventEmitter<any>();
 
   constructor() {
     super();
@@ -18,6 +19,10 @@ export class ReportersTableComponent extends TableClass implements OnInit {
 
   ngOnInit() {
     this.pages = this.getPages(Math.ceil(Number(this.count) / Number(this.limit)));
+  }
+
+  onClickCheck (event) {
+    this.clickCheck.emit(event);
   }
 
 }
