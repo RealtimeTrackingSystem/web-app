@@ -1,3 +1,4 @@
+import { IReport } from './../interface/report/report.interface';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -58,6 +59,15 @@ export class ReportService {
     return this.http.get(this.reportUrl + '/' + _id + query, {
       headers: headers
     });
+  }
+
+  SendReport (report: IReport) {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.post(this.reportUrl, report, {
+      headers: headers
+    })
   }
 
   GetAttachments (any) {

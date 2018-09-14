@@ -28,7 +28,7 @@
                   <td>{{row.description}}</td>
                   <td>{{row.status}}</td>
                   <td>{{row.location}}</td>
-                  <td>{{row._host.name}}</td>
+                  <td>{{row._host ? row._host.name : 'Individual Report'}}</td>
                   <td>{{row.createdAt}}</td>
                   <td class="td-actions text-right">
                     <button mat-raised-button type="button" (click)="onClickDetails(row)" class="btn btn-info">

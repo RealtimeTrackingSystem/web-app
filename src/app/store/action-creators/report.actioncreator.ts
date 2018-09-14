@@ -1,4 +1,3 @@
-import { REPORT_GET_DETAILS_SUCCESS, REPORT_GET_DETAILS_FAILED } from './../actions/report.action';
 import { catchError, tap, map, flatMap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { of, forkJoin } from 'rxjs';
@@ -9,7 +8,11 @@ import { IAppState } from '../app.store';
 import {
   REPORT_GET_FAILED,
   REPORT_GET_FULFILLED,
-  REPORT_GET_DATA
+  REPORT_GET_DATA,
+  REPORT_GET_DETAILS_SUCCESS,
+  REPORT_GET_DETAILS_FAILED,
+  REPORT_CREATE_FAILED,
+  REPORT_CREATE_FULFILLED
 } from '../actions/report.action';
 import { Subscription } from 'rxjs/Subscription';
 import { ReportService, DialogService } from '../../services';
@@ -159,6 +162,29 @@ export class ReportActionCreator {
             });
           }
         }),
+      );
+  }
+
+  SendReport (report): Observable<any> {
+    return this.reportService.SendReport(report)
+      .pipe(
+        catchError(error => of(error.error)),
+        tap(result => {
+          if (result.httpCode !== 201) {
+            this.ngRedux.dispatch({
+              type: REPORT_CREATE_FAILED,
+              payload: {
+                error: result.message
+              }
+            });
+          }
+          if (result.httpCode === 201) {
+            this.ngRedux.dispatch({
+              type: REPORT_CREATE_FULFILLED,
+              payload: {}
+            });
+          }
+        })
       );
   }
 }

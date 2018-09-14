@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Pin Location</h2>
+<mat-dialog-content>
+  <agm-map
+    [latitude]="lat"
+    [longitude]="lng"
+    [zoom]="zoom"
+    [zoomControl]="false"
+    (mapClick)="mapClicked($event)"
+  >
+    <agm-marker [latitude]="markerLat" [longitude]="markerLng"></agm-marker>
+  </agm-map>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button mat-button (click)="onConfirmClick()">Yes</button>
+</mat-dialog-actions>

@@ -49,3 +49,16 @@ export function getReportDetailsFailed (state: IReportStore, action) {
     error: action.payload.error
   });
 }
+
+export function sendReportSuccess (state: IReportStore, action) {
+  return tassign<IReportStore, IReportStore>(state, {
+    ...state
+  });
+}
+
+export function sendReportFailed (state: IReportStore, action) {
+  return tassign<IReportStore, IReportStore>(state, {
+    ...state,
+    error: action.payload.error
+  });
+}

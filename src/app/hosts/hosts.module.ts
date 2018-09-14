@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HostsListComponent } from './hosts-list/hosts-list.component';
 import { MaterialModule } from '../app.module';
 import { NewHostComponent } from './new-host/new-host.component';
-
+import { MapsModule, MapPointerModalComponent } from './../maps';
 
 @NgModule({
   imports: [
@@ -13,7 +13,8 @@ import { NewHostComponent } from './new-host/new-host.component';
     RouterModule,
     FormsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MapsModule
   ],
   declarations: [
     HostsListComponent,
@@ -22,6 +23,9 @@ import { NewHostComponent } from './new-host/new-host.component';
   exports: [
     HostsListComponent,
     NewHostComponent
+  ],
+  entryComponents: [
+    MapPointerModalComponent
   ]
 })
 export class HostsModule { }
