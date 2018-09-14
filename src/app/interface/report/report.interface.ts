@@ -9,6 +9,8 @@ export interface IReport {
   lat: number;
   _reporter?: IReporter;
   _host?: IHost;
+  hostId?: string;
+  reporterId?: string;
   status: string;
   people?: IPerson[];
   properties?: IProperty[];

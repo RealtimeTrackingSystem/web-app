@@ -6,6 +6,9 @@ import { MaterialModule } from '../app.module';
 
 import { ReportsTableComponent } from './reports-table/reports-table.component';
 import { ReportDetailsComponent } from './report-details/report-details.component';
+import { NewReportComponent } from './new-report/new-report.component';
+
+import { MapsModule, MapPointerModalComponent } from '../maps';
 
 @NgModule({
   imports: [
@@ -13,15 +16,21 @@ import { ReportDetailsComponent } from './report-details/report-details.componen
     MaterialModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MapsModule
   ],
   declarations: [
     ReportsTableComponent,
-    ReportDetailsComponent
+    ReportDetailsComponent,
+    NewReportComponent
   ],
   exports: [
     ReportsTableComponent,
-    ReportDetailsComponent
+    ReportDetailsComponent,
+    NewReportComponent
+  ],
+  entryComponents: [
+    MapPointerModalComponent
   ]
 })
 

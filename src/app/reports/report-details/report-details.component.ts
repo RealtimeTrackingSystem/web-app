@@ -45,7 +45,6 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
   }
 
   loadReportDetails (report: IReport) {
-    console.log(report);
     this.reportDetailForm = this.formBuilder.group({
       _id: [{ value: report._id, disabled: true }, Validators.required],
       title: [{ value: report.title, disabled: true}, Validators.required],
@@ -54,7 +53,7 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
       long:  [{ value: report.long, disabled: true}],
       lat: [{ value: report.lat, disabled: true }],
       _reporter: [{ value: report._reporter['fname'] + ' ' + report._reporter['lname'], disabled: true }],
-      _host: [{ value: report._host['name'], disabled: true }],
+      _host: [{ value: report._host ? report._host['name'] : 'Individual Report', disabled: true }],
       status: [{ value: report.status, disabled: true }],
       people: [{ value: report.people.map(r => r.fname + ' ' + r.lname).join(', '), disabled: true }],
       properties: [{ value: report.properties.map(p => p.type).join(', '), disabled: true }],

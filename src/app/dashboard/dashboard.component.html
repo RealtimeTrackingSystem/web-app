@@ -5,7 +5,15 @@
         <div class="card">
             <div style="padding: 10%">
               <h3>{{ title }}</h3>
-              <p>{{ body }}</p>
+              <agm-map
+                [latitude]="lat"
+                [longitude]="lng"
+                [zoom]="zoom"
+                [zoomControl]="false"
+                (mapClick)="mapClicked($event)"
+              >
+                <agm-marker [latitude]="markerLat" [longitude]="markerLng"></agm-marker>
+              </agm-map>
           </div>
         </div>
       </div>

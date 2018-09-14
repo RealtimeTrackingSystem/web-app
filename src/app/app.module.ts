@@ -39,6 +39,9 @@ import {
   MatStepperModule,
 } from '@angular/material';
 
+/* AGM */
+import { AgmCoreModule } from '@agm/core';
+
 /* REDUX */
 import { NgRedux, NgReduxModule, DevToolsExtension } from '@angular-redux/store';
 import { NgReduxRouterModule, NgReduxRouter } from '@angular-redux/router';
@@ -117,6 +120,9 @@ export class MaterialModule {}
         NavbarModule,
         FooterModule,
         FixedpluginModule,
+        AgmCoreModule.forRoot({
+          apiKey: 'AIzaSyD1dMqjs9d7Vdfm8JyZcWR89zFoAlD_rYQ'
+        })
     ],
     declarations: [
         AppComponent,

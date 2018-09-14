@@ -5,7 +5,9 @@ import {
   REPORT_GET_FAILED,
   REPORT_GET_DATA,
   REPORT_GET_DETAILS_FAILED,
-  REPORT_GET_DETAILS_SUCCESS
+  REPORT_GET_DETAILS_SUCCESS,
+  REPORT_CREATE_FAILED,
+  REPORT_CREATE_FULFILLED
 } from './actions/report.action';
 
 import * as report from './reducers/report.reducer';
@@ -38,6 +40,8 @@ export function reportReducer(state: IReportStore = REPORT_INITIAL_STATE, action
     case REPORT_GET_DATA: return report.getReportData(state, action);
     case REPORT_GET_DETAILS_FAILED: return report.getReportDetailsFailed(state, action);
     case REPORT_GET_DETAILS_SUCCESS: return report.getReportDetailsSuccess(state, action);
+    case REPORT_CREATE_FAILED: return report.sendReportFailed(state, action);
+    case REPORT_CREATE_FULFILLED: return report.sendReportSuccess(state, action);
   }
   return state;
 };

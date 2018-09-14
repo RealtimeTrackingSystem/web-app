@@ -45,6 +45,13 @@ export const ROUTES: RouteInfo[] = [
         icontype: 'playlist_add',
         usedBy: 'public'
     },
+    {
+        path: '/public/report-new',
+        title: 'New Report',
+        type: 'link',
+        icontype: 'playlist_add',
+        usedBy: 'public'
+    },
     // host
     {
         path: '/host/dashboard',
