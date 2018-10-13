@@ -13,7 +13,7 @@ spec:
         component: web
     spec:
       containers:
-        - name: client
+        - name: web-app
           image: johnhigginsavila/web-app
           ports:
             - containerPort: 4000
