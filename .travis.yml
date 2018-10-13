@@ -9,6 +9,8 @@ env:
 before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build -t johnhigginsavila/web-app-test -f Dockerfile.dev .
+script:
+  - docker build -t johnhigginsavila/web-app-test -f Dockerfile.dev .
 deploy:
   provider: script
   script: bash ./deploy.sh
