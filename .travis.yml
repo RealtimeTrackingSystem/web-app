@@ -1,5 +1,4 @@
 sudo: required
-# docker run -it -v $(pwd):/app ruby:2.3 sh
 services:
   - docker
 env:
