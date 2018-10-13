@@ -7,3 +7,5 @@ dist/
 **/.vscode
 !**/.vscode/tasks.json
 package-lock.json
+/coverage
+coverage
