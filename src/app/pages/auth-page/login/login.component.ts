@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { SessionActionCreator } from '../../../store/action-creators';
 import { Router } from '@angular/router';
+import swal from 'sweetalert2';
 
 declare var $: any;
 
@@ -73,10 +74,15 @@ export class LoginComponent implements OnInit, OnDestroy {
           .then(result => {
             if (result.token) {
               this.router.navigate([`/public`]);
+            } else {
+              return swal('Invalid Credentials', 'Invalid Username/ Email or password', 'warning');
             }
+          })
+          .catch(err => {
+            return swal('Unavailable', 'System is temporarily unavailable', 'error');
           });
       } else {
-        alert('Invalid form');
+        return swal('Invalid Form', 'Please complete the form', 'info');
       }
     }
 }
