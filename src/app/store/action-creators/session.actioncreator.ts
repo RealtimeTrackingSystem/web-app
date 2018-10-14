@@ -43,6 +43,7 @@ export class SessionActionCreator {
                 validationError: result.message
               }
             });
+            throw result;
           } else if (result.httpCode === 500) {
             this.ngRedux.dispatch({
               type: SESSION_CREATE_FAILED,
@@ -50,6 +51,7 @@ export class SessionActionCreator {
                 error: result.message
               }
             });
+            throw result;
           } else if (result.httpCode === 201) {
             const session: ISession = {
               token: result.payload.token,

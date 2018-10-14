@@ -1,3 +1,4 @@
+import { MaterialModule } from './../../app.module';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -20,7 +21,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     FormsModule,
     ReactiveFormsModule,
     FooterModule,
-    ComponentModule
+    ComponentModule,
+    MaterialModule
   ],
   declarations: [
     LoginComponent,
