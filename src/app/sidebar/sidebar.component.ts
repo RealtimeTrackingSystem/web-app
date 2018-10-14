@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
-
+import swal from 'sweetalert2';
+import { Router } from '@angular/router';
 declare const $: any;
 
 // Metadata
@@ -89,6 +90,10 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
     @Input() routeGroup: string;
+
+    constructor (
+        private router: Router
+    ) {}
     isMobileMenu() {
         if ($(window).width() > 991) {
             return false;
@@ -111,5 +116,21 @@ export class SidebarComponent implements OnInit {
             bool = true;
         }
         return bool;
+    }
+
+    logout () {
+        return swal({
+            title: 'Are you sure you want to log out?',
+            text: 'You won\'t be able to revert this!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+            if (result.value === true) {
+                this.router.navigate(['/']);
+            }
+          })
     }
 }

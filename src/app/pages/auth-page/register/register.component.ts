@@ -2,16 +2,22 @@ import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { SessionActionCreator } from '../../../store/action-creators';
 import { Router } from '@angular/router';
+import swal from 'sweetalert2';
 
 declare var $: any;
 
 @Component({
     selector: 'app-login-cmp',
-    templateUrl: './register.component.html'
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.scss']
 })
 
 export class RegisterComponent implements OnInit, OnDestroy {
     test: Date = new Date();
+    public genders = [
+      { name: 'Male', value: 'M' },
+      { name: 'Female', value: 'F' }
+    ];
     private toggleButton: any;
     private sidebarVisible: boolean;
     private nativeElement: Node;
@@ -33,7 +39,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         email: [null, Validators.required],
         fname: [null, Validators.required],
         lname: [null, Validators.required],
-        gender: [null, Validators.required],
+        gender: ['M', Validators.required],
         alias: [null, Validators.required],
         street: [null, Validators.required],
         barangay: [null, Validators.required],
@@ -85,9 +91,20 @@ export class RegisterComponent implements OnInit, OnDestroy {
             if (result.token) {
               this.router.navigate([`/public`]);
             }
-          });
+          })
+          .catch(err => {
+            return this.signupError(err);
+          })
       } else {
-        alert('Invalid form');
+        return swal('Invalid Form', 'Please complete the form', 'info');
+      }
+    }
+
+    signupError (err) {
+      if (err.httpCode === 400) {
+        return swal('Invalid Input', err.message, 'warning');
+      } else {
+        return swal('Server Not Available', 'Server is temporarily Unavailable', 'error');
       }
     }
 }
