@@ -44,6 +44,15 @@ export class HostService {
     });
   }
 
+  GetAllHost(): Observable<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.get(this.hostUrl, {
+      headers: headers
+    });
+  }
+
   GetHostById (_id: string): Observable<any> {
     const headers = new HttpHeaders()
       .append('Content-Type', 'application/json')
