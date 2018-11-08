@@ -41,6 +41,19 @@
                   </div>
                 </div>
 
+                <div class="form-group has-default">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">info</i>
+                      </span>
+                    </div>
+                    <mat-select class="form-control" formControlName="hostId">
+                      <mat-option *ngFor="let host of hostList" value="{{host._id}}">{{ host.name }}</mat-option>
+                    </mat-select>
+                  </div>
+                </div>
+
                 <!--<div class="form-group has-default">
                   <div class="input-group">
                     <div class="input-group-prepend">
