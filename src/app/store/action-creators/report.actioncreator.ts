@@ -73,8 +73,8 @@ export class ReportActionCreator {
     return forkJoin(_reports);
   }
 
-  GetReports (page: number = 0, limit: number = 10, tags: string[] = [], resources: string[] = []): Observable<IReportStore> {
-    return this.reportService.GetReports(page, limit, tags, resources)
+  GetReports (page: number = 0, limit: number = 10, tags: string[] = [], resources: string[] = [], options = {}): Observable<IReportStore> {
+    return this.reportService.GetReports(page, limit, tags, resources, options)
       .pipe(
         catchError(error => of(JSON.parse(error._body))),
         tap(result => {
