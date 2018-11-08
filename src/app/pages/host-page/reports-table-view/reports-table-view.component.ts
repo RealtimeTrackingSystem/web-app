@@ -3,7 +3,7 @@ import { select } from '@angular-redux/store';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ReportActionCreator } from '../../../store/action-creators';
-import { IReport } from './../../../interface';
+import { IReport, IHostMember } from './../../../interface';
 import { map, flatMap } from 'rxjs/operators';
 import { of, forkJoin } from 'rxjs';
 import { IAppState } from '../../../store/app.store';
@@ -21,6 +21,7 @@ export class ReportsTableViewComponent implements OnInit, ITable {
   @select(s => s.report.count) $count: Observable<number>;
   @select(s => s.report.page) $page: Observable<number>;
   @select(s => s.report.limit) $limit: Observable<number>;
+  @select(s => s.userData.activeHost.hostMember) $hostMember: Observable<IHostMember>;
 
   public pageNumber = 0;
 
@@ -31,7 +32,14 @@ export class ReportsTableViewComponent implements OnInit, ITable {
   ) { }
 
   ngOnInit() {
-    this.reportActionCreator.GetReports(this.pageNumber, 10, [], ['host']).toPromise()
+    this.$hostMember
+    .pipe(
+      flatMap((hostMember) => {
+        const options = {host: hostMember._id};
+        return this.reportActionCreator.GetReports(this.pageNumber, 10, [], ['host'], options)
+      })
+    )
+      .toPromise()
       .then();
   }
 
@@ -40,7 +48,14 @@ export class ReportsTableViewComponent implements OnInit, ITable {
     if (limit * (page + 1) < count) {
       const pageNumber = this.pageNumber + 1;
       this.pageNumber += 1;
-      this.reportActionCreator.GetReports(pageNumber, 10, [], ['host']).toPromise().then();
+      this.$hostMember
+        .pipe(
+          flatMap((hostMember) => {
+            const options = {host: hostMember._id};
+            return this.reportActionCreator.GetReports(pageNumber, 10, [], ['host'], options)
+          })
+        )
+        .toPromise().then();
     }
   }
 
@@ -48,27 +63,53 @@ export class ReportsTableViewComponent implements OnInit, ITable {
     if (this.pageNumber !== 0) {
       const pageNumber = this.pageNumber - 1;
       this.pageNumber -= 1;
-      this.reportActionCreator.GetReports(pageNumber, 10, [], ['host']).toPromise().then();
+      this.$hostMember
+        .pipe(
+          flatMap((hostMember) => {
+            const options = {host: hostMember._id};
+            return this.reportActionCreator.GetReports(pageNumber, 10, [], ['host'], options)
+          })
+        )
+        .toPromise().then();
     }
   }
 
   firstPage () {
     this.pageNumber = 0;
-    this.reportActionCreator.GetReports(0, 10, [], ['host']).toPromise()
-      .then();
+    this.$hostMember
+        .pipe(
+          flatMap((hostMember) => {
+            const options = {host: hostMember._id};
+            return this.reportActionCreator.GetReports(0, 10, [], ['host'], options)
+          })
+        )
+        .toPromise().then();
   }
 
   lastPage () {
     const {count, limit} = this.ngRedux.getState().report;
     const lastPage = Math.ceil(count / limit) - 1;
     this.pageNumber = lastPage;
-    this.reportActionCreator.GetReports(lastPage, 10, [], ['host']).toPromise()
-      .then();
+    this.$hostMember
+        .pipe(
+          flatMap((hostMember) => {
+            const options = {host: hostMember._id};
+            return this.reportActionCreator.GetReports(lastPage, 10, [], ['host'], options)
+          })
+        )
+        .toPromise().then();
   }
 
   goToPage (pageNumber: number) {
     this.pageNumber = pageNumber;
-    this.reportActionCreator.GetReports(pageNumber, 10, [], ['host']).toPromise().then();
+    this.$hostMember
+        .pipe(
+          flatMap((hostMember) => {
+            const options = {host: hostMember._id};
+            return this.reportActionCreator.GetReports(pageNumber, 10, [], ['host'], options)
+          })
+        )
+        .toPromise().then();
   }
 
   reportDetails (event) {

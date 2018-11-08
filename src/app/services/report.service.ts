@@ -33,7 +33,7 @@ export class ReportService {
     }
   }
 
-  GetReports(page: number = 0, limit: number = 10, tags: string[] = [], resources: string[] = []): Observable<any> {
+  GetReports(page: number = 0, limit: number = 10, tags: string[] = [], resources: string[] = [], options: any = {}): Observable<any> {
     const validResources = resources.filter(resource => this.VALID_RESOURCES.indexOf(resource) > -1);
     let query = '?page=' + page + '&limit=' + limit;
     if (validResources.length > 0) {
@@ -41,6 +41,12 @@ export class ReportService {
     }
     if (tags.length > 0) {
       query += '&tags' + tags.join(',');
+    }
+    if (options.reporter) {
+      query += '&reporter=' + options.reporter;
+    }
+    if (options.host) {
+      query += '&host=' + options.host;
     }
     const headers = new HttpHeaders()
       .append('Content-Type', 'application/json')
