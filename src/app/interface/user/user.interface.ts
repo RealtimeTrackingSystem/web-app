@@ -1,3 +1,4 @@
+import { IProfilePicture } from './../media/profile-picture.interface';
 import { IHostMember } from './../host/host-member.interface';
 
 export interface IUser {
@@ -18,4 +19,5 @@ export interface IUser {
   long?: number;
   reporterID?: string;
   hosts?: IHostMember[];
+  profilePicture?: IProfilePicture
 }

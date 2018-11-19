@@ -1,3 +1,4 @@
+import { ChangePasswordComponent } from './../../profile';
 import { HostListViewComponent } from './host-list-view/host-list-view.component';
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './../../dashboard/dashboard.component';
@@ -24,6 +25,10 @@ export const PublicRoutes: Routes = [
       {
         path: 'report-new',
         component: NewReportViewComponent
+      },
+      {
+        path: 'change-password',
+        component: ChangePasswordComponent
       }
     ]
   },

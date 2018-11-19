@@ -18,7 +18,11 @@ import {
   SESSION_CREATE_FULFILLED,
   SESSION_CREATE_FAILED,
   SESSION_DESTROY_FULFILLED,
-  SESSION_REGISTRATION_FAILED
+  SESSION_REGISTRATION_FAILED,
+  SESSION_FORGOT_PASSWORD_FULFILLED,
+  SESSION_FORGOT_PASSWORD_FAILED,
+  SESSION_PASSWORD_CHANGE_FULFILLED,
+  SESSION_PASSWORD_CHANGE_FAILED
 } from '../actions/session.action';
 
 @Injectable()
@@ -246,5 +250,72 @@ export class SessionActionCreator {
       type: USER_DATA_DESTROY
     });
     this.sessionService.SessionDestroy();
+  }
+
+  ForgotPassword (email: string) {
+    return this.sessionService.ForgotPassword(email)
+      .pipe(
+        catchError(error => of(error.error)),
+        tap(response => {
+          switch (response.httpCode) {
+            case 401: {
+              this.ngRedux.dispatch({
+                type: SESSION_FORGOT_PASSWORD_FAILED,
+                payload: {
+                  error: response.message
+                }
+              })
+            }
+            break;
+            case 201: {
+              this.ngRedux.dispatch({
+                type: SESSION_FORGOT_PASSWORD_FULFILLED
+              });
+            }
+            break;
+            default: {
+              this.ngRedux.dispatch({
+                type: SESSION_FORGOT_PASSWORD_FAILED,
+                payload: {
+                  error: response.message || 'Internal Server Error'
+                }
+              })
+            }
+          }
+        })
+      );
+  }
+  ChangePassword (oldPassword: string, newPassword: string, passwordConfirmation: string) {
+    return this.sessionService.ChangePassword(oldPassword, newPassword, passwordConfirmation)
+      .pipe(
+        catchError(error => of(error.error)),
+        tap(response => {
+          switch (response.httpCode) {
+            case 401: {
+              this.ngRedux.dispatch({
+                type: SESSION_PASSWORD_CHANGE_FAILED,
+                payload: {
+                  error: response.message
+                }
+              })
+            }
+            break;
+            case 201: {
+              this.ngRedux.dispatch({
+                type: SESSION_PASSWORD_CHANGE_FULFILLED
+              });
+            }
+            break;
+            default: {
+              this.ngRedux.dispatch({
+                type: SESSION_PASSWORD_CHANGE_FAILED,
+                payload: {
+                  error: response.message || 'Internal Server Error'
+                }
+              })
+            }
+          }
+        })
+      );
   }
 }
