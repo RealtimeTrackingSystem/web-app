@@ -85,4 +85,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         return swal('Invalid Form', 'Please complete the form', 'info');
       }
     }
+
+    forgotPassword() {
+      this.router.navigate([`/auth/forgot-password`])
+    }
 }

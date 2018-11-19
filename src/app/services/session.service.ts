@@ -64,19 +64,26 @@ export class SessionService {
     localStorage.clear();
   }
 
-  ChangePassword(changePassword: IChangePassword): Observable<any> {
-    const headers = new Headers({ 'Content-Type': 'application/json'});
-    const options = new RequestOptions({headers: headers});
-    return this.http.put(this.authUrl + '/v1/api/user/password', changePassword, options)
-    .map(response => response.json())
-    .share();
+  ChangePassword(oldPassword: string, newPassword: string, passwordConfirmation: string): Observable<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.SessionRead().token);
+    return this.httpClient.put(this.authUrl + '/password', {
+        oldPassword: oldPassword,
+        password: newPassword,
+        passwordConfirmation: passwordConfirmation
+      }, {
+        headers: headers
+      });
   }
 
   ForgotPassword(email: string): Observable<any> {
-    const headers = new Headers({ 'Content-Type': 'application/json'});
-    const options = new RequestOptions({headers: headers});
-    return this.http.post(this.authUrl + '/v1/api/user/password', {email}, options)
-    .map(response => response.json())
-    .share();
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+    return this.httpClient.post(this.authUrl + '/password', {
+        email: email
+      }, {
+        headers: headers
+      });
   }
 }

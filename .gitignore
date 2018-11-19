@@ -10,3 +10,7 @@ package-lock.json
 /coverage
 coverage
 service-account.json
+.DS_Store
+src/.DS_Store
+**/.DS_Store
+**/**/.DS_Store
