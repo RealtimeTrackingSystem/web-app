@@ -115,7 +115,7 @@ export class SidebarComponent implements OnInit {
         this.$user.subscribe(
             (user: IUser) => {
                 if (user) {
-                    this.profilePic = user.profilePicture.metaData.secure_url;
+                    this.profilePic =  user.profilePicture ? user.profilePicture.metaData.secure_url : null;
                     this.profileName = user.fname + ' ' + user.lname;
                 } else {
                     this.profilePic = './assets/img/default-avatar.png';
