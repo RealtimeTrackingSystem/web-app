@@ -1,4 +1,4 @@
-import { ChangePasswordComponent } from './../../profile';
+import { ChangePasswordComponent, MyProfileComponent } from './../../profile';
 import { HostListViewComponent } from './host-list-view/host-list-view.component';
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './../../dashboard/dashboard.component';
@@ -29,6 +29,10 @@ export const PublicRoutes: Routes = [
       {
         path: 'change-password',
         component: ChangePasswordComponent
+      },
+      {
+        path: 'my-profile',
+        component: MyProfileComponent
       }
     ]
   },

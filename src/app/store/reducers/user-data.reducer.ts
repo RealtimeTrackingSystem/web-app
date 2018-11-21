@@ -1,3 +1,4 @@
+import { IUser } from 'app/interface';
 import { IHostMember } from './../../interface/host/host-member.interface';
 import { IHost } from './../../interface/host/host.interface';
 import { tassign } from 'tassign';
@@ -71,5 +72,20 @@ export function setActiveHost (state: IUserDataStore, action) {
   return tassign<IUserDataStore, IUserDataStore>(state, {
     ...state,
     activeHost: action.payload.activeHost
+  });
+}
+
+export function updateUserSuccess (state: IUserDataStore, action) {
+  return tassign<IUserDataStore, IUserDataStore>(state, {
+    ...state,
+    user: action.payload.user,
+    error: null
+  });
+}
+
+export function updateUserFailed (state: IUserDataStore, action) {
+  return tassign<IUserDataStore, IUserDataStore>(state, {
+    ...state,
+    error: action.payload.error
   });
 }

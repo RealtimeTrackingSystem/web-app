@@ -1,3 +1,4 @@
+import { IUser } from 'app/interface';
 import { USER_DATA_DESTROY } from './../actions/user-data.action';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -24,6 +25,11 @@ import {
   SESSION_PASSWORD_CHANGE_FULFILLED,
   SESSION_PASSWORD_CHANGE_FAILED
 } from '../actions/session.action';
+
+import {
+  USER_UPDATE_FAILED,
+  USER_UPDATE_SUCCESS
+} from '../actions/user-data.action';
 
 @Injectable()
 
@@ -317,5 +323,51 @@ export class SessionActionCreator {
           }
         })
       );
+  }
+
+  UpdateProfile(user: IUser) {
+    return this.sessionService.UpdateProfile(user)
+      .pipe(
+        catchError(error => of(error.error)),
+        tap(result => {
+          switch (result.httpCode) {
+            case 400: {
+              this.ngRedux.dispatch({
+                type: USER_UPDATE_FAILED,
+                payload: {
+                  error: result.message
+                }
+              });
+            }
+            break;
+            case 201: {
+              this.ngRedux.dispatch({
+                type: USER_UPDATE_SUCCESS,
+                payload: {
+                  user: user
+                }
+              });
+            }
+            break;
+            default: {
+              this.ngRedux.dispatch({
+                type: USER_UPDATE_FAILED,
+                payload: {
+                  error: result.message || 'An Error Occured while updating profile'
+                }
+              });
+            }
+          }
+        }),
+        flatMap(
+          result => {
+            if (result.httpCode === 201) {
+              return this.SessionRehydrate();
+            } else {
+              return of(result);
+            }
+          }
+        )
+      )
   }
 }

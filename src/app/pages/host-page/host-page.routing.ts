@@ -3,7 +3,7 @@ import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { ReportsTableViewComponent } from './reports-table-view/reports-table-view.component';
 import { ReportDetailViewComponent } from './report-detail-view/report-detail-view.component';
 import { PendingHostRequestViewComponent } from './pending-host-request-view/pending-host-request-view.component';
-import { ChangePasswordComponent } from './../../profile';
+import { ChangePasswordComponent, MyProfileComponent } from './../../profile';
 
 export const HostRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -33,6 +33,10 @@ export const HostRoutes: Routes = [
       {
         path: 'change-password',
         component: ChangePasswordComponent
+      },
+      {
+        path: 'my-profile',
+        component: MyProfileComponent
       }
     ]
   },

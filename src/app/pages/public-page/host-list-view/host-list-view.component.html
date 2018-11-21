@@ -1,6 +1,6 @@
 <div class="main-content">
   <div class="container-fluid">
-    <div class="row">
+    <div *ngIf="hostMemberships.length < 1; else hostPreview" class="row">
       <app-hosts-list
         [hosts]="($hosts | async)"
         [count]="($count | async)"
@@ -14,5 +14,10 @@
         (addButton)="sendRequestToHost($event)"
       ></app-hosts-list>
     </div>
+    <ng-template #hostPreview>
+      <app-host-preview
+        [hostMembership]="hostMemberships[0]"
+      ></app-host-preview>
+    </ng-template>
   </div>
 </div>

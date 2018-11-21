@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../app.module';
 
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 @NgModule({
   imports: [
@@ -15,10 +16,12 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     MaterialModule
   ],
   declarations: [
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    MyProfileComponent
   ],
   exports: [
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    MyProfileComponent
   ]
 })
 export class ProfileModule { }
