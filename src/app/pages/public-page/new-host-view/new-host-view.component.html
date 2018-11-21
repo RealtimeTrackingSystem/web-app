@@ -1,7 +1,16 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="col-md-10">
-      <app-new-host></app-new-host>
+      <app-new-host *ngIf="hostMemberships.length < 1; else other"></app-new-host>
+      <ng-template #other>
+        <div class="col-md-12">
+        <div class="card">
+            <div style="padding: 10%">
+              <h3>Already Sent A Request or Joined a host</h3>
+          </div>
+        </div>
+      </div>
+      </ng-template>
     </div>
   </div>
 </div>

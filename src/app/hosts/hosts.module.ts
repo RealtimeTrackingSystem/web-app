@@ -6,6 +6,7 @@ import { HostsListComponent } from './hosts-list/hosts-list.component';
 import { MaterialModule } from '../app.module';
 import { NewHostComponent } from './new-host/new-host.component';
 import { MapsModule, MapPointerModalComponent } from './../maps';
+import { HostPreviewComponent } from './host-preview/host-preview.component';
 
 @NgModule({
   imports: [
@@ -18,11 +19,13 @@ import { MapsModule, MapPointerModalComponent } from './../maps';
   ],
   declarations: [
     HostsListComponent,
-    NewHostComponent
+    NewHostComponent,
+    HostPreviewComponent
   ],
   exports: [
     HostsListComponent,
-    NewHostComponent
+    NewHostComponent,
+    HostPreviewComponent
   ],
   entryComponents: [
     MapPointerModalComponent

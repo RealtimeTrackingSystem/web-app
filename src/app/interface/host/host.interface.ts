@@ -2,6 +2,7 @@ export interface IHost {
   _id: string;
   defaultTags: string[];
   name: string;
+  description: string;
   email: string;
   location: string;
   hostNature: string;

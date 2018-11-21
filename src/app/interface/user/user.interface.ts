@@ -6,15 +6,17 @@ export interface IUser {
   fname?: string;
   lname?: string;
   gender?: string;
+  age?: number;
   address?: string;
   alias?: string;
   email?: string;
   username?: string;
   street?: string;
+  barangay?: string;
   city?: string;
   region?: string;
   country?: string;
-  postalCode?: string;
+  zip?: string;
   lat?: number;
   long?: number;
   reporterID?: string;

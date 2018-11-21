@@ -1,0 +1,141 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header card-header-icon card-header-rose">
+            <div class="card-icon">
+              <i class="material-icons">perm_identity</i>
+            </div>
+            <h4 class="card-title">Edit Profile -
+              <small class="category">Complete your profile</small>
+            </h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="userDataForm">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Username</label>
+                    <input formControlName="username" type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Email address</label>
+                    <input formControlName="email" type="email" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Nickname / Alias</label>
+                    <input formControlName="alias" type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Fist Name</label>
+                    <input formControlName="fname" type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Last Name</label>
+                    <input formControlName="lname" type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Age</label>
+                    <input formControlName="age" type="number" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Gender</label>
+                    <input formControlName="gender" type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Street</label>
+                    <input formControlName="street" type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Barangay</label>
+                    <input formControlName="barangay" type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">City</label>
+                    <input formControlName="city" type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Region</label>
+                    <input formControlName="region" type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Country</label>
+                    <input formControlName="country" type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Zip Code</label>
+                    <input formControlName="zip" type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <!--<div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>About Me</label>
+                    <div class="form-group">
+                      <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                      <textarea class="form-control" rows="5"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>-->
+              <button mat-raised-button (click)="updateProfile()" class="btn btn-rose pull-right">Update Profile</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card card-profile">
+          <div class="card-avatar">
+            <a>
+              <img class="img" src="{{getProfilePic() || './assets/img/default-avatar.png'}}" />
+            </a>
+          </div>
+          <div class="card-body">
+            <h6 class="card-category text-gray">Reporter</h6>
+            <h4 class="card-title">{{ userData.user.fname + ' ' + userData.user.lname }}</h4>
+            <a href="#pablo" class="btn btn-rose btn-round">Update Profile Photo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,7 @@ import { ISession } from '../interface/session/session.interface';
 import { ISessionCreate } from '../interface/session/session-create.interface';
 import { IUserNew } from '../interface/user/user-new.interface';
 import { environment } from '../../environments/environment';
+import { IUser } from 'app/interface';
 
 @Injectable()
 export class SessionService {
@@ -85,5 +86,14 @@ export class SessionService {
       }, {
         headers: headers
       });
+  }
+
+  UpdateProfile(user: IUser): Observable<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.SessionRead().token);
+    return this.httpClient.put(this.authUrl + '/user', user, {
+      headers: headers
+    });
   }
 }
