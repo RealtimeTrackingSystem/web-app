@@ -1,7 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
 import swal from 'sweetalert2';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { select } from '@angular-redux/store';
+import { IUserDataStore } from 'app/store/user-data.store';
+import { IUser } from '../interface';
+
 declare const $: any;
 
 // Metadata
@@ -91,6 +96,10 @@ export class SidebarComponent implements OnInit {
     public menuItems: any[];
     @Input() routeGroup: string;
 
+    @select(s => s.userData.user) $user: Observable<IUser>;
+    public profilePic: string;
+    public profileName: string;
+
     constructor (
         private router: Router
     ) {}
@@ -103,6 +112,16 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem.usedBy === this.routeGroup);
+        this.$user.subscribe(
+            (user: IUser) => {
+                if (user) {
+                    this.profilePic =  user.profilePicture ? user.profilePicture.metaData.secure_url : null;
+                    this.profileName = user.fname + ' ' + user.lname;
+                } else {
+                    this.profilePic = './assets/img/default-avatar.png';
+                    this.profileName = 'User'
+                }
+        })
     }
     updatePS(): void  {
         if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {

@@ -1,9 +1,10 @@
+import { Subscription } from 'rxjs/Subscription';
 import { SessionActionCreator } from './../../../store/action-creators/session.actioncreator';
 import { IUserDataStore } from './../../../store/user-data.store';
 import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { select } from '@angular-redux/store';
-import { ITable, IHost } from '../../../interface';
+import { ITable, IHost, IHostMemberships } from '../../../interface';
 import { HostActionCreator } from '../../../store/action-creators';
 import { IAppState } from '../../../store/app.store';
 import { NgRedux } from '@angular-redux/store';
@@ -14,11 +15,15 @@ import swal from 'sweetalert2';
   templateUrl: './host-list-view.component.html',
   styleUrls: ['./host-list-view.component.scss']
 })
-export class HostListViewComponent implements OnInit, ITable {
+export class HostListViewComponent implements OnInit, OnDestroy, ITable {
   @select(s => s.host.hosts) $hosts: Observable<IHost[]>;
   @select(s => s.host.count) $count: Observable<number>;
   @select(s => s.host.limit) $limit: Observable<number>;
   @select(s => s.host.page) $page: Observable<number>;
+  @select(s => s.userData.hostMemberships) $hostMemberships: Observable<IHostMemberships[]>;
+
+  public hostMemberships: IHostMemberships[] = null;
+  public hostMembershiptsSubscription: Subscription;
 
   public pageNumber = 0;
   public userData: IUserDataStore;
@@ -40,6 +45,19 @@ export class HostListViewComponent implements OnInit, ITable {
     this.hostActionCreator.GetHosts(this.pageNumber, 10, this.hostFilter)
       .toPromise()
       .then();
+
+    this.hostMembershiptsSubscription = this.$hostMemberships
+      .subscribe((hostMemberships: IHostMemberships[]) => {
+        if (hostMemberships) {
+          this.hostMemberships = hostMemberships;
+        } else {
+          this.hostMemberships = [];
+        }
+      });
+  }
+
+  ngOnDestroy () {
+    this.hostMembershiptsSubscription.unsubscribe();
   }
 
   prevPage () {

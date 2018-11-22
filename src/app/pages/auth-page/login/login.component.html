@@ -1,10 +1,10 @@
 
 <div class="wrapper wrapper-full-page">
-  <div class="page-header login-page header-filter" filter-color="black" style="background-image: url('./assets/img/login.jpg'); background-size: cover; background-position: top center;">
+  <div class="page-header login-page header-filter" filter-color="black" style="background-image: url('./assets/img/city-background.jpeg'); background-size: cover; background-position: top center;">
     <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
     <div class="container">
       <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
-        <form [formGroup]="signInForm" (submit)="submit()" class="form">
+        <form [formGroup]="signInForm" class="form">
           <div class="card card-login card-hidden">
             <div class="card-header card-header-info text-center">
               <h4 class="card-title">Log in</h4>
@@ -30,15 +30,17 @@
                   <input formControlName="password" type="password" class="form-control" placeholder="Password...">
                 </div>
               </span>
-            </div>
-            <div class="card-footer justify-content-center">
-                  <button type="submit" class="btn btn-info btn-link btn-lg">Login</button>
+              <div class="card-footer justify-content-center">
+                <button (click)="submit()" class="btn btn-info btn-link btn-lg">Login</button>
+                <button (click)="forgotPassword()" class="btn btn-warning btn-link btn-lg">Forgot password?</button>
+              </div>
             </div>
           </div>
         </form>
       </div>
     </div>
-    <footer class="footer ">
+    <div><br /><br /></div>
+    <div class="footer">
       <div class="container">
         <!--<nav class="pull-left">
           <ul>
@@ -70,6 +72,6 @@
           <a href="#" target="_blank">Realtime Report Tracking System</a> web application
         </div>
       </div>
-    </footer>
+    </div>
   </div>
 </div>

@@ -191,6 +191,16 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  formatPath (val) {
+    let formatted;
+    if (val.indexOf('-') > -1) {
+      formatted = val.split('-').reduce((acu, cur) => {
+        return acu.concat([cur.charAt(0).toUpperCase() + cur.slice(1)]);
+      }, []).join(' ');
+    }
+    return formatted;
+  }
+
   getTitle() {
     let titlee: any = this.location.prepareExternalUrl(this.location.path());
     for (let i = 0; i < this.listTitles.length; i++) {
@@ -205,7 +215,8 @@ export class NavbarComponent implements OnInit {
         }
       }
     }
-    return 'Dashboard';
+    const path = this.location.path()
+    return this.formatPath(path.split('/').reverse()[0]);
   }
   getPath() {
     return this.location.prepareExternalUrl(this.location.path());

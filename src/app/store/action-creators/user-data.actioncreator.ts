@@ -1,3 +1,4 @@
+import { SessionService } from './../../services/session.service';
 import { IHostMemberships } from './../../interface';
 import { IHostMember } from './../../interface/host/host-member.interface';
 import { IUser } from './../../interface/user/user.interface';
@@ -10,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { IAppState } from '../app.store';
 import { ReporterService } from '../../services';
-import { tap, map, catchError, filter } from 'rxjs/operators'
+import { tap, map, catchError, filter, flatMap } from 'rxjs/operators'
 
 import {
   USER_DATA_POPULATE_REPORTER_SUCCESS,
@@ -21,6 +22,7 @@ import {
 } from '../actions/user-data.action';
 import { IReporter } from '../../interface';
 
+import { SessionActionCreator } from './session.actioncreator';
 
 @Injectable()
 
@@ -28,6 +30,7 @@ export class UserDataActionCreator {
   constructor (
     private ngRedux: NgRedux<IAppState>,
     private reporterService: ReporterService,
+    private sessionService: SessionService,
     private hostService: HostService
   ) {}
 

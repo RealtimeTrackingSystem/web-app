@@ -40,6 +40,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         fname: [null, Validators.required],
         lname: [null, Validators.required],
         gender: ['M', Validators.required],
+        age: [null, Validators.required],
         alias: [null, Validators.required],
         street: [null, Validators.required],
         barangay: [null, Validators.required],

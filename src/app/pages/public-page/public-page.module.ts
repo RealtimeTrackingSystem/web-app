@@ -9,6 +9,7 @@ import { HostsModule } from '../../hosts';
 import { NewHostViewComponent } from './new-host-view/new-host-view.component';
 import { NewReportViewComponent } from './new-report-view/new-report-view.component';
 import { ReportsModule } from '../../reports';
+import { ProfileModule } from '../../profile';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { ReportsModule } from '../../reports';
     ReactiveFormsModule,
     DashboardModule,
     HostsModule,
-    ReportsModule
+    ReportsModule,
+    ProfileModule
   ],
   declarations: [
     HostListViewComponent,

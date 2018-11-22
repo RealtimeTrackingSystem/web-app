@@ -9,6 +9,7 @@ import { ReportsModule } from '../../reports';
 import { ReportersModule } from '../../reporters';
 import { ReportDetailViewComponent } from './report-detail-view/report-detail-view.component';
 import { PendingHostRequestViewComponent } from './pending-host-request-view/pending-host-request-view.component';
+import { ProfileModule } from '../../profile';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { PendingHostRequestViewComponent } from './pending-host-request-view/pen
     ReactiveFormsModule,
     DashboardModule,
     ReportsModule,
-    ReportersModule
+    ReportersModule,
+    ProfileModule
   ],
   declarations: [
     ReportsTableViewComponent,
