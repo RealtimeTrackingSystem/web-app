@@ -7,21 +7,29 @@ import { MaterialModule } from '../app.module';
 
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { AddProfilePictureDialogComponent } from './add-profile-picture-dialog/add-profile-picture-dialog.component';
+import { ComponentModule } from '../components';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    ComponentModule
   ],
   declarations: [
     ChangePasswordComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    AddProfilePictureDialogComponent
   ],
   exports: [
     ChangePasswordComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    AddProfilePictureDialogComponent
+  ],
+  entryComponents: [
+    AddProfilePictureDialogComponent
   ]
 })
 export class ProfileModule { }

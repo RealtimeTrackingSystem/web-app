@@ -1,3 +1,5 @@
+import { AddProfilePictureDialogComponent } from './../add-profile-picture-dialog/add-profile-picture-dialog.component';
+import { MatDialog } from '@angular/material';
 import { SessionActionCreator } from './../../store/action-creators/session.actioncreator';
 import { IUser } from './../../interface/user/user.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -20,7 +22,8 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   public userDataForm: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
-    private sessionActionCreator: SessionActionCreator
+    private sessionActionCreator: SessionActionCreator,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -78,5 +81,17 @@ export class MyProfileComponent implements OnInit, OnDestroy {
           return swal('Update Profile Error', 'An error occured while updating profile', 'error');
         });
     }
+  }
+
+  openChangePicDialog () {
+    const dialogRef = this.dialog.open(AddProfilePictureDialogComponent, {
+      width: '500px',
+      data: { }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
   }
 }
