@@ -132,7 +132,7 @@
           <div class="card-body">
             <h6 class="card-category text-gray">Reporter</h6>
             <h4 class="card-title">{{ userData.user.fname + ' ' + userData.user.lname }}</h4>
-            <a href="#pablo" class="btn btn-rose btn-round">Update Profile Photo</a>
+            <a (click)="openChangePicDialog()" class="btn btn-rose btn-round">Update Profile Photo</a>
           </div>
         </div>
       </div>

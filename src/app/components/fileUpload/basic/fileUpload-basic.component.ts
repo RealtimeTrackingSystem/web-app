@@ -15,10 +15,12 @@ export class FileUploadBasicComponent implements OnInit {
 
   @Input() fileAlias: string; // file alias must be the same in backend
   @Input() URL; // backend url address
+  @Input() method: string;
   @Output() onErrorCallback = new EventEmitter<any>();
   @Output() onSuccessCallback = new EventEmitter<any>();
 
   private headers = new Headers();
+  public sending = false;
   public uploader: FileUploader = new FileUploader({ url: this.URL, itemAlias: this.fileAlias });
 
   private GetSessionToken(): string {
@@ -53,38 +55,34 @@ export class FileUploadBasicComponent implements OnInit {
   }
 
   upload() {
-    this.headers.append('Access-Control-Allow-Origin', '*');
+    // this.headers.append('Access-Control-Allow-Origin', '*');
     // this.headers.append('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-    // this.headers.append("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    this.headers.append('Authorization', `Bearer ${this.GetSessionToken()}`);
-    const options = new RequestOptions({ headers: this.headers });
-    const inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#file');
-    const fileCount: number = inputEl.files.length;
-    const formData = new FormData();
-    if (fileCount > 0) { // a file was selected
-      for (let i = 0; i < fileCount; i++) {
-        formData.append(this.fileAlias, inputEl.files.item(i));
+    // this.headers.append('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    if (!this.sending) {
+      this.sending = true;
+      this.headers.append('Authorization', this.GetSessionToken());
+      const options = new RequestOptions({ headers: this.headers });
+      const inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#file');
+      const fileCount: number = inputEl.files.length;
+      const formData = new FormData();
+      if (fileCount > 0) { // a file was selected
+        for (let i = 0; i < fileCount; i++) {
+          formData.append(this.fileAlias, inputEl.files.item(i));
+        }
+        this.http[this.method.toLowerCase() || 'post'](this.URL, formData, options)
+          .map((res: any) => res.json())
+          .map(data => this.getData(data))
+          .subscribe(
+            (result) => {
+              this.sending = false;
+              this.onSuccessCallback.emit(result);
+            },
+            (error) => {
+              this.sending = false;
+              this.onErrorCallback.emit(error);
+            }
+          );
       }
-      this.http
-        .post(this.URL, formData, options)
-        .map((res: any) => res.json())
-        .map(data => this.getData(data))
-        .subscribe(
-          (result) => {
-            this.onSuccessCallback.emit(result);
-            this.dialogService.showSwal('success-message', {
-              title: 'Upload Success!',
-              text: `Succeeded Entry`
-            });
-          },
-          (error) => {
-            this.onErrorCallback.emit(error);
-            this.dialogService.showSwal('error-message', {
-              title: 'Upload Failed.',
-              text: `Sorry there was a problem encountered while uploading your file.`
-            });
-          }
-        );
     }
   }
 }

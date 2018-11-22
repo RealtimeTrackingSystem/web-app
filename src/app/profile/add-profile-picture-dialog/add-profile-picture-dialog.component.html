@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Choose A file to upload</h1>
+<div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+  <app-fileUpload-basic
+    [fileAlias]="fileAlias"
+    method="put"
+    [URL]="URL"
+    (onErrorCallback)="onUploadError($event)"
+    (onSuccessCallback)="onUploadSuccess($event)"
+  ></app-fileUpload-basic>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>
