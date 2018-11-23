@@ -23,10 +23,6 @@ export const PublicRoutes: Routes = [
         component: NewHostViewComponent
       },
       {
-        path: 'report-new',
-        component: NewReportViewComponent
-      },
-      {
         path: 'change-password',
         component: ChangePasswordComponent
       },

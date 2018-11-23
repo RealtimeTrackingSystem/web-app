@@ -1,9 +1,6 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, OnChanges } from '@angular/core';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 import { IMediaUpload } from '../../../interface/media-upload/media-upload.interface';
-import { ISession } from '../../../interface/session/session.interface';
-import { ReportService } from '../../../services';
-import { Subscription } from 'rxjs';
 import * as _ from 'lodash';
 
 
@@ -12,76 +9,66 @@ import * as _ from 'lodash';
   templateUrl: './media-viewer-v1.component.html',
   styleUrls: ['./media-viewer-v1.component.scss']
 })
-export class MediaViewerV1Component implements OnInit, OnDestroy {
+export class MediaViewerV1Component implements OnInit, OnChanges {
 
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
 
-  @Input() reportId: string;
   @Input() height: number;
   @Input() width: number;
+  @Input() photos: IMediaUpload[] = [];
 
-  private reportSubscription: Subscription = null;
   public attachments: IMediaUpload[];
-  public noImage: string = 'http://healthcarechronicle.com/templateDesign/images/no_Image.jpg';
+  public noImage = 'https://hlfppt.org/wp-content/uploads/2017/04/placeholder.png';
 
-  constructor(
-    private reportService: ReportService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
+    console.log(this.photos);
     this.loadReportAttachments();
   }
 
-  
-
-  ngOnDestroy() {
-    (this.reportSubscription) ? this.reportSubscription.unsubscribe() : null;
+  ngOnChanges() {
+    console.log(this.photos);
+    this.loadReportAttachments();
   }
 
   loadReportAttachments () {
-    if (this.reportId) {
-      this.reportSubscription = this.reportService.GetAttachments(this.reportId)
-      .subscribe(
-        (attachments: IMediaUpload[]) => {
-          if (attachments) {
-            this.galleryOptions = [
-              {
-                  width: `${(this.width) ? this.width : 400}px`,
-                  height: `${(this.height) ? this.height : 300}px`,
-                  thumbnailsColumns: 4,
-                  imageAnimation: NgxGalleryAnimation.Slide
-              },
-              // max-width 800
-              {
-                  breakpoint: 500,
-                  width: '100%',
-                  height: '600px',
-                  imagePercent: 80,
-                  thumbnailsPercent: 20,
-                  thumbnailsMargin: 20,
-                  thumbnailMargin: 20
-              },
-              // max-width 400
-              {
-                  breakpoint: 400,
-                  preview: false
-              }
-            ];
-
-            if (attachments.length !== 0) {
-              this.galleryImages = _.map(attachments, (a) => {
-                return { small: a.url, medium: a.url, big: a.url };
-              });
-            } else {
-              this.galleryImages = [
-                {small: this.noImage, medium: this.noImage, big: this.noImage}
-              ];
-            }
-          }
+    if (this.photos) {
+      this.galleryOptions = [
+        {
+            width: `${(this.width) ? this.width : 400}px`,
+            height: `${(this.height) ? this.height : 300}px`,
+            thumbnailsColumns: 4,
+            imageAnimation: NgxGalleryAnimation.Slide
+        },
+        // max-width 800
+        {
+            breakpoint: 500,
+            width: '100%',
+            height: '600px',
+            imagePercent: 80,
+            thumbnailsPercent: 20,
+            thumbnailsMargin: 20,
+            thumbnailMargin: 20
+        },
+        // max-width 400
+        {
+            breakpoint: 400,
+            preview: false
         }
-      );
+      ];
+
+      if (this.photos.length !== 0) {
+        this.galleryImages = _.map(this.photos, (a) => {
+          return { small: a.metaData.secure_url, medium: a.metaData.secure_url, big: a.metaData.secure_url };
+        });
+      } else {
+        this.galleryImages = [
+          {small: this.noImage, medium: this.noImage, big: this.noImage}
+        ];
+      }
     }
   }
-
 }
+

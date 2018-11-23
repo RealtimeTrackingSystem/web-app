@@ -28,7 +28,7 @@
 
 .cdk-overlay-container {
     position: fixed;
-    z-index: 1050;
+    z-index: 999;
 }
 .cdk-overlay-container, .cdk-global-overlay-wrapper {
     pointer-events: none;

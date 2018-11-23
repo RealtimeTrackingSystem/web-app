@@ -1,6 +1,9 @@
+import { UpdateStatusDialogComponent } from './../update-status-dialog/update-status-dialog.component';
+import { MatDialog } from '@angular/material';
 import { IReport } from './../../interface';
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-report-details',
@@ -12,8 +15,17 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
   @Input() report: IReport;
   public reportDetails = 'Report Details';
   public reportDetailForm: FormGroup;
+  public photos = [];
+
+  public lat = 0;
+  public lng = 0;
+  public markerLat = 0;
+  public markerLng = 0;
+  public zoom = 18;
+
   constructor(
     private formBuilder: FormBuilder,
+    public dialog: MatDialog
   ) {
     this.reportDetailForm = this.formBuilder.group({
       _id: [{ value: null, disabled: true }],
@@ -30,7 +42,8 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
       medias: [{ value: null, disabled: true }],
       tags: [{ value: null, disabled: true }],
       createdAt: [{ value: null, disabled: true }],
-      updatedAt: [{ value: null, disabled: true }]
+      updatedAt: [{ value: null, disabled: true }],
+      notes: [{ value: null, disabled: true }]
     });
   }
 
@@ -45,6 +58,15 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
   }
 
   loadReportDetails (report: IReport) {
+    const notes = report.notes
+      .map(n => {
+        return moment(n.updatedAt).format('YYYY-MM-DD HH:MM') + ' Update: ' + n.text;
+      }).join('\n\n');
+    this.photos = report.medias;
+    this.lat = report.lat;
+    this.lng = report.long;
+    this.markerLat = report.lat;
+    this.markerLng = report.long;
     this.reportDetailForm = this.formBuilder.group({
       _id: [{ value: report._id, disabled: true }, Validators.required],
       title: [{ value: report.title, disabled: true}, Validators.required],
@@ -59,7 +81,23 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
       properties: [{ value: report.properties.map(p => p.type).join(', '), disabled: true }],
       tags: [{ value: report.tags.join(', '), disabled: true }],
       createdAt: [{ value: report.createdAt, disabled: true }],
-      updatedAt: [{ value: report.updatedAt, disabled: true }]
+      updatedAt: [{ value: report.updatedAt, disabled: true }],
+      notes: [{ value: notes, disabled: true }]
+    });
+  }
+
+  mapClicked(event) {
+    console.log(event);
+  }
+
+  updateStatusDialog() {
+    const dialogRef = this.dialog.open(UpdateStatusDialogComponent, {
+      width: '500px',
+      data: { report: this.report }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
     });
   }
 
