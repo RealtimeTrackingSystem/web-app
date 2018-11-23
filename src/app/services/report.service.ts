@@ -73,11 +73,24 @@ export class ReportService {
       .append('Authorization', this.GetSessionToken());
     return this.http.post(this.reportUrl, report, {
       headers: headers
-    })
+    });
   }
 
   GetAttachments (any) {
     return of(any);
+  }
+
+  UpdateReportStatus (reportId: string, status: string, note: string): Observable<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+
+    return this.http.put(this.reportUrl + '/status/' + reportId, {
+      status: status,
+      note: note
+    }, {
+      headers: headers
+    });
   }
 
 }

@@ -12,7 +12,9 @@ import {
   REPORT_GET_DETAILS_SUCCESS,
   REPORT_GET_DETAILS_FAILED,
   REPORT_CREATE_FAILED,
-  REPORT_CREATE_FULFILLED
+  REPORT_CREATE_FULFILLED,
+  REPORT_UPDATE_STATUS_FAILED,
+  REPORT_UPDATE_STATUS_FULFILLED
 } from '../actions/report.action';
 import { Subscription } from 'rxjs/Subscription';
 import { ReportService, DialogService } from '../../services';
@@ -46,7 +48,8 @@ export class ReportActionCreator {
       medias: report.medias,
       tags: report.tags,
       createdAt: report.createdAt,
-      updatedAt: report.updatedAt
+      updatedAt: report.updatedAt,
+      notes: report.notes
     });
   }
 
@@ -170,7 +173,7 @@ export class ReportActionCreator {
       .pipe(
         catchError(error => of(error.error)),
         tap(result => {
-          if (result.httpCode !== 201) {
+          if (result.httpCode !== 400) {
             this.ngRedux.dispatch({
               type: REPORT_CREATE_FAILED,
               payload: {
@@ -183,6 +186,37 @@ export class ReportActionCreator {
               type: REPORT_CREATE_FULFILLED,
               payload: {}
             });
+          }
+        })
+      );
+  }
+
+  UpdateReportStatus (reportId: string, status: string, note: string): Observable<any> {
+    return this.reportService.UpdateReportStatus(reportId, status, note)
+      .pipe(
+        catchError(error => of(error.error)),
+        tap(result => {
+          if (result.httpCode !== 400) {
+            this.ngRedux.dispatch({
+              type: REPORT_UPDATE_STATUS_FAILED,
+              payload: {
+                error: result.message
+              }
+            });
+          }
+          if (result.httpCode === 201) {
+            this.ngRedux.dispatch({
+              type: REPORT_UPDATE_STATUS_FULFILLED,
+              payload: {}
+            });
+          }
+        }),
+        flatMap((result) => {
+          if (result.httpCode === 201) {
+            return this.GetReportDetails(reportId)
+              .pipe(map(() => result));
+          } else {
+            return of(result);
           }
         })
       );

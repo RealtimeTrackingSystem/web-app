@@ -15,6 +15,7 @@ export class FileUploadBasicComponent implements OnInit {
 
   @Input() fileAlias: string; // file alias must be the same in backend
   @Input() URL; // backend url address
+  @Input() buttonName = 'File Upload';
   @Input() method: string;
   @Output() onErrorCallback = new EventEmitter<any>();
   @Output() onSuccessCallback = new EventEmitter<any>();

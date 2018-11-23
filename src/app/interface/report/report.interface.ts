@@ -1,5 +1,11 @@
 import { IHost, IReporter, IPerson, IProperty, IMedia } from './../../interface';
-
+export interface INote {
+  _id: string;
+  _report: string;
+  text: string;
+  createdAt: string;
+  updatedAt: string;
+};
 export interface IReport {
   _id: string;
   title: string;
@@ -18,4 +24,5 @@ export interface IReport {
   tags: string[];
   createdAt: string;
   updatedAt: string;
+  notes?: INote[];
 }

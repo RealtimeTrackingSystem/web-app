@@ -46,14 +46,7 @@ export const ROUTES: RouteInfo[] = [
     },
     {
         path: '/public/host-new',
-        title: 'New Host',
-        type: 'link',
-        icontype: 'playlist_add',
-        usedBy: 'public'
-    },
-    {
-        path: '/public/report-new',
-        title: 'New Report',
+        title: 'Request For New Host',
         type: 'link',
         icontype: 'playlist_add',
         usedBy: 'public'

@@ -9,54 +9,118 @@
       </div>
       <div class="card-body">
         <form [formGroup]="reportDetailForm">
+
           <div class="row">
             <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput formControlName="_id" type="text" placeholder="ID">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput formControlName="title" type="text" placeholder="TITLE">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput formControlName="description" type="text" placeholder="DESCRIPTION">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput formControlName="location" type="text" placeholder="LOCATION">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput formControlName="lat" type="text" placeholder="LATITUDE">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput formControlName="long" type="text" placeholder="LONGITUDE">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput formControlName="_reporter" type="text" placeholder="REPORTER">
-              </mat-form-field>
+              <div class="form-group">
+                <label class="bmd-label-floating">ID</label>
+                <input formControlName="_id" type="text" class="form-control">
+              </div>
             </div>
             <div class="col-md-6">
-              <mat-form-field class="example-full-width">
-                <input matInput formControlName="_host" type="text" placeholder="HOST">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput formControlName="status" type="text" placeholder="STATUS">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput formControlName="people" type="text" placeholder="PEOPLE">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput formControlName="properties" type="text" placeholder="PROPERTIES">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput formControlName="tags" type="text" placeholder="TAGS">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput formControlName="createdAt" type="text" placeholder="Date Reported">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput formControlName="updatedAt" type="text" placeholder="Date Updated">
-              </mat-form-field>
+              <div class="form-group">
+                <label class="bmd-label-floating">TITLE</label>
+                <input formControlName="title" type="text" class="form-control">
+              </div>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">DESCRIPTION</label>
+                <input formControlName="description" type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">LOCATION</label>
+                <input formControlName="location" type="text" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">LONGITUDE</label>
+                <input formControlName="long" type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">LATITUDE</label>
+                <input formControlName="lat" type="text" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">HOST</label>
+                <input formControlName="_host" type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="bmd-label-floating">STATUS</label>
+                <input formControlName="status" type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <button (click)="updateStatusDialog()" class="btn btn-info">Update Status</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">PEOPLE</label>
+                <input formControlName="people" type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">TAGS</label>
+                <input formControlName="tags" type="text" class="form-control">
+              </div>
+            </div>
+          </div>
+  
+
+          <div class="row">
+            <div class="col-md-6">
+              <label class="bmd-label-floating">PHOTOS</label>
+              <div>
+                <app-media-viewer-v1
+                  [photos]="photos"
+                ></app-media-viewer-v1>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">NOTES</label>
+                <mat-form-field class="example-full-width">
+                    <textarea rows="6" formControlName="notes" matInput type="text"></textarea>
+                  </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+
+          <agm-map
+            [latitude]="lat"
+            [longitude]="lng"
+            [zoom]="zoom"
+            [zoomControl]="false"
+            (mapClick)="mapClicked($event)"
+          >
+            <agm-marker [latitude]="markerLat" [longitude]="markerLng"></agm-marker>
+          </agm-map>
+
         </form>
       </div>
     </div>
