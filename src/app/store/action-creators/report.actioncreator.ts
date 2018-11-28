@@ -14,7 +14,11 @@ import {
   REPORT_CREATE_FAILED,
   REPORT_CREATE_FULFILLED,
   REPORT_UPDATE_STATUS_FAILED,
-  REPORT_UPDATE_STATUS_FULFILLED
+  REPORT_UPDATE_STATUS_FULFILLED,
+  REPORT_GET_NON_DUPLICATE_FAILED,
+  REPORT_GET_NON_DUPLICATE_SUCCESS,
+  REPORT_SET_DUPLICATE_SUCCESS,
+  REPORT_SET_DUPLICATE_FAILED
 } from '../actions/report.action';
 import { Subscription } from 'rxjs/Subscription';
 import { ReportService, DialogService } from '../../services';
@@ -49,7 +53,10 @@ export class ReportActionCreator {
       tags: report.tags,
       createdAt: report.createdAt,
       updatedAt: report.updatedAt,
-      notes: report.notes
+      notes: report.notes,
+      duplicates: report.duplicates,
+      duplicateParent: report.duplicateParent,
+      isDuplicate: report.isDuplicate
     });
   }
 
@@ -173,7 +180,7 @@ export class ReportActionCreator {
       .pipe(
         catchError(error => of(error.error)),
         tap(result => {
-          if (result.httpCode !== 400) {
+          if (result.httpCode >= 400) {
             this.ngRedux.dispatch({
               type: REPORT_CREATE_FAILED,
               payload: {
@@ -196,7 +203,7 @@ export class ReportActionCreator {
       .pipe(
         catchError(error => of(error.error)),
         tap(result => {
-          if (result.httpCode !== 400) {
+          if (result.httpCode >= 400) {
             this.ngRedux.dispatch({
               type: REPORT_UPDATE_STATUS_FAILED,
               payload: {
@@ -219,6 +226,60 @@ export class ReportActionCreator {
             return of(result);
           }
         })
+      );
+  }
+
+  GetNonDuplicateReports (): Observable<any> {
+    return this.reportService.GetDuplicateReports(false)
+      .pipe(
+        catchError(error => of(error.error)),
+        tap(result => {
+          if (result.httpCode >= 400) {
+            this.ngRedux.dispatch({
+              type: REPORT_GET_NON_DUPLICATE_FAILED,
+              payload: {
+                error: result.message
+              }
+            });
+          }
+          if (result.httpCode === 200) {
+            this.ngRedux.dispatch({
+              type: REPORT_GET_NON_DUPLICATE_SUCCESS,
+              payload: {
+                reports: result.reports
+              }
+            });
+          }
+        })
+      );
+  }
+
+  SetDuplicateReport (parentDuplicate: string, duplicate: string): Observable<any> {
+    return this.reportService.SetDuplicateReport(parentDuplicate, duplicate)
+      .pipe(
+        catchError(error => of(error.error)),
+        tap(result => {
+          if (result.httpCode >= 400) {
+            this.ngRedux.dispatch({
+              type: REPORT_SET_DUPLICATE_FAILED,
+              payload: {
+                error: result.message
+              }
+            });
+          }
+          if (result.httpCode === 201) {
+            this.ngRedux.dispatch({
+              type: REPORT_SET_DUPLICATE_SUCCESS
+            });
+          }
+        }),
+        flatMap(result => {
+          return forkJoin(
+            of(result),
+            this.GetReportDetails(duplicate)
+          )
+        }),
+        map(results => results[0])
       );
   }
 }

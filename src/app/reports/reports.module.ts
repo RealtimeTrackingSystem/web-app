@@ -14,6 +14,7 @@ import { NewReportComponent } from './new-report/new-report.component';
 import { MapsModule, MapPointerModalComponent } from '../maps';
 import { ComponentModule } from '../components';
 import { UpdateStatusDialogComponent } from './update-status-dialog/update-status-dialog.component';
+import { SetDuplicateDialogComponent } from './set-duplicate-dialog/set-duplicate-dialog.component';
 
 @NgModule({
   imports: [
@@ -31,17 +32,20 @@ import { UpdateStatusDialogComponent } from './update-status-dialog/update-statu
     ReportsTableComponent,
     ReportDetailsComponent,
     NewReportComponent,
-    UpdateStatusDialogComponent
+    UpdateStatusDialogComponent,
+    SetDuplicateDialogComponent
   ],
   exports: [
     ReportsTableComponent,
     ReportDetailsComponent,
     NewReportComponent,
-    UpdateStatusDialogComponent
+    UpdateStatusDialogComponent,
+    SetDuplicateDialogComponent
   ],
   entryComponents: [
     MapPointerModalComponent,
-    UpdateStatusDialogComponent
+    UpdateStatusDialogComponent,
+    SetDuplicateDialogComponent
   ]
 })
 

@@ -76,3 +76,32 @@ export function updateReportStatusFailed (state: IReportStore, action) {
     error: action.payload.error
   });
 }
+
+export function getNonDuplicateReportSuccess (state: IReportStore, action) {
+  return tassign<IReportStore, IReportStore>(state, {
+    ...state,
+    error: null,
+    reports: action.payload.reports
+  });
+}
+
+export function getNonDuplicateReportFailed (state: IReportStore, action) {
+  return tassign<IReportStore, IReportStore>(state, {
+    ...state,
+    error: action.payload.error
+  });
+}
+
+export function setDuplicateReportSuccess (state: IReportStore) {
+  return tassign<IReportStore, IReportStore>(state, {
+    ...state,
+    error: null
+  });
+}
+
+export function setDuplicateReportFailed (state: IReportStore, action) {
+  return tassign<IReportStore, IReportStore>(state, {
+    ...state,
+    error: action.payload.error
+  });
+}

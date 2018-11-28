@@ -43,11 +43,17 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
+                <label class="bmd-label-floating">REPORTER</label>
+                <input formControlName="_reporter" type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
                 <label class="bmd-label-floating">LONGITUDE</label>
                 <input formControlName="long" type="text" class="form-control">
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
               <div class="form-group">
                 <label class="bmd-label-floating">LATITUDE</label>
                 <input formControlName="lat" type="text" class="form-control">
@@ -56,7 +62,7 @@
           </div>
 
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-3">
               <div class="form-group">
                 <label class="bmd-label-floating">HOST</label>
                 <input formControlName="_host" type="text" class="form-control">
@@ -71,6 +77,12 @@
             <div class="col-md-3">
               <div class="form-group">
                 <button (click)="updateStatusDialog()" class="btn btn-info">Update Status</button>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <button *ngIf="!isDuplicate()" (click)="setDuplicate()" class="btn btn-info">Mark as duplicate</button>
+                <button *ngIf="isDuplicate()" class="btn btn-info disabled">This Report is a duplicate</button>
               </div>
             </div>
           </div>

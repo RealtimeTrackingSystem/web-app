@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Set Duplicate</h1>
+<div mat-dialog-content>
+  <a>Set Duplicate</a>
+  <div *ngIf="reports" class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Location</th>
+          <th class="text-right"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let report of reports">
+          <td>{{ report.title }}</td>
+          <td>{{ report.description }}</td>
+          <td>{{ report.location }}</td>
+          <td class="td-actions text-right">
+            <button mat-raised-button type="button" (click)="onDuplicateClick(report)" class="btn btn-info">
+                <i class="material-icons">check</i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="btn" (click)="onNoClick()">Cancel</button>
+</div>

@@ -9,7 +9,11 @@ import {
   REPORT_CREATE_FAILED,
   REPORT_CREATE_FULFILLED,
   REPORT_UPDATE_STATUS_FAILED,
-  REPORT_UPDATE_STATUS_FULFILLED
+  REPORT_UPDATE_STATUS_FULFILLED,
+  REPORT_GET_NON_DUPLICATE_FAILED,
+  REPORT_GET_NON_DUPLICATE_SUCCESS,
+  REPORT_SET_DUPLICATE_SUCCESS,
+  REPORT_SET_DUPLICATE_FAILED
 } from './actions/report.action';
 
 import * as report from './reducers/report.reducer';
@@ -46,6 +50,10 @@ export function reportReducer(state: IReportStore = REPORT_INITIAL_STATE, action
     case REPORT_CREATE_FULFILLED: return report.sendReportSuccess(state, action);
     case REPORT_UPDATE_STATUS_FULFILLED: return report.updateReportStatusFulfilled(state);
     case REPORT_UPDATE_STATUS_FAILED: return report.updateReportStatusFailed(state, action);
+    case REPORT_GET_NON_DUPLICATE_FAILED: return report.getNonDuplicateReportFailed(state, action);
+    case REPORT_GET_NON_DUPLICATE_SUCCESS: return report.getNonDuplicateReportSuccess(state, action);
+    case REPORT_SET_DUPLICATE_FAILED: return report.setDuplicateReportFailed(state, action);
+    case REPORT_SET_DUPLICATE_SUCCESS: return report.setDuplicateReportSuccess(state);
   }
   return state;
 };
