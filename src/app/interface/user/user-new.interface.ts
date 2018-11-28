@@ -13,4 +13,5 @@ export interface IUserNew {
   zip: string;
   password: string;
   passwordConfirmation: string
+  birthday: string;
 }

@@ -21,5 +21,6 @@ export interface IUser {
   long?: number;
   reporterID?: string;
   hosts?: IHostMember[];
-  profilePicture?: IProfilePicture
+  profilePicture?: IProfilePicture;
+  birthday?: string;
 }
