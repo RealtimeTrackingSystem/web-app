@@ -1,3 +1,4 @@
+import { SetDuplicateDialogComponent } from './../set-duplicate-dialog/set-duplicate-dialog.component';
 import { UpdateStatusDialogComponent } from './../update-status-dialog/update-status-dialog.component';
 import { MatDialog } from '@angular/material';
 import { IReport } from './../../interface';
@@ -93,6 +94,22 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
   updateStatusDialog() {
     const dialogRef = this.dialog.open(UpdateStatusDialogComponent, {
       width: '500px',
+      data: { report: this.report }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  isDuplicate () {
+    console.log(this.report.isDuplicate);
+    return this.report.isDuplicate;
+  }
+
+  setDuplicate() {
+    const dialogRef = this.dialog.open(SetDuplicateDialogComponent, {
+      width: '750px',
       data: { report: this.report }
     });
 

@@ -93,4 +93,24 @@ export class ReportService {
     });
   }
 
+  GetDuplicateReports (isDuplicate: boolean = true): Observable<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.get(this.reportUrl + '/duplicates' + '?isDuplicate=' + isDuplicate.toString(), {
+      headers: headers
+    });
+  }
+
+  SetDuplicateReport (parentDuplicate: string, duplicate: string): Observable<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.post(this.reportUrl + '/duplicates', {
+      parentDuplicate, duplicate
+    }, {
+      headers: headers
+    });
+  }
+
 }

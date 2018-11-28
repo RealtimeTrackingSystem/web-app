@@ -25,4 +25,7 @@ export interface IReport {
   createdAt: string;
   updatedAt: string;
   notes?: INote[];
+  duplicateParent?: IReport;
+  duplicates?: IReport[];
+  isDuplicate?: boolean;
 }
