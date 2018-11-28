@@ -31,6 +31,8 @@ import {
   USER_UPDATE_SUCCESS
 } from '../actions/user-data.action';
 
+import * as moment from 'moment';
+
 @Injectable()
 
 export class SessionActionCreator {
@@ -42,6 +44,7 @@ export class SessionActionCreator {
   ) {}
 
   Register (userNew: IUserNew): Observable<ISession> {
+    userNew.birthday = moment(userNew.birthday).format('YYYY-MM-DD');
     return this.sessionService.Register(userNew)
       .pipe(
         catchError(error => of(JSON.parse(error._body))),

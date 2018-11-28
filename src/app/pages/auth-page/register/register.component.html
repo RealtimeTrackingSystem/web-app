@@ -14,55 +14,38 @@
 
                         <div class="form-group has-default">
                           <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">
-                                <i class="material-icons">face</i>
-                              </span>
-                            </div>
-                            <input formControlName="username" type="text" class="form-control" placeholder="Username">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="username" placeholder="Username" type="text">
+                            </mat-form-field>
                           </div>
                         </div>
 
                         <div class="form-group has-default">
                           <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">
-                                <i class="material-icons">mail</i>
-                              </span>
-                            </div>
-                            <input formControlName="email" type="text" class="form-control" placeholder="Email...">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="email" placeholder="Email" type="text">
+                            </mat-form-field>
                           </div>
                         </div>
 
                         <div class="form-group has-default">
                           <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">
-                                <i class="material-icons">face</i>
-                              </span>
-                            </div>
-                            <input formControlName="fname" type="text" placeholder="First Name" class="form-control">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="fname" placeholder="Firstname" type="text">
+                            </mat-form-field>
                           </div>
                         </div>
 
                         <div class="form-group has-default">
                           <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">
-                                <i class="material-icons">face</i>
-                              </span>
-                            </div>
-                            <input formControlName="lname" type="text" placeholder="Last Name" class="form-control">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="lname" placeholder="Lastname" type="text">
+                            </mat-form-field>
                           </div>
                         </div>
                       
                         <div class="form-group has-default">
                           <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">
-                                <i class="material-icons">face</i>
-                              </span>
-                            </div>
                             <mat-select class="form-control" name="gender" formControlName="gender">
                               <mat-option *ngFor="let gender of genders" [value]="gender.value">{{ gender.name }}</mat-option>
                             </mat-select>
@@ -71,34 +54,25 @@
 
                         <div class="form-group has-default">
                           <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">
-                                <i class="material-icons">face</i>
-                              </span>
-                            </div>
-                            <input formControlName="age" type="number" placeholder="Age" class="form-control">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="birthday" placeholder="Birthday" type="date">
+                            </mat-form-field>
                           </div>
                         </div>
 
                         <div class="form-group has-default">
                           <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">
-                                <i class="material-icons">face</i>
-                              </span>
-                            </div>
-                            <input formControlName="alias" type="text" placeholder="Alias / Nickname" class="form-control">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="alias" placeholder="Nickname / Alias" type="text">
+                            </mat-form-field>
                           </div>
                         </div>
 
                         <div class="form-group has-default">
                           <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">
-                                <i class="material-icons">face</i>
-                              </span>
-                            </div>
-                            <input formControlName="street" type="text" placeholder="Street" class="form-control">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="street" placeholder="Street" type="text">
+                            </mat-form-field>
                           </div>
                         </div>
                       </div><!--col-md-6-->
@@ -106,78 +80,57 @@
                       <div class="col-md-5 mr-auto">
                         <div class="form-group has-default">
                           <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">
-                                <i class="material-icons">face</i>
-                              </span>
-                            </div>
-                            <input formControlName="barangay" type="text" class="form-control" placeholder="Barangay">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="barangay" placeholder="Barangay" type="text">
+                            </mat-form-field>
                           </div>
                         </div>
 
                         <div class="form-group has-default">
                           <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">
-                                <i class="material-icons">face</i>
-                              </span>
-                            </div>
-                            <input formControlName="city" type="text" class="form-control" placeholder="City">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="city" placeholder="City" type="text">
+                            </mat-form-field>
                           </div>
                         </div>
 
                         <div class="form-group has-default">
                           <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">
-                                <i class="material-icons">face</i>
-                              </span>
-                            </div>
-                            <input formControlName="region" type="text" placeholder="Region" class="form-control">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="region" placeholder="Region" type="text">
+                            </mat-form-field>
                           </div>
                         </div>
 
                         <div class="form-group has-default">
                           <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">
-                                <i class="material-icons">face</i>
-                              </span>
-                            </div>
-                            <input formControlName="country" type="text" placeholder="Country" class="form-control">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="country" placeholder="Country" type="text">
+                            </mat-form-field>
                           </div>
                         </div>
                       
                         <div class="form-group has-default">
                           <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">
-                                <i class="material-icons">face</i>
-                              </span>
-                            </div>
-                            <input formControlName="zip" type="text" placeholder="Zip" class="form-control">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="zip" placeholder="Zip" type="text">
+                            </mat-form-field>
                           </div>
                         </div>
 
                         <div class="form-group has-default">
                           <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">
-                                <i class="material-icons">lock_outline</i>
-                              </span>
-                            </div>
-                            <input formControlName="password" type="password" placeholder="Password..." class="form-control">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="password" placeholder="Password" type="password">
+                            </mat-form-field>
                           </div>
                         </div>
 
                         <div class="form-group has-default">
                           <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">
-                                <i class="material-icons">lock_outline</i>
-                              </span>
-                            </div>
-                            <input formControlName="passwordConfirmation" type="password" placeholder="Confirm Password" class="form-control">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="passwordConfirmation" placeholder="Re-type Password" type="password">
+                            </mat-form-field>
                           </div>
                         </div>
 

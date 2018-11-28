@@ -12,4 +12,6 @@ export interface IReporter {
     country: string;
     zip: string;
     reporterID: string;
+    birthday: string;
+    age: number;
 }
