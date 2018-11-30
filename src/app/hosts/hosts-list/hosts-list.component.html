@@ -8,10 +8,18 @@
     </div>
       <div class="card-body">
         <div *ngIf="hosts" class="table-responsive">
+        <form [formGroup]="searchHostForm" (submit)="onSearchHost()"  class="navbar-form">
+          <div class="input-group no-border">
+            <input type="text" formControlName="searchString" value="" class="form-control" placeholder="Search...">
+            <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
+              <i class="material-icons">search</i>
+              <div class="ripple-container"></div>
+            </button>
+          </div>
+        </form>
           <table class="table">
             <thead>
               <tr>
-                <th class="text-center">ID</th>
                 <th>Name</th>
                 <th>Location</th>
                 <th>Nature</th>
@@ -22,12 +30,11 @@
             </thead>
             <tbody>
               <tr *ngFor="let row of hosts">
-                  <td class="text-center">{{row._id}}</td>
-                  <td class="text-center">{{row.name}}</td>
-                  <td class="text-center">{{row.location}}</td>
-                  <td class="text-center">{{row.hostNature}}</td>
-                  <td class="text-center">{{row.email}}</td>
-                  <td class="text-center">{{row.createdAt}}</td>
+                  <td>{{row.name}}</td>
+                  <td>{{row.location}}</td>
+                  <td>{{row.hostNature}}</td>
+                  <td>{{row.email}}</td>
+                  <td>{{row.createdAt}}</td>
                   <td class="td-actions text-right">
                     <button (click)="onAddButton(row)" [matTooltip]="addToolTip(row.name)" [matTooltipPosition]="'left'" mat-raised-button type="button" class="btn btn-info">
                         <i class="material-icons">group_add</i>

@@ -3,6 +3,7 @@ import { UpdateStatusDialogComponent } from './../update-status-dialog/update-st
 import { MatDialog } from '@angular/material';
 import { IReport } from './../../interface';
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import * as moment from 'moment';
 
@@ -26,7 +27,8 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
 
   constructor(
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) {
     this.reportDetailForm = this.formBuilder.group({
       _id: [{ value: null, disabled: true }],
@@ -103,7 +105,6 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
   }
 
   isDuplicate () {
-    console.log(this.report.isDuplicate);
     return this.report.isDuplicate;
   }
 
@@ -116,6 +117,10 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
     });
+  }
+
+  seeOriginal() {
+    this.router.navigate(['/host/reports/details/' + this.report.duplicateParent._id]);
   }
 
 }

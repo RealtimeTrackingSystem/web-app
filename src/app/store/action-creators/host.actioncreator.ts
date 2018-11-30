@@ -63,6 +63,41 @@ export class HostActionCreator {
       );
   }
 
+  SearchHostPaginate (searchString: string, page: number = 0, limit: number = 10): Observable<any> {
+    return this.hostService.SearchHostPaginated(searchString, page, limit)
+    .pipe(
+      catchError(error => of(error.error)),
+      tap(result => {
+        if (result.httpCode === 400) {
+          this.ngRedux.dispatch({
+            type: HOST_GET_FAILED,
+            payload: {
+              error: result.message
+            }
+          });
+        } else if (result.httpCode === 500) {
+          this.ngRedux.dispatch({
+            type: HOST_GET_FAILED,
+            payload: {
+              error: result.message
+            }
+          });
+        } else if (result.httpCode === 200) {
+          this.ngRedux.dispatch({
+            type: HOST_GET_SUCCESS,
+            payload: {
+              hosts: result.hosts,
+              limit: limit,
+              page: page,
+              count: result.count
+            }
+          });
+        }
+      }),
+      map((result: any) => result.hosts)
+    );
+  }
+
   SendHostRequest (_id: string): Observable<any> {
     return this.hostService.SendHostRequest(_id)
       .pipe(

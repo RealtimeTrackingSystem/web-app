@@ -79,4 +79,17 @@ export class HostService {
       headers: headers
     });
   }
+
+  SearchHostPaginated (searchString: string, page = 0, limit = 30): Observable<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    let query = '?';
+    query += 'page=' + page;
+    query += '&';
+    query += 'limit=' + limit;
+    return this.http.get(this.hostUrl + '/search-paginated/' + searchString + query, {
+      headers: headers
+    });
+  }
 }

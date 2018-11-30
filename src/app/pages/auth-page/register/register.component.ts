@@ -86,16 +86,16 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     submit() {
       if (this.registrationForm.valid) {
-        this.sessionActionCreator.Register(this.registrationForm.value)
+        return this.sessionActionCreator.Register(this.registrationForm.value)
           .toPromise()
           .then(result => {
             if (result.token) {
-              this.router.navigate([`/public`]);
+              this.router.navigate([`/auth/login`]);
             }
           })
           .catch(err => {
             return this.signupError(err);
-          })
+          });
       } else {
         return swal('Invalid Form', 'Please complete the form', 'info');
       }

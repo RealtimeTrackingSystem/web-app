@@ -46,7 +46,7 @@
                       
                         <div class="form-group has-default">
                           <div class="input-group">
-                            <mat-select class="form-control" name="gender" formControlName="gender">
+                            <mat-select matInput class="form-control" name="Sex" formControlName="gender">
                               <mat-option *ngFor="let gender of genders" [value]="gender.value">{{ gender.name }}</mat-option>
                             </mat-select>
                           </div>
