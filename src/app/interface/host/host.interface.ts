@@ -16,4 +16,5 @@ export interface IHost {
   zip: string;
   createdAt: Date;
   updatedAt: Date;
+  isApproved: boolean;
 }
