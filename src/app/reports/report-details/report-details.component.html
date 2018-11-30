@@ -76,13 +76,14 @@
             </div>
             <div class="col-md-3">
               <div class="form-group">
-                <button (click)="updateStatusDialog()" class="btn btn-info">Update Status</button>
+                <button *ngIf="!isDuplicate()" (click)="updateStatusDialog()" class="btn btn-info">Update Status</button>
+                <button *ngIf="isDuplicate()" class="btn btn-info disabled">Update Status</button>
               </div>
             </div>
             <div class="col-md-3">
               <div class="form-group">
                 <button *ngIf="!isDuplicate()" (click)="setDuplicate()" class="btn btn-info">Mark as duplicate</button>
-                <button *ngIf="isDuplicate()" class="btn btn-info disabled">This Report is a duplicate</button>
+                <button *ngIf="isDuplicate()" (click)="seeOriginal()" class="btn btn-info">See Original Report</button>
               </div>
             </div>
           </div>

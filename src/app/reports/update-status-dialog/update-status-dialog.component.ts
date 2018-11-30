@@ -11,7 +11,7 @@ import swal from 'sweetalert2';
 })
 export class UpdateStatusDialogComponent implements OnInit {
   public updateReportStatusForm: FormGroup;
-  public reportStatuses = [ 'NEW', 'VALIDATED', 'INPROGRESS', 'DONE', 'EXPIRED', 'INVALID'];
+  public reportStatuses = [ 'NEW', 'VALIDATED', 'INPROGRESS', 'DONE', 'INVALID'];
   public loading = false;
   constructor(
     public dialogRef: MatDialogRef<UpdateStatusDialogComponent>,

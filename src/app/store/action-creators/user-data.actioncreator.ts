@@ -24,6 +24,8 @@ import { IReporter } from '../../interface';
 
 import { SessionActionCreator } from './session.actioncreator';
 
+import * as moment from 'moment';
+
 @Injectable()
 
 export class UserDataActionCreator {
@@ -94,6 +96,7 @@ export class UserDataActionCreator {
     return of(user)
       .pipe(
         tap(result => {
+          result.age = result.age ? result.age : moment().diff(result.birthday, 'years');
           this.ngRedux.dispatch({
             type: USER_DATA_POPULATE_USER_SUCCESS,
             payload: {

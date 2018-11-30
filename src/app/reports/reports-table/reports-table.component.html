@@ -11,25 +11,23 @@
           <table class="table">
             <thead>
               <tr>
-                <th class="text-center">ID</th>
                 <th>Title</th>
-                <th>Description</th>
                 <th>Status</th>
                 <th>Location</th>
                 <th>Host</th>
                 <th>Date Reported</th>
+                <th>Is Duplicate?</th>
                 <th class="text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let row of filteredReports">
-                  <td class="text-center">{{row._id}}</td>
                   <td>{{row.title}}</td>
-                  <td>{{row.description}}</td>
                   <td>{{row.status}}</td>
                   <td>{{row.location}}</td>
                   <td>{{row._host ? row._host.name : 'Individual Report'}}</td>
                   <td>{{row.createdAt}}</td>
+                  <td>{{row.isDuplicate}}</td>
                   <td class="td-actions text-right">
                     <button mat-raised-button type="button" (click)="onClickDetails(row)" class="btn btn-success">
                         <i class="material-icons">info</i>

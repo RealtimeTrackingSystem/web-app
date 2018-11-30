@@ -25,6 +25,8 @@ export class HostListViewComponent implements OnInit, OnDestroy, ITable {
   public hostMemberships: IHostMemberships[] = null;
   public hostMembershiptsSubscription: Subscription;
 
+  public hostSearchString = '';
+
   public pageNumber = 0;
   public userData: IUserDataStore;
   public hostFilter: string;
@@ -64,7 +66,9 @@ export class HostListViewComponent implements OnInit, OnDestroy, ITable {
     if (this.pageNumber !== 0) {
       const pageNumber = this.pageNumber - 1;
       this.pageNumber -= 1;
-      this.hostActionCreator.GetHosts(pageNumber, 10, this.hostFilter).toPromise().then();
+      (this.hostSearchString === '' || this.hostSearchString == null)
+        ? this.hostActionCreator.GetHosts(pageNumber, 10, this.hostFilter).toPromise().then()
+        : this.hostActionCreator.SearchHostPaginate(this.hostSearchString, pageNumber, 10).toPromise().then();
     }
   }
   nextPage () {
@@ -72,22 +76,30 @@ export class HostListViewComponent implements OnInit, OnDestroy, ITable {
     if (limit * (page + 1) < count) {
       const pageNumber = this.pageNumber + 1;
       this.pageNumber += 1;
-      this.hostActionCreator.GetHosts(pageNumber, 10, this.hostFilter).toPromise().then();
+      (this.hostSearchString === '' || this.hostSearchString == null)
+        ? this.hostActionCreator.GetHosts(pageNumber, 10, this.hostFilter).toPromise().then()
+        : this.hostActionCreator.SearchHostPaginate(this.hostSearchString, pageNumber, 10).toPromise().then();
     }
   }
   firstPage () {
     this.pageNumber = 0;
-    this.hostActionCreator.GetHosts(0, 10, this.hostFilter).toPromise().then();
+    (this.hostSearchString === '' || this.hostSearchString == null)
+        ? this.hostActionCreator.GetHosts(0, 10, this.hostFilter).toPromise().then()
+        : this.hostActionCreator.SearchHostPaginate(this.hostSearchString, 0, 10).toPromise().then();
   }
   lastPage () {
     const {count, limit, page} = this.ngRedux.getState().report;
     const lastPage = Math.ceil(count / limit) - 1;
     this.pageNumber = lastPage;
-    this.hostActionCreator.GetHosts(lastPage, 10, this.hostFilter).toPromise().then();
+    (this.hostSearchString === '' || this.hostSearchString == null)
+        ? this.hostActionCreator.GetHosts(lastPage, 10, this.hostFilter).toPromise().then()
+        : this.hostActionCreator.SearchHostPaginate(this.hostSearchString, lastPage, 10).toPromise().then();
   }
   goToPage (pageNumber: number) {
     this.pageNumber = pageNumber;
-    this.hostActionCreator.GetHosts(pageNumber, 10, this.hostFilter).toPromise().then();
+    (this.hostSearchString === '' || this.hostSearchString == null)
+        ? this.hostActionCreator.GetHosts(pageNumber, 10, this.hostFilter).toPromise().then()
+        : this.hostActionCreator.SearchHostPaginate(this.hostSearchString, pageNumber, 10).toPromise().then();
   }
 
   sendRequestToHost (host: IHost) {
@@ -115,5 +127,12 @@ export class HostListViewComponent implements OnInit, OnDestroy, ITable {
             });
         }
       });
+  }
+
+  searchHost(hostSearchString: string) {
+    this.hostSearchString = hostSearchString;
+    (this.hostSearchString === '' || this.hostSearchString == null)
+        ? this.hostActionCreator.GetHosts(0, 10, this.hostFilter).toPromise().then()
+        : this.hostActionCreator.SearchHostPaginate(hostSearchString, 0, 10).toPromise().then();
   }
 }

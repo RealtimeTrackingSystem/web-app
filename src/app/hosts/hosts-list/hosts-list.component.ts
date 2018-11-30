@@ -1,3 +1,4 @@
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { IHost } from './../../interface';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TableClass } from '../../classes';
@@ -11,12 +12,20 @@ export class HostsListComponent extends TableClass implements OnInit {
 
   @Input() hosts: IHost[];
   @Output() addButton = new EventEmitter<any>();
+  @Output() searchHost = new EventEmitter<any>();
 
-  constructor() {
+  public searchHostForm: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder
+  ) {
     super();
   }
 
   ngOnInit() {
+    this.searchHostForm = this.formBuilder.group({
+      searchString: [null]
+    });
     this.pages = this.getPages(Math.ceil(Number(this.count) / Number(this.limit)));
   }
 
@@ -26,6 +35,10 @@ export class HostsListComponent extends TableClass implements OnInit {
 
   onAddButton (host: IHost) {
     this.addButton.emit(host);
+  }
+
+  onSearchHost() {
+    this.searchHost.emit(this.searchHostForm.value.searchString);
   }
 
 }
