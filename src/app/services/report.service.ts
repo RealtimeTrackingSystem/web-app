@@ -56,6 +56,26 @@ export class ReportService {
     });
   }
 
+  SearchReportPaginated (page: number = 0, limit: number = 10, searchString: string, options: any = {}) {
+    let query = '';
+    query += '?';
+    query += 'page=' + page;
+    query += '&';
+    query += 'limit=' + limit;
+    if (options.isDuplicate != null) {
+      query += '&isDuplicate=' + options.isDuplicate;
+    }
+    if (options.hostId) {
+      query += '&hostId=' + options.hostId;
+    }
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.get(this.reportUrl + '/search/' + searchString + query, {
+      headers: headers
+    });
+  }
+
   GetReportsById(_id: string, resources: string[] = []): Observable<any> {
     const validResources = resources.filter(resource => this.VALID_RESOURCES.indexOf(resource) > -1);
     const query = validResources.length > 0 ? '?resources=' + validResources.join(',') : '';

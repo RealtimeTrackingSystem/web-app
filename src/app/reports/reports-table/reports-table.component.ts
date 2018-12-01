@@ -1,3 +1,4 @@
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit, Input, Output, OnChanges, EventEmitter } from '@angular/core';
 import { IReport } from '../../interface';
 import { Observable, of } from 'rxjs';
@@ -13,20 +14,30 @@ import * as _ from 'lodash';
 export class ReportsTableComponent extends TableClass implements OnInit, OnChanges {
 
   @Input() reports: IReport[];
+  @Output() searchReport = new EventEmitter<any>();
 
   public filteredReports: IReport[];
-
-  constructor() {
+  public reportSearchForm: FormGroup;
+  constructor(
+    private formBuilder: FormBuilder
+  ) {
     super();
   }
 
   ngOnInit() {
     this.filteredReports = this.reports;
+    this.reportSearchForm = this.formBuilder.group({
+      searchString: []
+    });
   }
 
   ngOnChanges (changes) {
     this.pages = this.getPages(Math.ceil(Number(this.count) / Number(this.limit)));
     this.filteredReports = this.reports;
+  }
+
+  onSearchReport () {
+    this.searchReport.emit(this.reportSearchForm.value.searchString);
   }
 
 }

@@ -127,6 +127,50 @@ export class ReportActionCreator {
       );
   }
 
+  SearchReportPaginated (page: number = 0, limit: number = 10, searchString: string, options: any = {}) {
+    return this.reportService.SearchReportPaginated(page, limit, searchString, options)
+      .pipe(
+        catchError(error => of(JSON.parse(error._body))),
+        tap(result => {
+          if (result.httpCode === 400) {
+            this.ngRedux.dispatch({
+              type: REPORT_GET_FAILED,
+              payload: {
+                error: result.message
+              }
+            });
+          } else if (result.httpCode === 500) {
+            this.ngRedux.dispatch({
+              type: REPORT_GET_FAILED,
+              payload: {
+                error: result.message
+              }
+            });
+          } else if (result.httpCode === 200) {
+            this.ngRedux.dispatch({
+              type: REPORT_GET_FULFILLED,
+              payload: {
+                reports: result.reports,
+                limit: limit,
+                page: page,
+                count: result.count
+              }
+            });
+          }
+        }),
+        map(result => ({
+          reports: result.reports,
+          reportDetails: null,
+          page: page,
+          limit: limit,
+          count: result.count,
+          error: null,
+          success: result.status,
+          spinner: false
+        }))
+      );
+  }
+
   GetReportDetails (_id): Observable<IReport> {
     const resources = ['reporter', 'host', 'people', 'properties', 'medias'];
     return this.reportService.GetReportsById(_id, resources)
