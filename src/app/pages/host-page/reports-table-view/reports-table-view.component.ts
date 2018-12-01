@@ -24,6 +24,7 @@ export class ReportsTableViewComponent implements OnInit, ITable {
   @select(s => s.userData.activeHost.hostMember) $hostMember: Observable<IHostMember>;
 
   public pageNumber = 0;
+  public searchString = '';
 
   constructor(
     private ngRedux: NgRedux<IAppState>,
@@ -51,8 +52,13 @@ export class ReportsTableViewComponent implements OnInit, ITable {
       this.$hostMember
         .pipe(
           flatMap((hostMember) => {
-            const options = {host: hostMember._id};
-            return this.reportActionCreator.GetReports(pageNumber, 10, [], ['host'], options)
+            if (this.searchString != null && this.searchString !== '') {
+              const options = {hostId: hostMember._id};
+              return this.reportActionCreator.SearchReportPaginated(pageNumber, 10, this.searchString, options)
+            } else {
+              const options = {host: hostMember._id};
+              return this.reportActionCreator.GetReports(pageNumber, 10, [], ['host'], options)
+            }
           })
         )
         .toPromise().then();
@@ -66,8 +72,13 @@ export class ReportsTableViewComponent implements OnInit, ITable {
       this.$hostMember
         .pipe(
           flatMap((hostMember) => {
-            const options = {host: hostMember._id};
-            return this.reportActionCreator.GetReports(pageNumber, 10, [], ['host'], options)
+            if (this.searchString != null && this.searchString !== '') {
+              const options = {hostId: hostMember._id};
+              return this.reportActionCreator.SearchReportPaginated(pageNumber, 10, this.searchString, options)
+            } else {
+              const options = {host: hostMember._id};
+              return this.reportActionCreator.GetReports(pageNumber, 10, [], ['host'], options)
+            }
           })
         )
         .toPromise().then();
@@ -79,8 +90,13 @@ export class ReportsTableViewComponent implements OnInit, ITable {
     this.$hostMember
         .pipe(
           flatMap((hostMember) => {
-            const options = {host: hostMember._id};
-            return this.reportActionCreator.GetReports(0, 10, [], ['host'], options)
+            if (this.searchString != null && this.searchString !== '') {
+              const options = {hostId: hostMember._id};
+              return this.reportActionCreator.SearchReportPaginated(0, 10, this.searchString, options)
+            } else {
+              const options = {host: hostMember._id};
+              return this.reportActionCreator.GetReports(0, 10, [], ['host'], options)
+            }
           })
         )
         .toPromise().then();
@@ -93,8 +109,13 @@ export class ReportsTableViewComponent implements OnInit, ITable {
     this.$hostMember
         .pipe(
           flatMap((hostMember) => {
-            const options = {host: hostMember._id};
-            return this.reportActionCreator.GetReports(lastPage, 10, [], ['host'], options)
+            if (this.searchString != null && this.searchString !== '') {
+              const options = {hostId: hostMember._id};
+              return this.reportActionCreator.SearchReportPaginated(lastPage, 10, this.searchString, options)
+            } else {
+              const options = {host: hostMember._id};
+              return this.reportActionCreator.GetReports(lastPage, 10, [], ['host'], options)
+            }
           })
         )
         .toPromise().then();
@@ -105,8 +126,13 @@ export class ReportsTableViewComponent implements OnInit, ITable {
     this.$hostMember
         .pipe(
           flatMap((hostMember) => {
-            const options = {host: hostMember._id};
-            return this.reportActionCreator.GetReports(pageNumber, 10, [], ['host'], options)
+            if (this.searchString != null && this.searchString !== '') {
+              const options = {hostId: hostMember._id};
+              return this.reportActionCreator.SearchReportPaginated(pageNumber, 10, this.searchString, options)
+            } else {
+              const options = {host: hostMember._id};
+              return this.reportActionCreator.GetReports(pageNumber, 10, [], ['host'], options)
+            }
           })
         )
         .toPromise().then();
@@ -116,6 +142,23 @@ export class ReportsTableViewComponent implements OnInit, ITable {
     if (event._id) {
       this.router.navigate(['/host/reports/details/' + event._id]);
     }
+  }
+
+  searchReport (searchString: string) {
+    this.searchString = searchString;
+    this.$hostMember
+        .pipe(
+          flatMap((hostMember) => {
+            if (searchString != null && searchString !== '') {
+              const options = {hostId: hostMember._id};
+              return this.reportActionCreator.SearchReportPaginated(0, 10, this.searchString, options)
+            } else {
+              const options = {host: hostMember._id};
+              return this.reportActionCreator.GetReports(0, 10, [], ['host'], options)
+            }
+          })
+        )
+        .toPromise().then();
   }
 
 }

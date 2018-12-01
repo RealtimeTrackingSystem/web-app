@@ -8,6 +8,15 @@
     </div>
       <div class="card-body">
         <div *ngIf="filteredReports" class="table-responsive">
+          <form [formGroup]="reportSearchForm" (submit)="onSearchReport()"  class="navbar-form">
+            <div class="input-group no-border">
+              <input type="text" formControlName="searchString" value="" class="form-control" placeholder="Search...">
+              <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
+                <i class="material-icons">search</i>
+                <div class="ripple-container"></div>
+              </button>
+            </div>
+          </form>
           <table class="table">
             <thead>
               <tr>
