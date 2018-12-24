@@ -56,6 +56,15 @@ export class ReportService {
     });
   }
 
+  GetAllReports (): Observable<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.get(this.reportUrl, {
+      headers: headers
+    });
+  }
+
   SearchReportPaginated (page: number = 0, limit: number = 10, searchString: string, options: any = {}) {
     let query = '';
     query += '?';

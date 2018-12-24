@@ -1,3 +1,4 @@
+import { AnalyticsModule } from './../../analytics';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -10,6 +11,7 @@ import { ReportersModule } from '../../reporters';
 import { ReportDetailViewComponent } from './report-detail-view/report-detail-view.component';
 import { PendingHostRequestViewComponent } from './pending-host-request-view/pending-host-request-view.component';
 import { ProfileModule } from '../../profile';
+import { AnayliticsComponent } from './anaylitics/anaylitics.component';
 
 @NgModule({
   imports: [
@@ -20,12 +22,14 @@ import { ProfileModule } from '../../profile';
     DashboardModule,
     ReportsModule,
     ReportersModule,
-    ProfileModule
+    ProfileModule,
+    AnalyticsModule
   ],
   declarations: [
     ReportsTableViewComponent,
     ReportDetailViewComponent,
-    PendingHostRequestViewComponent
+    PendingHostRequestViewComponent,
+    AnayliticsComponent
   ],
   entryComponents: [
   ]

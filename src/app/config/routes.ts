@@ -69,8 +69,8 @@ const ADMIN: RouteInfo[] = [
 
 const HOST: RouteInfo[] = [
   {
-    path: '/host/dashboard',
-    title: 'Dashboard',
+    path: '/host/analytics',
+    title: 'Analytics',
     type: 'link',
     icontype: 'dashboard'
   },

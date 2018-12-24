@@ -113,7 +113,7 @@ export class PublicLayoutComponent implements OnInit, AfterViewInit {
     this.userDataActionCreator.ChangeActiveHost($event)
       .toPromise()
       .then((hostMembership: IHostMemberships) => {
-        this.router.navigate(['/host/dashboard']);
+        this.router.navigate(['/host/analytics']);
       });
   }
 }
