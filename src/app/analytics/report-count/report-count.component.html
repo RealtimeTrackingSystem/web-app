@@ -1,0 +1,61 @@
+<div class="card">
+  <div class="card-header card-header-info card-header-icon">
+    <div class="card-icon">
+      <i class="material-icons">assignment</i>
+    </div>
+    <h4 class="card-title">Report Count</h4>
+  </div>
+  <div class="card-body">
+    <ul class="nav nav-pills nav-pills-success" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#link1" role="tablist">
+          Graph
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#link2" role="tablist">
+          Report
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content tab-space">
+      <div class="tab-pane active" id="link1">
+        <div class="card">
+          <div class="card-body">
+            <h5>Line Chart</h5>
+            <div id="simpleLineChart"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5>Pie Chart</h5>
+            <div id="pieChart"></div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="link2">
+        <h5>Report Count Table</h5>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Report Type</th>
+              <th>Total Count</th>
+              <th>Resolved</th>
+              <th>Unresolved</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of reportData; let i = index">
+                <td>{{i}}</td>
+                <td>{{row.type}}</td>
+                <td>{{row.count}}</td>
+                <td>{{row.resolved}}</td>
+                <td>{{row.unresolved}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

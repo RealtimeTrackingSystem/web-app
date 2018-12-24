@@ -46,7 +46,7 @@ export class HostLayoutComponent implements OnInit, AfterViewInit {
   }
   ngOnInit() {
     if (this.router.url === '/host') {
-      this.router.navigate(['/host/dashboard']);
+      this.router.navigate(['/host/analytics']);
     }
     this.hostMemberships = this.$hostMemberships
         .pipe(

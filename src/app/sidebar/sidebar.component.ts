@@ -53,8 +53,8 @@ export const ROUTES: RouteInfo[] = [
     },
     // host
     {
-        path: '/host/dashboard',
-        title: 'Dashboard',
+        path: '/host/analytics',
+        title: 'Analytics',
         type: 'link',
         icontype: 'dashboard',
         usedBy: 'host'
