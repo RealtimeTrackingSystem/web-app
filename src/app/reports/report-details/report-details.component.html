@@ -103,6 +103,46 @@
             </div>
           </div>
   
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">NOTES</label>
+                <mat-form-field class="example-full-width">
+                    <textarea rows="6" formControlName="notes" matInput type="text"></textarea>
+                  </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="report && report.duplicates.length > 0" class="row">
+            <div class="col-md-10">
+              <h5>Duplicates</h5>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Location</th>
+                    <th>Date Reported</th>
+                    <th class="text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of report.duplicates">
+                      <td>{{row.title}}</td>
+                      <td>{{row.status}}</td>
+                      <td>{{row.location}}</td>
+                      <td>{{row.createdAt}}</td>
+                      <td class="td-actions text-right">
+                        <button mat-raised-button type="button" (click)="onClickDetails(row)" class="btn btn-success">
+                            <i class="material-icons">info</i>
+                        </button>
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
           <div class="row">
             <div class="col-md-6">
@@ -111,14 +151,6 @@
                 <app-media-viewer-v1
                   [photos]="photos"
                 ></app-media-viewer-v1>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="bmd-label-floating">NOTES</label>
-                <mat-form-field class="example-full-width">
-                    <textarea rows="6" formControlName="notes" matInput type="text"></textarea>
-                  </mat-form-field>
               </div>
             </div>
           </div>
