@@ -56,6 +56,7 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
 
   ngOnChanges (changes) {
     if (this.report) {
+      console.log(this.report.duplicates);
       this.loadReportDetails(this.report);
     }
   }
@@ -105,7 +106,7 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
   }
 
   isDuplicate () {
-    return this.report.isDuplicate;
+    return this.report && this.report.isDuplicate;
   }
 
   setDuplicate() {
@@ -121,6 +122,10 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
 
   seeOriginal() {
     this.router.navigate(['/host/reports/details/' + this.report.duplicateParent._id]);
+  }
+
+  onClickDetails(report) {
+    this.router.navigate(['/host/reports/details/' + report._id]);
   }
 
 }
