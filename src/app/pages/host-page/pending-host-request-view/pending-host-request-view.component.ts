@@ -97,4 +97,24 @@ export class PendingHostRequestViewComponent implements OnInit, ITable {
     });
   }
 
+  rejectRequest (reporter) {
+    swal({
+      title: 'Are you sure?',
+      text: 'Do you want to reject ' + reporter.fname + ' ' + reporter.lname + '?',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    })
+    .then(result => {
+      if (result.value) {
+        console.log(reporter);
+        const userData: IUserDataStore = this.ngRedux.getState().userData;
+        this.reporterActionCreator.RejectRequest(userData.activeHost.host._id, reporter)
+          .toPromise()
+          .then();
+      }
+    });
+  }
+
 }

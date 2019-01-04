@@ -70,4 +70,13 @@ export class ReporterService {
         headers: headers
       });
   }
+
+  RejectUserRequest (hostId: string, userId: string): Observable<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.delete(this.hostUrl + '/requests/' + hostId + '/' + userId, {
+        headers: headers
+      });
+  }
 }
