@@ -109,6 +109,10 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
     return this.report && this.report.isDuplicate;
   }
 
+  isVoid () {
+    return this.report && this.report.status === 'VOID';
+  }
+
   setDuplicate() {
     const dialogRef = this.dialog.open(SetDuplicateDialogComponent, {
       width: '750px',

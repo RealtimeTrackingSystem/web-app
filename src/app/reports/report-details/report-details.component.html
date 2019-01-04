@@ -76,8 +76,8 @@
             </div>
             <div class="col-md-3">
               <div class="form-group">
-                <button *ngIf="!isDuplicate()" (click)="updateStatusDialog()" class="btn btn-info">Update Status</button>
-                <button *ngIf="isDuplicate()" class="btn btn-info disabled">Update Status</button>
+                <button *ngIf="!isDuplicate() && !isVoid()" (click)="updateStatusDialog()" class="btn btn-info">Update Status</button>
+                <button *ngIf="isDuplicate() || isVoid()" class="btn btn-info disabled">Update Status</button>
               </div>
             </div>
             <div class="col-md-3">
