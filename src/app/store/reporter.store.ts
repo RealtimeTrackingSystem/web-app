@@ -4,7 +4,9 @@ import {
   REPORTER_GET_PENDING_REQUEST_FAILED,
   REPORTER_GET_PENDING_REQUEST_SUCCESS,
   REPORTER_ACCEPT_REQUEST_FAILED,
-  REPORTER_ACCEPT_REQUEST_SUCCESS
+  REPORTER_ACCEPT_REQUEST_SUCCESS,
+  REPORTER_REJECT_REQUEST_FAILED,
+  REPORTER_REJECT_REQUEST_SUCCESS
 } from './actions/reporter.action';
 
 import * as reporter from './reducers/reporter.reducer';
@@ -34,6 +36,8 @@ export function reporterReducer(state: IReporterStore = REPORTER_INITIAL_STATE, 
     case REPORTER_GET_PENDING_REQUEST_SUCCESS: return reporter.getPendingHostRequestSuccess(state, action);
     case REPORTER_ACCEPT_REQUEST_FAILED: return reporter.acceptRequestFailed(state, action);
     case REPORTER_ACCEPT_REQUEST_SUCCESS: return reporter.acceptRequestSuccess(state, action);
+    case REPORTER_REJECT_REQUEST_FAILED: return reporter.acceptRequestFailed(state, action);
+    case REPORTER_REJECT_REQUEST_SUCCESS: return reporter.acceptRequestSuccess(state, action);
   }
   return state;
 };

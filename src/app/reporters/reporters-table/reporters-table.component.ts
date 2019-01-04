@@ -12,6 +12,7 @@ export class ReportersTableComponent extends TableClass implements OnInit {
 
   @Input() reporters: IReporter[]
   @Output() clickCheck = new EventEmitter<any>();
+  @Output() clickClear = new EventEmitter<any>();
 
   constructor() {
     super();
@@ -23,6 +24,10 @@ export class ReportersTableComponent extends TableClass implements OnInit {
 
   onClickCheck (event) {
     this.clickCheck.emit(event);
+  }
+
+  onClickClear (event) {
+    this.clickClear.emit(event);
   }
 
 }
