@@ -90,6 +90,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
           .toPromise()
           .then(result => {
             if (result.token) {
+              return swal('Registration successful', 'You can now login', 'success');
+            } else {
+              throw new Error('Internal server error');
+            }
+          })
+          .then((result) => {
+            if (result) {
               this.router.navigate([`/auth/login`]);
             }
           })
