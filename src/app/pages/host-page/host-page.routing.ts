@@ -6,6 +6,7 @@ import { ReportDetailViewComponent } from './report-detail-view/report-detail-vi
 import { PendingHostRequestViewComponent } from './pending-host-request-view/pending-host-request-view.component';
 import { ChangePasswordComponent, MyProfileComponent } from './../../profile';
 import { ReportCountComponent } from 'app/analytics';
+import { RegisterUserViewComponent } from './register-user-view/register-user-view.component';
 
 export const HostRoutes: Routes = [
   { path: '', redirectTo: 'analytics', pathMatch: 'full' },
@@ -39,6 +40,10 @@ export const HostRoutes: Routes = [
       {
         path: 'my-profile',
         component: MyProfileComponent
+      },
+      {
+        path: 'register-users',
+        component: RegisterUserViewComponent
       }
     ]
   },

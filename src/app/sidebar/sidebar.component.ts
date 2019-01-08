@@ -77,6 +77,13 @@ export const ROUTES: RouteInfo[] = [
         type: 'link',
         icontype: 'notification_important',
         usedBy: 'host'
+    },
+    {
+        path: '/host/register-users',
+        title: 'Register Users',
+        type: 'link',
+        icontype: 'notification_important',
+        usedBy: 'host'
     }
 ];
 
