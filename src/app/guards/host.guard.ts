@@ -25,8 +25,8 @@ export class HostGuard implements CanActivate, CanActivateChild {
         if (!activeHost) {
           swal({
             type: 'warning',
-            title: 'No Host selected',
-            text: 'Please select a host',
+            title: 'Sorry',
+            text: 'You are not authorized for this content',
           }).then(() => {
             this.router.navigate(['/public/dashboard']);
           });
@@ -47,8 +47,8 @@ export class HostGuard implements CanActivate, CanActivateChild {
         if (!activeHost) {
           swal({
             type: 'warning',
-            title: 'No Host selected',
-            text: 'Please select a host',
+            title: 'Sorry',
+            text: 'You are not authorized for this content',
           }).then(() => {
             this.router.navigate(['/public/dashboard']);
           });

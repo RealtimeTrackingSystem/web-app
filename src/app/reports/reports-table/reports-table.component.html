@@ -24,8 +24,8 @@
                 <th>Status</th>
                 <th>Location</th>
                 <th>Host</th>
+                <th>Anonymous?</th>
                 <th>Date Reported</th>
-                <th>Is Duplicate?</th>
                 <th class="text-right">Actions</th>
               </tr>
             </thead>
@@ -35,8 +35,8 @@
                   <td>{{row.status}}</td>
                   <td>{{row.location}}</td>
                   <td>{{row._host ? row._host.name : 'Individual Report'}}</td>
+                  <td>{{isAnonymous(row) ? 'No' : 'Yes'}}</td>
                   <td>{{row.createdAt}}</td>
-                  <td>{{row.isDuplicate}}</td>
                   <td class="td-actions text-right">
                     <button mat-raised-button type="button" (click)="onClickDetails(row)" class="btn btn-success">
                         <i class="material-icons">info</i>

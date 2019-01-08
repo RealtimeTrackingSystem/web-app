@@ -40,4 +40,11 @@ export class ReportsTableComponent extends TableClass implements OnInit, OnChang
     this.searchReport.emit(this.reportSearchForm.value.searchString);
   }
 
+  isAnonymous (report: any) {
+    const hostId = report._host._id ? report._host._id : report._host;
+    const userHostId = report.user && report.user.hosts[0] && report.user.hosts[0]._id ? report.user.hosts[0]._id : null;
+    console.log(hostId, userHostId);
+    return hostId !== userHostId;
+  }
+
 }

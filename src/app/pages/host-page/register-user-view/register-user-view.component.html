@@ -1,0 +1,150 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-signup">
+                      <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 mr-auto">
+                  <form [formGroup]="registrationForm" (submit)="submit()" class="form">
+                    <div class="row">
+                      <div class="col-md-5 mr-auto">
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="username" placeholder="Username" type="text">
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="email" placeholder="Email" type="text">
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="fname" placeholder="Firstname" type="text">
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="lname" placeholder="Lastname" type="text">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      
+                        <div class="form-group has-default">
+                          <div class="input-group"><label>Gender: </label></div>
+                          <div class="input-group">
+                            <mat-select matInput class="form-control" name="Sex" formControlName="gender">
+                              <mat-option *ngFor="let gender of genders" [value]="gender.value">{{ gender.name }}</mat-option>
+                            </mat-select>
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="birthday" placeholder="Birthday" type="date">
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="alias" placeholder="Nickname / Alias" type="text">
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="street" placeholder="Street" type="text">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div><!--col-md-6-->
+
+                      <div class="col-md-5 mr-auto">
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="barangay" placeholder="Barangay" type="text">
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="city" placeholder="City" type="text">
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="region" placeholder="Region" type="text">
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="country" placeholder="Country" type="text">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="zip" placeholder="Zip" type="text">
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="password" placeholder="Password" type="password">
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="form-group has-default">
+                          <div class="input-group">
+                            <mat-form-field class="example-full-width">
+                              <input matInput formControlName="passwordConfirmation" placeholder="Re-type Password" type="password">
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                      </div><!--col-md-6-->
+                    </div>
+                    <br />
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-info btn-round mt-4">Register</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div> <!-- form container -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

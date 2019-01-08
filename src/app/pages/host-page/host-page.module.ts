@@ -1,5 +1,6 @@
 import { AnalyticsModule } from './../../analytics';
 import { NgModule } from '@angular/core';
+import { MaterialModule } from './../../app.module';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,6 +13,7 @@ import { ReportDetailViewComponent } from './report-detail-view/report-detail-vi
 import { PendingHostRequestViewComponent } from './pending-host-request-view/pending-host-request-view.component';
 import { ProfileModule } from '../../profile';
 import { AnayliticsComponent } from './anaylitics/anaylitics.component';
+import { RegisterUserViewComponent } from './register-user-view/register-user-view.component';
 
 @NgModule({
   imports: [
@@ -19,6 +21,7 @@ import { AnayliticsComponent } from './anaylitics/anaylitics.component';
     RouterModule.forChild(HostRoutes),
     FormsModule,
     ReactiveFormsModule,
+    MaterialModule,
     DashboardModule,
     ReportsModule,
     ReportersModule,
@@ -29,7 +32,8 @@ import { AnayliticsComponent } from './anaylitics/anaylitics.component';
     ReportsTableViewComponent,
     ReportDetailViewComponent,
     PendingHostRequestViewComponent,
-    AnayliticsComponent
+    AnayliticsComponent,
+    RegisterUserViewComponent
   ],
   entryComponents: [
   ]
