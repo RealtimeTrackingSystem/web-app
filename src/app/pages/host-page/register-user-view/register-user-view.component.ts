@@ -65,10 +65,10 @@ export class RegisterUserViewComponent implements OnInit {
   submit() {
     console.log(this.registrationForm.value);
     if (this.registrationForm.valid) {
-      return this.sessionActionCreator.Register(this.registrationForm.value)
+      return this.sessionActionCreator.AddNewUser(this.registrationForm.value)
         .toPromise()
         .then(result => {
-          if (result.token) {
+          if (result.httpCode === 201) {
             return swal('Registration successful', 'You can now login', 'success');
           } else {
             throw new Error('Internal server error');

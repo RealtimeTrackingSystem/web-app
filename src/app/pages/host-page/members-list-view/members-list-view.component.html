@@ -11,9 +11,9 @@
         (firstPage)="firstPage()"
         (lastPage)="lastPage()"
         (goToPage)="goToPage($event)"
-        (clickCheck)="acceptRequest($event)"
-        (clickClear)="rejectRequest($event)"
-        hostRequestBtn="true"
+        (clickCheck)="setAsAdmin($event)"
+        (clickClear)="unsetAsAdmin($event)"
+        setAsAdminBtn="true"
       ></app-reporters-table>
     </div>
   </div>

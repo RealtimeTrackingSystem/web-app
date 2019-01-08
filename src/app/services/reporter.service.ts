@@ -17,6 +17,7 @@ export class ReporterService {
 
   private reporterUrl = environment.API_URL + `/api/reporters`;
   private hostUrl = environment.API_URL + `/api/hosts`;
+  private membersUrl = environment.API_URL + '/api/people/host-members';
 
   constructor(
     private http: HttpClient,
@@ -78,5 +79,32 @@ export class ReporterService {
     return this.http.delete(this.hostUrl + '/requests/' + hostId + '/' + userId, {
         headers: headers
       });
+  }
+
+  GetMembers(hostId: string, page, limit): Observable<any> {
+    let query = '';
+    if (page !== null) {
+      query += '?page=' + page;
+    }
+    if (page !== null && limit !== null) {
+      query += '&limit=' + limit;
+    }
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.get(this.membersUrl + '/' + hostId + query, {
+      headers: headers
+    });
+  }
+
+  setAdminship (hostId: string, userId: string, isAdmin: boolean): Observable<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.post(this.hostUrl + '/admin', {
+      hostId, userId, isAdmin
+    }, {
+      headers: headers
+    });
   }
 }

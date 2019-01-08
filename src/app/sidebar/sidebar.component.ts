@@ -84,6 +84,13 @@ export const ROUTES: RouteInfo[] = [
         type: 'link',
         icontype: 'notification_important',
         usedBy: 'host'
+    },
+    {
+        path: '/host/view-members',
+        title: 'View Members',
+        type: 'link',
+        icontype: 'notification_important',
+        usedBy: 'host'
     }
 ];
 

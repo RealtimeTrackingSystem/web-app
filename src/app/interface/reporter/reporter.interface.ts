@@ -14,4 +14,5 @@ export interface IReporter {
     reporterID: string;
     birthday: string;
     age: number;
+    hosts?: any[]
 }
