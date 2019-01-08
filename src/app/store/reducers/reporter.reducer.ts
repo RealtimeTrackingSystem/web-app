@@ -31,3 +31,21 @@ export function acceptRequestFailed (state: IReporterStore, action) {
     error: action.payload.error
   });
 }
+
+export function getHostMembersSuccess (state: IReporterStore, action) {
+  return tassign<IReporterStore, IReporterStore>(state, {
+    ...state,
+    reporters: action.payload.reporters,
+    count: action.payload.count,
+    page: action.payload.page,
+    limit: action.payload.limit,
+    error: null
+  });
+}
+
+export function getHostMembersFailed (state: IReporterStore, action) {
+  return tassign<IReporterStore, IReporterStore>(state, {
+    ...state,
+    error: action.payload.error
+  });
+}

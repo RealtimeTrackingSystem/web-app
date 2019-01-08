@@ -7,6 +7,7 @@ import { PendingHostRequestViewComponent } from './pending-host-request-view/pen
 import { ChangePasswordComponent, MyProfileComponent } from './../../profile';
 import { ReportCountComponent } from 'app/analytics';
 import { RegisterUserViewComponent } from './register-user-view/register-user-view.component';
+import { MembersListViewComponent } from './members-list-view/members-list-view.component';
 
 export const HostRoutes: Routes = [
   { path: '', redirectTo: 'analytics', pathMatch: 'full' },
@@ -44,6 +45,10 @@ export const HostRoutes: Routes = [
       {
         path: 'register-users',
         component: RegisterUserViewComponent
+      },
+      {
+        path: 'view-members',
+        component: MembersListViewComponent
       }
     ]
   },

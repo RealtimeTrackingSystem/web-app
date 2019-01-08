@@ -10,7 +10,9 @@ import { TableClass } from '../../classes';
 })
 export class ReportersTableComponent extends TableClass implements OnInit {
 
-  @Input() reporters: IReporter[]
+  @Input() reporters: IReporter[];
+  @Input() setAsAdminBtn: Boolean;
+  @Input() hostRequestBtn: Boolean;
   @Output() clickCheck = new EventEmitter<any>();
   @Output() clickClear = new EventEmitter<any>();
 
@@ -28,6 +30,14 @@ export class ReportersTableComponent extends TableClass implements OnInit {
 
   onClickClear (event) {
     this.clickClear.emit(event);
+  }
+
+  isAdmin (reporter: any): Boolean {
+    if (reporter.hosts && reporter.hosts[0] && reporter.hosts[0].isAdmin) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }

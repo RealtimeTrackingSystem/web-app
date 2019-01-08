@@ -18,6 +18,7 @@
                 <th>Alias</th>
                 <th>Location</th>
                 <th>Zip</th>
+                <th *ngIf="setAsAdminBtn">Admin</th>
                 <th class="text-right">Actions</th>
               </tr>
             </thead>
@@ -30,12 +31,21 @@
                   <td>{{row.alias}}</td>
                   <td>{{row.street}}, {{row.barangay}}, {{row.city}}, {{row.region}}, {{row.country}}</td>
                   <td>{{row.zip}}</td>
+                  <td *ngIf="setAsAdminBtn">{{ isAdmin(row) ? 'Yes' : 'No' }}</td>
                   <td class="td-actions text-right">
-                    <button mat-raised-button matTooltip="Accept Request" [matTooltipPosition]="'left'" type="button" (click)="onClickCheck(row)" class="btn btn-success">
+                    <button *ngIf="hostRequestBtn" mat-raised-button matTooltip="Accept Request" [matTooltipPosition]="'left'" type="button" (click)="onClickCheck(row)" class="btn btn-success">
                         <i class="material-icons">check</i>
                     </button>
                     
-                    <button mat-raised-button matTooltip="Reject Request" [matTooltipPosition]="'left'" type="button" (click)="onClickClear(row)" class="btn btn-danger">
+                    <button *ngIf="hostRequestBtn" mat-raised-button matTooltip="Reject Request" [matTooltipPosition]="'left'" type="button" (click)="onClickClear(row)" class="btn btn-danger">
+                        <i class="material-icons">clear</i>
+                    </button>
+
+                    <button *ngIf="setAsAdminBtn && !isAdmin(row)" mat-raised-button matTooltip="Set as Admin" [matTooltipPosition]="'left'" type="button" (click)="onClickCheck(row)" class="btn btn-success">
+                        <i class="material-icons">check</i>
+                    </button>
+                    
+                    <button *ngIf="setAsAdminBtn && isAdmin(row)" mat-raised-button matTooltip="Remove as Admin" [matTooltipPosition]="'left'" type="button" (click)="onClickClear(row)" class="btn btn-danger">
                         <i class="material-icons">clear</i>
                     </button>
                   </td>

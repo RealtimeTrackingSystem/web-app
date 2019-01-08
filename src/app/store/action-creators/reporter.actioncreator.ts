@@ -1,3 +1,4 @@
+import { REPORTER_GET_MEMBERS_SUCCESS } from './../actions/reporter.action';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgRedux } from '@angular-redux/store';
@@ -8,7 +9,8 @@ import {
   REPORTER_ACCEPT_REQUEST_FAILED,
   REPORTER_ACCEPT_REQUEST_SUCCESS,
   REPORTER_REJECT_REQUEST_FAILED,
-  REPORTER_REJECT_REQUEST_SUCCESS
+  REPORTER_REJECT_REQUEST_SUCCESS,
+  REPORTER_GET_MEMBERS_FAILED
 } from '../actions/reporter.action';
 import { tap, catchError, map, flatMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
@@ -129,6 +131,53 @@ export class ReporterActionCreator {
             const reporterStore = this.ngRedux.getState().reporter;
             return this.GetPendingHostRequests(hostId, reporterStore.page, reporterStore.limit);
           }
+        })
+      );
+  }
+
+  GetMembers (hostID: string, page = 0, limit = 10): Observable<any> {
+    return this.reporterService.GetMembers(hostID, page, limit)
+      .pipe(
+        catchError(error => of(error.error)),
+        tap((result: any) => {
+          if (result.httpCode !== 200) {
+            this.ngRedux.dispatch({
+              type: REPORTER_GET_MEMBERS_FAILED,
+              payload: {
+                error: result.message
+              }
+            });
+          }
+          if (result.httpCode === 200) {
+            this.ngRedux.dispatch({
+              type: REPORTER_GET_MEMBERS_SUCCESS,
+              payload: {
+                reporters: result.members,
+                page: page,
+                limit: limit,
+                count: result.count
+              }
+            });
+          }
+        }),
+        map(result => {
+          const reporters: IReporter[] = result.members.map((r: IReporter) => ({
+            _id: r._id,
+            username: r.username,
+            email: r.email,
+            fname: r.fname,
+            lname: r.lname,
+            alias: r.alias,
+            street: r.street,
+            barangay: r.barangay,
+            city: r.city,
+            region: r.region,
+            country: r.country,
+            zip: r.zip,
+            reporterID: r.reporterID,
+            hosts: r.hosts
+          }));
+          return reporters;
         })
       );
   }

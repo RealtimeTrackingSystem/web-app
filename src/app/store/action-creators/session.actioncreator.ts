@@ -100,6 +100,14 @@ export class SessionActionCreator {
       );
   }
 
+  AddNewUser (userNew: IUserNew): Observable<any> {
+    userNew.birthday = moment(userNew.birthday).format('YYYY-MM-DD');
+    return this.sessionService.Register(userNew)
+      .pipe(
+        catchError(error => of(JSON.parse(error._body)))
+      );
+  }
+
   Login (newSession: ISessionCreate): Observable<ISession> {
     return this.sessionService.Login(newSession)
       .pipe(

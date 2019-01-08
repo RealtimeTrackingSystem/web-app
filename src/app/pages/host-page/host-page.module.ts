@@ -14,6 +14,7 @@ import { PendingHostRequestViewComponent } from './pending-host-request-view/pen
 import { ProfileModule } from '../../profile';
 import { AnayliticsComponent } from './anaylitics/anaylitics.component';
 import { RegisterUserViewComponent } from './register-user-view/register-user-view.component';
+import { MembersListViewComponent } from './members-list-view/members-list-view.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { RegisterUserViewComponent } from './register-user-view/register-user-vi
     ReportDetailViewComponent,
     PendingHostRequestViewComponent,
     AnayliticsComponent,
-    RegisterUserViewComponent
+    RegisterUserViewComponent,
+    MembersListViewComponent
   ],
   entryComponents: [
   ]
