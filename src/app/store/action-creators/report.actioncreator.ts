@@ -18,6 +18,8 @@ import {
   REPORT_GET_NON_DUPLICATE_FAILED,
   REPORT_GET_NON_DUPLICATE_SUCCESS,
   REPORT_SET_DUPLICATE_SUCCESS,
+  REPORT_REMOVE_DUPLICATE_FAILED,
+  REPORT_REMOVE_DUPLICATE_SUCCESS,
   REPORT_SET_DUPLICATE_FAILED,
   REPORT_GET_SUSPECTS_FAILED,
   REPORT_GET_SUSPECTS_FULFILLED
@@ -317,6 +319,35 @@ export class ReportActionCreator {
           if (result.httpCode === 201) {
             this.ngRedux.dispatch({
               type: REPORT_SET_DUPLICATE_SUCCESS
+            });
+          }
+        }),
+        flatMap(result => {
+          return forkJoin(
+            of(result),
+            this.GetReportDetails(duplicate)
+          )
+        }),
+        map(results => results[0])
+      );
+  }
+
+  RemoveDuplicateReport (duplicate: string): Observable<any> {
+    return this.reportService.RemoveDuplicateReport(duplicate)
+      .pipe(
+        catchError(error => of(error.error)),
+        tap(result => {
+          if (result.httpCode >= 400) {
+            this.ngRedux.dispatch({
+              type: REPORT_REMOVE_DUPLICATE_FAILED,
+              payload: {
+                error: result.message
+              }
+            });
+          }
+          if (result.httpCode === 201) {
+            this.ngRedux.dispatch({
+              type: REPORT_REMOVE_DUPLICATE_SUCCESS
             });
           }
         }),

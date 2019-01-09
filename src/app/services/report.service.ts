@@ -143,6 +143,17 @@ export class ReportService {
     });
   }
 
+  RemoveDuplicateReport (duplicate: string): Observable<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.put(this.reportUrl + '/duplicates', {
+      duplicate
+    }, {
+      headers: headers
+    });
+  }
+
   SearchSuspects (search: string, page: number, limit: number): Observable<any> {
     let query = '?';
     if (limit) {

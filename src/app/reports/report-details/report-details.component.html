@@ -77,7 +77,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <button *ngIf="!isDuplicate() && !isVoid()" (click)="updateStatusDialog()" class="btn btn-info">Update Status</button>
-                <button *ngIf="isDuplicate() || isVoid()" class="btn btn-info disabled">Update Status</button>
+                <button *ngIf="isDuplicate()" (click)="removeDuplicate()" class="btn btn-warning">Unmark as Duplicate</button>
               </div>
             </div>
             <div class="col-md-3">

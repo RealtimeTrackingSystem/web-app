@@ -1,3 +1,4 @@
+import { ReportActionCreator } from 'app/store/action-creators';
 import { SetDuplicateDialogComponent } from './../set-duplicate-dialog/set-duplicate-dialog.component';
 import { UpdateStatusDialogComponent } from './../update-status-dialog/update-status-dialog.component';
 import { MatDialog } from '@angular/material';
@@ -28,7 +29,8 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
   constructor(
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private reportActionCreator: ReportActionCreator
   ) {
     this.reportDetailForm = this.formBuilder.group({
       _id: [{ value: null, disabled: true }],
@@ -124,6 +126,15 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
     });
+  }
+
+  removeDuplicate() {
+    if (this.report) {
+      const duplicate = this.report._id;
+      return this.reportActionCreator.RemoveDuplicateReport(duplicate)
+        .toPromise()
+        .then();
+    }
   }
 
   seeOriginal() {

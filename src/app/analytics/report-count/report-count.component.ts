@@ -23,29 +23,34 @@ export class ReportCountComponent implements OnInit, OnDestroy {
   public reportData = [];
   @Input() startDate: number = Number(new Date('2018-01-01'));
   @Input() endDate: number = Number(new Date('2018-12-01'));
+  @Input() hostId: string;
 
   constructor(
     private reportService: ReportService
   ) { }
 
   ngOnInit() {
-    this.graphDataSubscription = this.loadReportGraphData(this.startDate, this.endDate)
+    if (this.hostId) {
+      this.graphDataSubscription = this.loadReportGraphData(this.startDate, this.endDate, this.hostId)
       .subscribe(
         data => {
           this.reportData = this.getReportTableData(data);
         }
       );
+    }
   }
 
   ngOnDestroy() {
     this.graphDataSubscription.unsubscribe();
   }
 
-  loadReportGraphData (startDate: number, endDate: number) {
+  loadReportGraphData (startDate: number, endDate: number, hostId: string) {
     if (this.startDate && this.endDate) {
       return this.reports
         .pipe(
-          map(result => result.reports),
+          map(result => result.reports.filter(r => {
+            return r._host === hostId;
+          })),
           map(this.convertCreatedAt),
           map(this.groupByCategories),
           tap(data => {
