@@ -67,7 +67,8 @@ export const ROUTES: RouteInfo[] = [
         collapse: 'host/reports',
         children: [
             {path: 'table', title: 'Table View', ab: 'TV'},
-            {path: 'map', title: 'Map View', ab: 'MV'}
+            {path: 'map', title: 'Map View', ab: 'MV'},
+            {path: 'suspects', title: 'Suspect List', ab: 'SL'}
         ],
         usedBy: 'host'
     },

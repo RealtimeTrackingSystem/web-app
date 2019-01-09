@@ -18,7 +18,9 @@ import {
   REPORT_GET_NON_DUPLICATE_FAILED,
   REPORT_GET_NON_DUPLICATE_SUCCESS,
   REPORT_SET_DUPLICATE_SUCCESS,
-  REPORT_SET_DUPLICATE_FAILED
+  REPORT_SET_DUPLICATE_FAILED,
+  REPORT_GET_SUSPECTS_FAILED,
+  REPORT_GET_SUSPECTS_FULFILLED
 } from '../actions/report.action';
 import { Subscription } from 'rxjs/Subscription';
 import { ReportService, DialogService } from '../../services';
@@ -116,6 +118,7 @@ export class ReportActionCreator {
         }),
         map(result => ({
           reports: result.reports,
+          suspects: [],
           reportDetails: null,
           page: page,
           limit: limit,
@@ -324,6 +327,33 @@ export class ReportActionCreator {
           )
         }),
         map(results => results[0])
+      );
+  }
+
+  SearchSuspectsPaginated (page: number = 0, limit: number = 10, search: string): Observable<any> {
+    return this.reportService.SearchSuspects(search, page, limit)
+      .pipe(
+        catchError(error => of(error.error)),
+        tap(result => {
+          if (result.httpCode >= 400) {
+            this.ngRedux.dispatch({
+              type: REPORT_GET_SUSPECTS_FAILED,
+              payload: {
+                error: result.message || 'Internal server error'
+              }
+            });
+          } else if (result.httpCode === 200) {
+            this.ngRedux.dispatch({
+              type: REPORT_GET_SUSPECTS_FULFILLED,
+              payload: {
+                suspects: result.people,
+                limit: limit,
+                page: page,
+                count: result.count
+              }
+            })
+          }
+        })
       );
   }
 }

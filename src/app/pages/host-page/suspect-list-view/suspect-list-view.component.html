@@ -1,0 +1,19 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="">
+      <app-suspects-table
+        [suspects]="($suspects | async)"
+        [count]="($count | async)"
+        [page]="($page | async)"
+        [limit]="($limit | async)"
+        (nextPage)="nextPage()"
+        (prevPage)="prevPage()"
+        (firstPage)="firstPage()"
+        (lastPage)="lastPage()"
+        (goToPage)="goToPage($event)"
+        (details)="reportDetails($event)"
+        (searchSuspects)="searchSuspects($event)"
+      ></app-suspects-table>
+    </div>
+  </div>
+</div>

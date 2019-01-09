@@ -15,6 +15,7 @@ import { of, forkJoin } from 'rxjs';
 export class ReportService {
 
   private reportUrl = environment.API_URL + `/api/reports`;
+  private peopleUrl = environment.API_URL + '/api/people';
   private VALID_RESOURCES: string[] = [
     'people', 'properties', 'medias', 'reporter', 'host'
   ];
@@ -138,6 +139,23 @@ export class ReportService {
     return this.http.post(this.reportUrl + '/duplicates', {
       parentDuplicate, duplicate
     }, {
+      headers: headers
+    });
+  }
+
+  SearchSuspects (search: string, page: number, limit: number): Observable<any> {
+    let query = '?';
+    if (limit) {
+      query += 'page=' + page + '&limit=' + limit;
+    }
+    if (search) {
+      query += '&search=' + search;
+    }
+    query += '&isCulprit=' + true;
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.get(this.peopleUrl + query, {
       headers: headers
     });
   }

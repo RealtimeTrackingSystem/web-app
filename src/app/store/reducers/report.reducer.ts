@@ -105,3 +105,21 @@ export function setDuplicateReportFailed (state: IReportStore, action) {
     error: action.payload.error
   });
 }
+
+export function getSuspectsSuccess (state: IReportStore, action) {
+  return tassign<IReportStore, IReportStore>(state, {
+    ...state,
+    limit: action.payload.limit,
+    page: action.payload.page,
+    count: action.payload.count,
+    suspects: action.payload.suspects,
+    error: null
+  });
+}
+
+export function getSuspectsFailed (state: IReportStore, action) {
+  return tassign<IReportStore, IReportStore>(state, {
+    ...state,
+    error: action.payload.error
+  });
+}
