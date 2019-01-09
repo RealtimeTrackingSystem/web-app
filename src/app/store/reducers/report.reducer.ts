@@ -106,6 +106,21 @@ export function setDuplicateReportFailed (state: IReportStore, action) {
   });
 }
 
+export function removeDuplicateReportSuccess (state: IReportStore) {
+  return tassign<IReportStore, IReportStore>(state, {
+    ...state,
+    error: null
+  });
+}
+
+export function removeDuplicateReportFailed (state: IReportStore, action) {
+  return tassign<IReportStore, IReportStore>(state, {
+    ...state,
+    error: action.payload.error
+  });
+}
+
+
 export function getSuspectsSuccess (state: IReportStore, action) {
   return tassign<IReportStore, IReportStore>(state, {
     ...state,

@@ -14,6 +14,8 @@ import {
   REPORT_GET_NON_DUPLICATE_SUCCESS,
   REPORT_SET_DUPLICATE_SUCCESS,
   REPORT_SET_DUPLICATE_FAILED,
+  REPORT_REMOVE_DUPLICATE_FAILED,
+  REPORT_REMOVE_DUPLICATE_SUCCESS,
   REPORT_GET_SUSPECTS_FAILED,
   REPORT_GET_SUSPECTS_FULFILLED
 } from './actions/report.action';
@@ -58,6 +60,8 @@ export function reportReducer(state: IReportStore = REPORT_INITIAL_STATE, action
     case REPORT_GET_NON_DUPLICATE_SUCCESS: return report.getNonDuplicateReportSuccess(state, action);
     case REPORT_SET_DUPLICATE_FAILED: return report.setDuplicateReportFailed(state, action);
     case REPORT_SET_DUPLICATE_SUCCESS: return report.setDuplicateReportSuccess(state);
+    case REPORT_REMOVE_DUPLICATE_FAILED: return report.removeDuplicateReportFailed(state, action);
+    case REPORT_REMOVE_DUPLICATE_SUCCESS: return report.removeDuplicateReportSuccess(state);
     case REPORT_GET_SUSPECTS_FAILED: return report.getSuspectsFailed(state, action);
     case REPORT_GET_SUSPECTS_FULFILLED: return report.getSuspectsSuccess(state, action);
   }
