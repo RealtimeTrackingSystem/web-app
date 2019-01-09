@@ -4,3 +4,4 @@ export { ReportDetailsComponent } from './report-details/report-details.componen
 export { NewReportComponent } from './new-report/new-report.component';
 export { UpdateStatusDialogComponent } from './update-status-dialog/update-status-dialog.component';
 export { SetDuplicateDialogComponent } from './set-duplicate-dialog/set-duplicate-dialog.component';
+export { SuspectsTableComponent } from './suspects-table/suspects-table.component';

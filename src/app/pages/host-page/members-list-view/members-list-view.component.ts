@@ -82,6 +82,7 @@ export class MembersListViewComponent implements OnInit, ITable {
       .then();
   }
 
+  // @TODO interface this with redux
   setAsAdmin (reporter) {
     const userData: IUserDataStore = this.ngRedux.getState().userData;
     if (userData.user._id === reporter._id) {
@@ -101,6 +102,7 @@ export class MembersListViewComponent implements OnInit, ITable {
       });
   }
 
+  // @TODO interface this with redux
   unsetAsAdmin (reporter) {
     const userData: IUserDataStore = this.ngRedux.getState().userData;
     if (userData.user._id === reporter._id) {

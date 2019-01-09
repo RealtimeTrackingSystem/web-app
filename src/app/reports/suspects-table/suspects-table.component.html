@@ -1,0 +1,95 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header card-header-rose card-header-icon">
+      <div class="card-icon">
+        <i class="material-icons">assignment</i>
+      </div>
+      <h4 class="card-title">Suspects</h4>
+    </div>
+      <div class="card-body">
+        <div *ngIf="fiteredSuspects" class="table-responsive">
+          <form [formGroup]="suspectSearchForm" (submit)="onSearchSuspects()"  class="navbar-form">
+            <div class="input-group no-border">
+              <input type="text" formControlName="searchString" value="" class="form-control" placeholder="Search...">
+              <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
+                <i class="material-icons">search</i>
+                <div class="ripple-container"></div>
+              </button>
+            </div>
+          </form>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Reported At</th>
+                <th>From Report Title</th>
+                <th>Report Status</th>
+                <th class="text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of fiteredSuspects">
+                  <td>{{ row._id }}</td>
+                  <td>{{ row.fname }}</td>
+                  <td>{{ row.lname }}</td>
+                  <td>{{ row._report ? row._report.createdAt : row.createdAt }}</td>
+                  <td>{{ row._report ? row._report.title : '' }}</td>
+                  <td>{{ row._report ? row._report.status : '' }}</td>
+                  <td class="td-actions text-right">
+                    <button mat-raised-button matTooltip="View Report" [matTooltipPosition]="'left'" type="button" (click)="onClickDetails(row)" class="btn btn-success">
+                        <i class="material-icons">info</i>
+                    </button>
+                  </td>
+              </tr>
+            </tbody>
+            
+          </table>
+          <div class="row">
+            <div class="col-sm-5">
+                <div class="dataTables_info" id="datatables_info" role="status" aria-live="polite">Showing {{((page + 1) * limit) - limit}} to {{ (page + 1) * limit < count ? (page + 1) * limit :  count}} of {{count}} entries
+                </div>
+            </div>
+            <div class="col-sm-7">
+                <div class="dataTables_paginate paging_full_numbers" id="datatables_paginate">
+                    <ul class="pagination">
+                        <!--<li class="paginate_button first" id="datatables_first">
+                            <a href="#" aria-controls="datatables" data-dt-idx="0" tabindex="0">First</a>
+                        </li>
+                        <li class="paginate_button previous" id="datatables_previous">
+                            <a href="#" aria-controls="datatables" data-dt-idx="1" tabindex="0">Previous</a>
+                        </li>
+                        <li class="paginate_button ">
+                            <a href="#" aria-controls="datatables" data-dt-idx="2" tabindex="0">1</a>
+                        </li>
+                        <li class="paginate_button ">
+                            <a href="#" aria-controls="datatables" data-dt-idx="3" tabindex="0">2</a>
+                        </li>
+                        <li class="paginate_button "><a href="#" aria-controls="datatables" data-dt-idx="4" tabindex="0">3</a></li>
+                        <li class="paginate_button active"><a href="#" aria-controls="datatables" data-dt-idx="5" tabindex="0">4</a></li>-->
+                        <li class="paginate_button first" id="datatables_first">
+                            <a aria-controls="datatables" (click)="onFirstPage()" tabindex="0">First</a>
+                        </li>
+                        <li class="paginate_button previous" id="datatables_previous">
+                            <a aria-controls="datatables" (click)="onPrevPage()" tabindex="0">Previous</a>
+                        </li>
+
+                        <li *ngFor="let p of pages"  class="paginate_button" [className]="p === page ? 'active paginate_button' : 'paginate_button'">
+                            <a (click)="onTargetPage(p)">{{ p + 1 }}</a>
+                        </li>
+
+                        <li class="paginate_button next disabled" id="datatables_next">
+                          <a aria-controls="datatables" (click)="onNextPage()" tabindex="0">Next</a>
+                        </li>
+                        <li class="paginate_button last disabled" id="datatables_last">
+                          <a aria-controls="datatables" (click)="onLastPage()" tabindex="0">Last</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

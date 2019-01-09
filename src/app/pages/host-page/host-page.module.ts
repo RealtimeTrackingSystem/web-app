@@ -15,6 +15,7 @@ import { ProfileModule } from '../../profile';
 import { AnayliticsComponent } from './anaylitics/anaylitics.component';
 import { RegisterUserViewComponent } from './register-user-view/register-user-view.component';
 import { MembersListViewComponent } from './members-list-view/members-list-view.component';
+import { SuspectListViewComponent } from './suspect-list-view/suspect-list-view.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { MembersListViewComponent } from './members-list-view/members-list-view.
     PendingHostRequestViewComponent,
     AnayliticsComponent,
     RegisterUserViewComponent,
-    MembersListViewComponent
+    MembersListViewComponent,
+    SuspectListViewComponent
   ],
   entryComponents: [
   ]

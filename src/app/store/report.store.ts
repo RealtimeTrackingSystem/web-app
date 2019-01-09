@@ -13,12 +13,15 @@ import {
   REPORT_GET_NON_DUPLICATE_FAILED,
   REPORT_GET_NON_DUPLICATE_SUCCESS,
   REPORT_SET_DUPLICATE_SUCCESS,
-  REPORT_SET_DUPLICATE_FAILED
+  REPORT_SET_DUPLICATE_FAILED,
+  REPORT_GET_SUSPECTS_FAILED,
+  REPORT_GET_SUSPECTS_FULFILLED
 } from './actions/report.action';
 
 import * as report from './reducers/report.reducer';
 export interface IReportStore {
   reports: IReport[];
+  suspects: any[];
   limit: number;
   page: number;
   count: number;
@@ -30,6 +33,7 @@ export interface IReportStore {
 
 export const REPORT_INITIAL_STATE: IReportStore = {
   reports: [],
+  suspects: [],
   reportDetails: null,
   limit: 0,
   page: 0,
@@ -54,6 +58,8 @@ export function reportReducer(state: IReportStore = REPORT_INITIAL_STATE, action
     case REPORT_GET_NON_DUPLICATE_SUCCESS: return report.getNonDuplicateReportSuccess(state, action);
     case REPORT_SET_DUPLICATE_FAILED: return report.setDuplicateReportFailed(state, action);
     case REPORT_SET_DUPLICATE_SUCCESS: return report.setDuplicateReportSuccess(state);
+    case REPORT_GET_SUSPECTS_FAILED: return report.getSuspectsFailed(state, action);
+    case REPORT_GET_SUSPECTS_FULFILLED: return report.getSuspectsSuccess(state, action);
   }
   return state;
 };

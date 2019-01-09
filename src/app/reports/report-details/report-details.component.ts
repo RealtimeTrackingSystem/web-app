@@ -62,6 +62,7 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
   }
 
   loadReportDetails (report: IReport) {
+    console.log(report.people);
     const notes = report.notes
       .map(n => {
         return moment(n.updatedAt).format('YYYY-MM-DD HH:MM') + ' Update: ' + n.text;
@@ -81,7 +82,8 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
       _reporter: [{ value: report._reporter['fname'] + ' ' + report._reporter['lname'], disabled: true }],
       _host: [{ value: report._host ? report._host['name'] : 'Individual Report', disabled: true }],
       status: [{ value: report.status, disabled: true }],
-      people: [{ value: report.people.map(r => r.fname + ' ' + r.lname).join(', '), disabled: true }],
+      people: [{ value: report.people
+        .map(r => r.fname + ' ' + r.lname + `${r.isCulprit ? ' (Suspect)' : ' (Victim)'}`).join(', '), disabled: true }],
       properties: [{ value: report.properties.map(p => p.type).join(', '), disabled: true }],
       tags: [{ value: report.tags.join(', '), disabled: true }],
       createdAt: [{ value: report.createdAt, disabled: true }],
