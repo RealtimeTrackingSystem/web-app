@@ -92,7 +92,22 @@ export const ROUTES: RouteInfo[] = [
         type: 'link',
         icontype: 'notification_important',
         usedBy: 'host'
-    }
+    },
+    // admin
+    {
+        path: '/admin/dashboard',
+        title: 'Dashboard',
+        type: 'link',
+        icontype: 'dashboard',
+        usedBy: 'admin'
+    },
+    {
+        path: '/admin/host-joined',
+        title: 'Host List',
+        type: 'link',
+        icontype: 'view_list',
+        usedBy: 'admin'
+    },
 ];
 
 @Component({

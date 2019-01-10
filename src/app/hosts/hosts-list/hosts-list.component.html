@@ -8,7 +8,7 @@
     </div>
       <div class="card-body">
         <div *ngIf="hosts" class="table-responsive">
-        <form [formGroup]="searchHostForm" (submit)="onSearchHost()"  class="navbar-form">
+        <form *ngIf="search === true" [formGroup]="searchHostForm" (submit)="onSearchHost()"  class="navbar-form">
           <div class="input-group no-border">
             <input type="text" formControlName="searchString" value="" class="form-control" placeholder="Search...">
             <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
@@ -36,8 +36,15 @@
                   <td>{{row.email}}</td>
                   <td>{{row.createdAt}}</td>
                   <td class="td-actions text-right">
-                    <button (click)="onAddButton(row)" [matTooltip]="addToolTip(row.name)" [matTooltipPosition]="'left'" mat-raised-button type="button" class="btn btn-info">
+                    <button *ngIf="confirmHost === false && row.isApproved" (click)="onAddButton(row)" [matTooltip]="addToolTip(row.name)" [matTooltipPosition]="'left'" mat-raised-button type="button" class="btn btn-info">
                         <i class="material-icons">group_add</i>
+                    </button>
+
+                    <button *ngIf="!confirmHost == false && !row.isApproved" (click)="onConfirmHost(row)" [matTooltip]="addToolTip2(row.name)" [matTooltipPosition]="'left'" mat-raised-button type="button" class="btn btn-success">
+                        <i class="material-icons">check</i>
+                    </button>
+                    <button *ngIf="!confirmHost == false && row.isApproved" (click)="onBlockHost(row)" [matTooltip]="addToolTip3(row.name)" [matTooltipPosition]="'left'" mat-raised-button type="button" class="btn btn-danger">
+                        <i class="material-icons">clear</i>
                     </button>
                   </td>
               </tr>

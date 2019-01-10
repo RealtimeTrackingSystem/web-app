@@ -11,8 +11,12 @@ import { TableClass } from '../../classes';
 export class HostsListComponent extends TableClass implements OnInit {
 
   @Input() hosts: IHost[];
+  @Input() search = true;
+  @Input() confirmHost = false;
   @Output() addButton = new EventEmitter<any>();
   @Output() searchHost = new EventEmitter<any>();
+  @Output() confirmHostClick = new EventEmitter<any>();
+  @Output() blockHostClick = new EventEmitter<any>();
 
   public searchHostForm: FormGroup;
 
@@ -23,6 +27,7 @@ export class HostsListComponent extends TableClass implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.hosts);
     this.searchHostForm = this.formBuilder.group({
       searchString: [null]
     });
@@ -33,8 +38,24 @@ export class HostsListComponent extends TableClass implements OnInit {
     return 'Send Request To Host: ' + hostName;
   }
 
+  addToolTip2 (hostName) {
+    return 'Confirm Host: ' + hostName;
+  }
+
+  addToolTip3 (hostName) {
+    return 'Block Host: ' + hostName;
+  }
+
   onAddButton (host: IHost) {
     this.addButton.emit(host);
+  }
+
+  onConfirmHost (host: IHost) {
+    this.confirmHostClick.emit(host);
+  }
+
+  onBlockHost (host: IHost) {
+    this.blockHostClick.emit(host);
   }
 
   onSearchHost() {

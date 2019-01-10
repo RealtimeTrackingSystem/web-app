@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminRoutes } from './admin-page.routing';
 import { DashboardModule } from '../../dashboard/dashboard.module';
+import { HostJoinedViewComponent } from './host-joined-view/host-joined-view.component';
+import { HostsModule } from '../../hosts';
 
 @NgModule({
   imports: [
@@ -11,9 +13,11 @@ import { DashboardModule } from '../../dashboard/dashboard.module';
     RouterModule.forChild(AdminRoutes),
     FormsModule,
     ReactiveFormsModule,
-    DashboardModule
+    DashboardModule,
+    HostsModule
   ],
   declarations: [
+    HostJoinedViewComponent
   ],
   entryComponents: [
   ]

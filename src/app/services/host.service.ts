@@ -92,4 +92,22 @@ export class HostService {
       headers: headers
     });
   }
+
+  ApproveHost (hostId: string) {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.put(this.hostUrl + '/approval/' + hostId, {}, {
+      headers: headers
+    });
+  }
+
+  DisapproveHost (hostId: string) {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.put(this.hostUrl + '/disapproval/' + hostId, {}, {
+      headers: headers
+    });
+  }
 }
