@@ -73,7 +73,6 @@ export class LoginComponent implements OnInit, OnDestroy {
           .toPromise()
           .then(result => {
             if (result.token) {
-              console.log(result.user);
               if (result.user && result.user.accessLevel.toUpperCase() === 'ADMIN') {
                 this.router.navigate([`/admin`]);
               } else {
