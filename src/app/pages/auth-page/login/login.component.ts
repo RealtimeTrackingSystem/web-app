@@ -73,7 +73,11 @@ export class LoginComponent implements OnInit, OnDestroy {
           .toPromise()
           .then(result => {
             if (result.token) {
-              this.router.navigate([`/public`]);
+              if (result.user && result.user.accessLevel.toUpperCase() === 'ADMIN') {
+                this.router.navigate([`/admin`]);
+              } else {
+                this.router.navigate([`/public`]);
+              }
             } else {
               return swal('Invalid Credentials', 'Invalid Username/ Email or password', 'warning');
             }

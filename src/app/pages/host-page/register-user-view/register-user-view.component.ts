@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { SessionActionCreator } from '../../../store/action-creators';
 import swal from 'sweetalert2';
 import { map, flatMap } from 'rxjs/operators';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-register-user-view',
@@ -91,6 +92,10 @@ export class RegisterUserViewComponent implements OnInit {
     } else {
       return swal('Server Not Available', 'Server is temporarily Unavailable', 'error');
     }
+  }
+
+  minDate () {
+    return moment().subtract(1, 'd').format('YYYY-MM-DD');
   }
 
 }
