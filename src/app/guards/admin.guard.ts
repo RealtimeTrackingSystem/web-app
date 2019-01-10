@@ -1,47 +1,62 @@
+import { map } from 'rxjs/operators';
+import { IHostMemberships } from './../interface';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivateChild } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import swal from 'sweetalert2';
-import { ISession } from 'app/interface/session/session.interface';
+import { UserDataActionCreator } from '../store/action-creators/user-data.actioncreator';
+import { IUserDataStore } from 'app/store/user-data.store';
 
 
 @Injectable()
 export class AdminGuard implements CanActivate, CanActivateChild {
   constructor (
-    private router: Router
+    private router: Router,
+    private userDataActionCreator: UserDataActionCreator
   ) {}
 
   canActivate(
   ): Observable<boolean> | Promise<boolean> | boolean {
-    // const session: ISession = JSON.parse(localStorage.getItem('session'));
-    // if (!session || !session.token || (session.user._role.accessLevel !== 1 )) {
-    //   swal({
-    //     type: 'error',
-    //     title: 'Invalid URL',
-    //     text: 'This content is not available.',
-    //   }).then(() => {
-    //     this.router.navigate(['auth/login']);
-    //   });
-    // } else {
-    //   return true;
-    // }
-    return true;
+    return this.userDataActionCreator.checkUserData()
+      .pipe(
+        map(userData => userData)
+      )
+      .toPromise()
+      .then((userData: IUserDataStore) => {
+        console.log(userData);
+        if (!userData.user.accessLevel && userData.user && userData.user.accessLevel.toUpperCase() !== 'ADMIN') {
+          swal({
+            type: 'warning',
+            title: 'Sorry',
+            text: 'You are not authorized for this content',
+          }).then(() => {
+            this.router.navigate(['/public/dashboard']);
+          });
+        } else {
+          return true;
+        }
+      });
   }
 
   canActivateChild(
   ): Observable<boolean> | Promise<boolean> | boolean {
-    const session: ISession = JSON.parse(localStorage.getItem('session'));
-    // if (!session || !session.token || (session.user._role.accessLevel !== 1 )) {
-    //   swal({
-    //     type: 'error',
-    //     title: 'Invalid URL',
-    //     text: 'This content is not available.',
-    //   }).then(() => {
-    //     this.router.navigate(['auth/login']);
-    //   });
-    // } else {
-    //   return true;
-    // }
-    return true;
+    return this.userDataActionCreator.checkUserData()
+      .pipe(
+        map(userData => userData)
+      )
+      .toPromise()
+      .then((userData: IUserDataStore) => {
+        if (!userData.user.accessLevel && userData.user && userData.user.accessLevel.toUpperCase() !== 'ADMIN') {
+          swal({
+            type: 'warning',
+            title: 'Sorry',
+            text: 'You are not authorized for this content',
+          }).then(() => {
+            this.router.navigate(['/public/dashboard']);
+          });
+        } else {
+          return true;
+        }
+      });
   }
 }

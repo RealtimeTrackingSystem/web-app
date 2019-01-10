@@ -72,7 +72,7 @@ export class HostListViewComponent implements OnInit, OnDestroy, ITable {
     }
   }
   nextPage () {
-    const {count, limit, page} = this.ngRedux.getState().report;
+    const {count, limit, page} = this.ngRedux.getState().host;
     if (limit * (page + 1) < count) {
       const pageNumber = this.pageNumber + 1;
       this.pageNumber += 1;
@@ -88,7 +88,7 @@ export class HostListViewComponent implements OnInit, OnDestroy, ITable {
         : this.hostActionCreator.SearchHostPaginate(this.hostSearchString, 0, 10).toPromise().then();
   }
   lastPage () {
-    const {count, limit, page} = this.ngRedux.getState().report;
+    const {count, limit, page} = this.ngRedux.getState().host;
     const lastPage = Math.ceil(count / limit) - 1;
     this.pageNumber = lastPage;
     (this.hostSearchString === '' || this.hostSearchString == null)

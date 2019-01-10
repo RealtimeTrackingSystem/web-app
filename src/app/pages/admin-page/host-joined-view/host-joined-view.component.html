@@ -1,0 +1,19 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <app-hosts-list
+        [hosts]="($hosts | async)"
+        [count]="($count | async)"
+        [page]="($page | async)"
+        [limit]="($limit | async)"
+        (nextPage)="nextPage()"
+        (prevPage)="prevPage()"
+        (firstPage)="firstPage()"
+        (lastPage)="lastPage()"
+        (goToPage)="goToPage($event)"
+        (confirmHostClick)="confirmHost($event)"
+        (blockHostClick)="blockHost($event)"
+        search="false"
+        confirmHost="false"
+      ></app-hosts-list>
+  </div>
+</div>

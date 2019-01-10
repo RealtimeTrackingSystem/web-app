@@ -23,4 +23,5 @@ export interface IUser {
   hosts?: IHostMember[];
   profilePicture?: IProfilePicture;
   birthday?: string;
+  accessLevel?: string;
 }

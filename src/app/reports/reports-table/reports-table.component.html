@@ -35,7 +35,7 @@
                   <td>{{row.status}}</td>
                   <td>{{row.location}}</td>
                   <td>{{row._host ? row._host.name : 'Individual Report'}}</td>
-                  <td>{{isAnonymous(row) ? 'Yes' : 'No'}}</td>
+                  <td>{{isAnonymous(row) ? 'No' : 'Yes'}}</td>
                   <td>{{row.createdAt}}</td>
                   <td class="td-actions text-right">
                     <button mat-raised-button type="button" (click)="onClickDetails(row)" class="btn btn-success">
