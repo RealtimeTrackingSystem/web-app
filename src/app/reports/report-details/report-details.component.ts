@@ -48,6 +48,7 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
       tags: [{ value: null, disabled: true }],
       createdAt: [{ value: null, disabled: true }],
       updatedAt: [{ value: null, disabled: true }],
+      category: [{ value: null, disabled: true }],
       notes: [{ value: null, disabled: true }]
     });
   }
@@ -58,13 +59,11 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
 
   ngOnChanges (changes) {
     if (this.report) {
-      console.log(this.report.duplicates);
       this.loadReportDetails(this.report);
     }
   }
 
   loadReportDetails (report: IReport) {
-    console.log(report.people);
     const notes = report.notes
       .map(n => {
         return moment(n.updatedAt).format('YYYY-MM-DD HH:MM') + ' Update: ' + n.text;
@@ -90,7 +89,8 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
       tags: [{ value: report.tags.join(', '), disabled: true }],
       createdAt: [{ value: report.createdAt, disabled: true }],
       updatedAt: [{ value: report.updatedAt, disabled: true }],
-      notes: [{ value: notes, disabled: true }]
+      notes: [{ value: notes, disabled: true }],
+      category: [{ value: report.category ? report.category.name : '', disabled: true }]
     });
   }
 

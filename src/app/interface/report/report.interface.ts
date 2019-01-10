@@ -28,4 +28,5 @@ export interface IReport {
   duplicateParent?: IReport;
   duplicates?: IReport[];
   isDuplicate?: boolean;
+  category?: any;
 }

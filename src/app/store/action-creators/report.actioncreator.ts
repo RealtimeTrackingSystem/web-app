@@ -60,7 +60,8 @@ export class ReportActionCreator {
       notes: report.notes,
       duplicates: report.duplicates,
       duplicateParent: report.duplicateParent,
-      isDuplicate: report.isDuplicate
+      isDuplicate: report.isDuplicate,
+      category: report.category
     });
   }
 
