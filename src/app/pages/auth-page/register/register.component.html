@@ -56,7 +56,7 @@
                         <div class="form-group has-default">
                           <div class="input-group">
                             <mat-form-field class="example-full-width">
-                              <input matInput formControlName="birthday" placeholder="Birthday" type="date">
+                              <input matInput formControlName="birthday" placeholder="Birthday" type="date" [max]="minDate()">
                             </mat-form-field>
                           </div>
                         </div>

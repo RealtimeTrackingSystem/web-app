@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from
 import { SessionActionCreator } from '../../../store/action-creators';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
+import * as moment from 'moment';
 
 declare var $: any;
 
@@ -114,5 +115,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
       } else {
         return swal('Server Not Available', 'Server is temporarily Unavailable', 'error');
       }
+    }
+
+    minDate () {
+      return moment().subtract(1, 'd').format('YYYY-MM-DD');
     }
 }

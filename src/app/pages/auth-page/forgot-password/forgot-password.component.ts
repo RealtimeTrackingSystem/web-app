@@ -11,7 +11,7 @@ declare var $: any;
   templateUrl: './forgot-password.component.html'
 })
 
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordComponent implements OnInit, OnDestroy {
 
   test: Date = new Date();
     private toggleButton: any;
@@ -68,25 +68,37 @@ export class ForgotPasswordComponent implements OnInit {
 
     resetPassword() {
       if (this.resetPasswordForm.valid) {
-        this.sessionActionCreator.ForgotPassword(this.resetPasswordForm.value.email)
-          .toPromise()
-          .then(response => {
-            switch (response.httpCode) {
-              case 400: {
-                return swal('Reset Password', response.message, 'warning');
-              }
-              case 201: {
-                this.resetPasswordForm.reset();
-                return swal('Reset Password', 'Successfully change password. \n Please check your email.', 'info');
-              }
-              default: {
-                return swal('Reset Password', response.message, 'error');
-              }
-            }
-          })
-          .catch(error => {
-            return swal('Reset Password', 'Internal Server Error', 'error');
-          })
+        return swal({
+          title: 'Are you sure you want to Reset your password?',
+          text: 'You won\'t be able to revert this!',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes'
+        }).then((result) => {
+          if (result.value === true) {
+            return this.sessionActionCreator.ForgotPassword(this.resetPasswordForm.value.email)
+              .toPromise()
+              .then(response => {
+                switch (response.httpCode) {
+                  case 400: {
+                    return swal('Reset Password', response.message, 'warning');
+                  }
+                  case 201: {
+                    this.resetPasswordForm.reset();
+                    return swal('Reset Password', 'Successfully change password. \n Please check your email.', 'info');
+                  }
+                  default: {
+                    return swal('Reset Password', response.message, 'error');
+                  }
+                }
+              })
+              .catch(error => {
+                return swal('Reset Password', 'Internal Server Error', 'error');
+              })
+          }
+        })
       } else {
         return swal('Invalid Form', 'Please enter your email', 'info');
       }
