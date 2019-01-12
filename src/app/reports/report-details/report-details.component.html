@@ -120,7 +120,7 @@
                 actions="['sendSummon', 'sendClearance']"
                 (sendSummon)="sendSummon($event)"
                 (viewSummonDetails)="summonDetailsDialog($event)"
-                (sendClearance)="sendClearance($event)"
+                (sendClearance)="sendClearanceDialog($event)"
               ></app-suspects-table>
             </div>
             <div *ngIf="!report || report.people.length < 1" class="col-md-12">

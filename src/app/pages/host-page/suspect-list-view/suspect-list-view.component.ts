@@ -1,3 +1,5 @@
+import { MatDialog } from '@angular/material';
+import { SendClearanceDialogComponent } from './../../../reports/send-clearance-dialog/send-clearance-dialog.component';
 import { ReportService } from './../../../services/report.service';
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
@@ -31,7 +33,8 @@ export class SuspectListViewComponent implements OnInit, ITable {
     private reportService: ReportService,
     private ngRedux: NgRedux<IAppState>,
     private reportActionCreator: ReportActionCreator,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -119,5 +122,16 @@ export class SuspectListViewComponent implements OnInit, ITable {
     if (data._report) {
       this.router.navigate(['/host/reports/details/' + data._report._id]);
     }
+  }
+
+  sendClearanceDialog (event) {
+    const dialogRef = this.dialog.open(SendClearanceDialogComponent, {
+      width: '750px',
+      data: event
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 }

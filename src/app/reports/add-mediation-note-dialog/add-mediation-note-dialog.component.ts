@@ -75,11 +75,13 @@ export class AddMediationNoteDialogComponent implements OnInit {
           .subscribe(
             (result) => {
               this.sending = false;
-             console.log(result);
+             swal('Success', 'Successfully added mediation note', 'success');
             },
             (error) => {
               this.sending = false;
-              console.log(error);
+              swal('Warning', 'An error occured while sending mediation note', 'warning');
+            }, () => {
+              this.dialogRef.close();
             }
           );
       }
