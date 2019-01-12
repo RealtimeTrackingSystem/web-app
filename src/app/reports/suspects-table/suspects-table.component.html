@@ -47,6 +47,9 @@
             <button *ngIf="toShowActions('sendSummon')" mat-raised-button matTooltip="Send Summon" [matTooltipPosition]="'left'" type="button" (click)="onSendSummonClick(row)" class="btn btn-success">
                 <i class="material-icons">mail</i>
             </button>
+            <button *ngIf="toShowActions('sendClearance')" mat-raised-button matTooltip="Give Clearance" [matTooltipPosition]="'left'" type="button" (click)="onSendClearanceClick(row)" class="btn btn-info">
+                <i class="material-icons">check</i>
+            </button>
           </td>
       </tr>
     </tbody>

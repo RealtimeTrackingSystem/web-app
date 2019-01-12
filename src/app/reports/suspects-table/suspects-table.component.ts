@@ -10,13 +10,14 @@ export class SuspectsTableComponent extends TableClass implements OnInit, OnChan
 
   @Input() suspects: any[];
   @Input() fields: string[] = ['_id', 'fname', 'lname', 'reportedAt', 'reportTitle', 'reportStatus', 'type', 'actions'];
-  @Input() actions: string[] = ['viewDetails'];
+  @Input() actions: string[] = ['viewDetails', 'sendClearance'];
   @Input() pagination = true;
   @Input() searchBar = true;
   @Output() clickInfo = new EventEmitter<any>();
   @Output() searchSuspects = new EventEmitter<any>();
   @Output() sendSummon = new EventEmitter<any>();
   @Output() viewSummonDetails = new EventEmitter<any>();
+  @Output() sendClearance = new EventEmitter<any>();
 
   public fiteredSuspects: any[];
   public suspectSearchForm: FormGroup;
@@ -61,6 +62,10 @@ export class SuspectsTableComponent extends TableClass implements OnInit, OnChan
 
   onViewSummonDetailsClick (event) {
     this.viewSummonDetails.emit(event);
+  }
+
+  onSendClearanceClick (event) {
+    this.sendClearance.emit(event);
   }
 
 }
