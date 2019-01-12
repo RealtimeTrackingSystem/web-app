@@ -1,0 +1,23 @@
+<div *ngIf="populatedMediationNotes" class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Mediated by</th>
+        <th>Summary</th>
+        <th>Attachment</th>
+        <th>Added At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of populatedMediationNotes">
+        <td>{{ row._id }}</td>
+        <td>{{ row._reporter && row._reporter.fname ? row._reporter.fname + ' ' + row._reporter.lname : row._reporter }}</td>
+        <th>{{ row.note }}</th>
+        <th><a *ngIf="row.link != '#'" href="{{row.link}}" target="_blank">View Attachment</a></th>
+        <th>{{ row.createdAt }}</th>
+      </tr>
+    </tbody>
+    
+  </table>
+</div>

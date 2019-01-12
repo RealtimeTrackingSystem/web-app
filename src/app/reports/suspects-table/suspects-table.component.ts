@@ -9,8 +9,14 @@ import { TableClass } from '../../classes';
 export class SuspectsTableComponent extends TableClass implements OnInit, OnChanges {
 
   @Input() suspects: any[];
+  @Input() fields: string[] = ['_id', 'fname', 'lname', 'reportedAt', 'reportTitle', 'reportStatus', 'type', 'actions'];
+  @Input() actions: string[] = ['viewDetails'];
+  @Input() pagination = true;
+  @Input() searchBar = true;
   @Output() clickInfo = new EventEmitter<any>();
   @Output() searchSuspects = new EventEmitter<any>();
+  @Output() sendSummon = new EventEmitter<any>();
+  @Output() viewSummonDetails = new EventEmitter<any>();
 
   public fiteredSuspects: any[];
   public suspectSearchForm: FormGroup;
@@ -39,6 +45,22 @@ export class SuspectsTableComponent extends TableClass implements OnInit, OnChan
 
   onSearchSuspects () {
     this.searchSuspects.emit(this.suspectSearchForm.value.searchString);
+  }
+
+  toShow (field) {
+    return this.fields.indexOf(field) > -1;
+  }
+
+  toShowActions (action) {
+    return this.actions.indexOf(action) > -1;
+  }
+
+  onSendSummonClick (event) {
+    this.sendSummon.emit(event);
+  }
+
+  onViewSummonDetailsClick (event) {
+    this.viewSummonDetails.emit(event);
   }
 
 }

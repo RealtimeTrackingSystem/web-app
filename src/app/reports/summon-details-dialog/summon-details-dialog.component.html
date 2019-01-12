@@ -1,0 +1,53 @@
+<h1 mat-dialog-title>Summon Details</h1>
+<div mat-dialog-content>
+  <form [formGroup]="summonForm">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="bmd-label-floating">ID</label>
+          <input formControlName="_id" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="bmd-label-floating">TYPE</label>
+          <input formControlName="type" type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="bmd-label-floating">Summon Sent Count</label>
+          <input formControlName="count" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="bmd-label-floating">Expiration</label>
+          <input formControlName="expiration" type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="bmd-label-floating">Compliance</label>
+          <input formControlName="compliance" type="text" class="form-control">
+        </div>
+      </div>
+      <div *ngIf="data.compliance == 'NEW'" class="col-md-6">
+        <div class="row">
+          <div class="col-md-6"><button (click)="setComplied()" class="btn btn-info">Complied</button></div>
+          <div class="col-md-6"><button (click)="setNotComplied()"  class="btn btn-warning">Did not comply</button></div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="btn" (click)="onOkClick()">Cancel</button>
+</div>

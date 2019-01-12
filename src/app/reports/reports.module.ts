@@ -16,6 +16,12 @@ import { ComponentModule } from '../components';
 import { UpdateStatusDialogComponent } from './update-status-dialog/update-status-dialog.component';
 import { SetDuplicateDialogComponent } from './set-duplicate-dialog/set-duplicate-dialog.component';
 import { SuspectsTableComponent } from './suspects-table/suspects-table.component';
+import { PeopleTableComponent } from './people-table/people-table.component';
+import { AddSummonDialogComponent } from './add-summon-dialog/add-summon-dialog.component';
+import { SummonDetailsDialogComponent } from './summon-details-dialog/summon-details-dialog.component';
+import { MediationNotesTableComponent } from './mediation-notes-table/mediation-notes-table.component';
+import { UpdateMediationNotesDialogComponent } from './update-mediation-notes-dialog/update-mediation-notes-dialog.component';
+import { AddMediationNoteDialogComponent } from './add-mediation-note-dialog/add-mediation-note-dialog.component';
 
 @NgModule({
   imports: [
@@ -35,7 +41,13 @@ import { SuspectsTableComponent } from './suspects-table/suspects-table.componen
     NewReportComponent,
     UpdateStatusDialogComponent,
     SetDuplicateDialogComponent,
-    SuspectsTableComponent
+    SuspectsTableComponent,
+    PeopleTableComponent,
+    AddSummonDialogComponent,
+    SummonDetailsDialogComponent,
+    MediationNotesTableComponent,
+    UpdateMediationNotesDialogComponent,
+    AddMediationNoteDialogComponent
   ],
   exports: [
     ReportsTableComponent,
@@ -43,12 +55,22 @@ import { SuspectsTableComponent } from './suspects-table/suspects-table.componen
     NewReportComponent,
     UpdateStatusDialogComponent,
     SetDuplicateDialogComponent,
-    SuspectsTableComponent
+    SuspectsTableComponent,
+    AddSummonDialogComponent,
+    PeopleTableComponent,
+    SummonDetailsDialogComponent,
+    MediationNotesTableComponent,
+    UpdateMediationNotesDialogComponent,
+    AddMediationNoteDialogComponent
   ],
   entryComponents: [
     MapPointerModalComponent,
     UpdateStatusDialogComponent,
-    SetDuplicateDialogComponent
+    SetDuplicateDialogComponent,
+    AddSummonDialogComponent,
+    SummonDetailsDialogComponent,
+    UpdateMediationNotesDialogComponent,
+    AddMediationNoteDialogComponent
   ]
 })
 

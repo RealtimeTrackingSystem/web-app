@@ -61,7 +61,8 @@ export class ReportActionCreator {
       duplicates: report.duplicates,
       duplicateParent: report.duplicateParent,
       isDuplicate: report.isDuplicate,
-      category: report.category
+      category: report.category,
+      ...report
     });
   }
 

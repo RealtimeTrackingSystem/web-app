@@ -11,6 +11,7 @@ import { SpinnerComponent, DirectiveModule } from '../directives';
 import { ModalBasicComponentComponent } from './modal/modal-basic/modal-basic-component.component';
 import { MediaViewerV1Component } from './media-viewer/media-viewerV1/media-viewer-v1.component'
 import { PipeModule } from './../pipes';
+import { FileUploadWithFormComponent } from './fileUpload/form/file-upload-with-form.component';
 
 @NgModule({
   imports: [
@@ -26,14 +27,16 @@ import { PipeModule } from './../pipes';
     InputBasicComponent,
     TableBasicComponent,
     FileUploadBasicComponent,
-    MediaViewerV1Component
+    MediaViewerV1Component,
+    FileUploadWithFormComponent
   ],
   declarations: [
     InputBasicComponent,
     TableBasicComponent,
     FileUploadBasicComponent,
     ModalBasicComponentComponent,
-    MediaViewerV1Component
+    MediaViewerV1Component,
+    FileUploadWithFormComponent
   ],
   entryComponents: [
     SpinnerComponent

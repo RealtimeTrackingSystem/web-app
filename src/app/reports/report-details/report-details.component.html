@@ -89,19 +89,16 @@
           </div>
 
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-3">
               <div class="form-group">
                 <label class="bmd-label-floating">Category</label>
                 <input formControlName="category" type="text" class="form-control">
               </div>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-3">
               <div class="form-group">
-                <label class="bmd-label-floating">PEOPLE</label>
-                <input formControlName="people" type="text" class="form-control">
+                <label class="bmd-label-floating">Urgency</label>
+                <input formControlName="urgency" type="text" class="form-control">
               </div>
             </div>
             <div class="col-md-6">
@@ -109,6 +106,36 @@
                 <label class="bmd-label-floating">TAGS</label>
                 <input formControlName="tags" type="text" class="form-control">
               </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div *ngIf="report && report.people.length > 0" class="col-md-12">
+              <h3>People Involved</h3>
+              <app-suspects-table *ngIf="report && report.people.length > 0"
+                [suspects]="report.people"
+                fields="['_id', 'fname', 'lname', 'type', 'summons', 'clearance', 'actions']"
+                pagination="false"
+                searchBar="false"
+                actions="['sendSummon']"
+                (sendSummon)="sendSummon($event)"
+                (viewSummonDetails)="summonDetailsDialog($event)"
+              ></app-suspects-table>
+            </div>
+            <div *ngIf="!report || !report.people.length > 0" class="col-md-12">
+              <h3>No People Involved</h3>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-10">
+              <h3>Mediation Notes</h3>
+              <app-mediation-notes-table *ngIf="report && report.mediationNotes.length > 0" 
+                [mediationNotes]="report.mediationNotes"
+              ></app-mediation-notes-table>
+            </div>
+            <div class="col-md-2">
+              <button (click)="addMediationNoteDialog()" class="btn btn-info">ADD Mediation Note</button>
             </div>
           </div>
   

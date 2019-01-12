@@ -1,0 +1,26 @@
+<div>
+  <form [formGroup]="addMediationNoteForm">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label class="bmd-label-floating">Note</label>
+          <input formControlName="note" type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+    <div class="fileinput-preview fileinput-exists thumbnail img-circle"></div>
+    <div>
+      <span class="btn btn-success btn-file">
+        <span class="fileinput-new">Upload File</span>
+        <span class="fileinput-exists">Change</span>
+        <input id="file" type="file" name="..." />
+      </span>
+      <button type="button" class="fileinput-exists btn btn-primary" (click)="upload()" >Submit</button>
+      <br />
+      <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput" >
+        <i class="fa fa-times"></i> Remove</a>
+    </div>
+  </div>
+</div>
