@@ -9,7 +9,7 @@ import { TableClass } from '../../classes';
 export class SuspectsTableComponent extends TableClass implements OnInit, OnChanges {
 
   @Input() suspects: any[];
-  @Input() fields: string[] = ['_id', 'fname', 'lname', 'reportedAt', 'reportTitle', 'reportStatus', 'type', 'actions'];
+  @Input() fields: string[] = ['_id', 'fname', 'lname', 'reportedAt', 'reportTitle', 'reportStatus', 'type', 'clearance', 'actions'];
   @Input() actions: string[] = ['viewDetails', 'sendClearance'];
   @Input() pagination = true;
   @Input() searchBar = true;

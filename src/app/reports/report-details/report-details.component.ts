@@ -1,3 +1,4 @@
+import { SendClearanceDialogComponent } from './../send-clearance-dialog/send-clearance-dialog.component';
 import { AddMediationNoteDialogComponent } from './../add-mediation-note-dialog/add-mediation-note-dialog.component';
 import { SummonDetailsDialogComponent } from './../summon-details-dialog/summon-details-dialog.component';
 import { ReportService } from './../../services/report.service';
@@ -142,6 +143,17 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
     });
   }
 
+  sendClearanceDialog (event) {
+    const dialogRef = this.dialog.open(SendClearanceDialogComponent, {
+      width: '750px',
+      data: event
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
+
   isDuplicate () {
     return this.report && this.report.isDuplicate;
   }
@@ -203,10 +215,6 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
         return swal('Success', 'Successfully sent summon', 'success');
       }
     })
-  }
-
-  sendClearance (event) {
-    console.log(event);
   }
 
 }
