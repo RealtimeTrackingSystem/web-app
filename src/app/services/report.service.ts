@@ -171,4 +171,66 @@ export class ReportService {
     });
   }
 
+  sendSummon (personId: string) {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.post(this.peopleUrl + '/summons/', {
+      personId: personId
+    }, {
+      headers: headers
+    });
+  }
+
+  getSummonById (summonId: string) {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.get(this.peopleUrl + '/summons/' + summonId, {
+      headers: headers
+    });
+  }
+
+  updateSummon (summonId: string, compliance: string, complianceNote: string) {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.put(this.peopleUrl + '/summons/' + summonId, {
+      compliance, complianceNote
+    }, {
+      headers: headers
+    });
+  }
+
+  getMediationNoteById (mediationNoteId: string) {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.get(this.reportUrl + '/mediationNotes/' + mediationNoteId, {
+      headers: headers
+    });
+  }
+
+  addFileAction (reportId: string, note: string) {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.post(this.reportUrl + '/fileActions', {
+      reportId, note
+    }, {
+      headers: headers
+    });
+  }
+
+  updateFileAction (fileActionId: string, note: string) {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.put(this.reportUrl + '/fileActions/' + fileActionId, {
+      note: note
+    }, {
+      headers: headers
+    });
+  }
+
 }

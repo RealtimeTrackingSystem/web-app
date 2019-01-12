@@ -29,4 +29,7 @@ export interface IReport {
   duplicates?: IReport[];
   isDuplicate?: boolean;
   category?: any;
+  urgency?: string;
+  _fileAction?: any;
+  mediationNotes?: any[];
 }
