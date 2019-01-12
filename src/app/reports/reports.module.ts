@@ -22,6 +22,7 @@ import { SummonDetailsDialogComponent } from './summon-details-dialog/summon-det
 import { MediationNotesTableComponent } from './mediation-notes-table/mediation-notes-table.component';
 import { UpdateMediationNotesDialogComponent } from './update-mediation-notes-dialog/update-mediation-notes-dialog.component';
 import { AddMediationNoteDialogComponent } from './add-mediation-note-dialog/add-mediation-note-dialog.component';
+import { SendClearanceDialogComponent } from './send-clearance-dialog/send-clearance-dialog.component';
 
 @NgModule({
   imports: [
@@ -47,7 +48,8 @@ import { AddMediationNoteDialogComponent } from './add-mediation-note-dialog/add
     SummonDetailsDialogComponent,
     MediationNotesTableComponent,
     UpdateMediationNotesDialogComponent,
-    AddMediationNoteDialogComponent
+    AddMediationNoteDialogComponent,
+    SendClearanceDialogComponent
   ],
   exports: [
     ReportsTableComponent,
@@ -61,7 +63,8 @@ import { AddMediationNoteDialogComponent } from './add-mediation-note-dialog/add
     SummonDetailsDialogComponent,
     MediationNotesTableComponent,
     UpdateMediationNotesDialogComponent,
-    AddMediationNoteDialogComponent
+    AddMediationNoteDialogComponent,
+    SendClearanceDialogComponent
   ],
   entryComponents: [
     MapPointerModalComponent,
@@ -70,7 +73,8 @@ import { AddMediationNoteDialogComponent } from './add-mediation-note-dialog/add
     AddSummonDialogComponent,
     SummonDetailsDialogComponent,
     UpdateMediationNotesDialogComponent,
-    AddMediationNoteDialogComponent
+    AddMediationNoteDialogComponent,
+    SendClearanceDialogComponent
   ]
 })
 

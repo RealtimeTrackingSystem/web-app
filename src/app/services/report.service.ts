@@ -233,4 +233,15 @@ export class ReportService {
     });
   }
 
+  sendClearance ({ personId, clearanceNotes, reporterId, reporterLname, reporterFname, reporterEmail }: any) {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', this.GetSessionToken());
+    return this.http.post(this.peopleUrl + '/clearances', {
+      personId, clearanceNotes, reporterId, reporterLname, reporterFname, reporterEmail
+    }, {
+      headers: headers
+    })
+  }
+
 }

@@ -117,12 +117,13 @@
                 fields="['_id', 'fname', 'lname', 'type', 'summons', 'clearance', 'actions']"
                 pagination="false"
                 searchBar="false"
-                actions="['sendSummon']"
+                actions="['sendSummon', 'sendClearance']"
                 (sendSummon)="sendSummon($event)"
                 (viewSummonDetails)="summonDetailsDialog($event)"
+                (sendClearance)="sendClearance($event)"
               ></app-suspects-table>
             </div>
-            <div *ngIf="!report || !report.people.length > 0" class="col-md-12">
+            <div *ngIf="!report || report.people.length < 1" class="col-md-12">
               <h3>No People Involved</h3>
             </div>
           </div>

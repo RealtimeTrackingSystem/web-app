@@ -205,4 +205,8 @@ export class ReportDetailsComponent implements OnInit, OnChanges {
     })
   }
 
+  sendClearance (event) {
+    console.log(event);
+  }
+
 }
