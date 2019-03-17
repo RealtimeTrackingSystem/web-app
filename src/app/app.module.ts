@@ -121,7 +121,7 @@ export class MaterialModule {}
         FooterModule,
         FixedpluginModule,
         AgmCoreModule.forRoot({
-          apiKey: 'AIzaSyCZ9GxZSLeKD_XC_eOcMFPReIvHocR5WII'
+          apiKey: 'AIzaSyBmbRGliVKKLtrHUGQYRC2XrRqWgrX3Iqs'
         })
     ],
     declarations: [

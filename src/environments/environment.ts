@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://35.198.219.21/middleware-api'
-  // API_URL: 'http://localhost:3000'
+  API_URL: 'https://35.198.249.140/middleware-api'
+  // API_URL: 'https://rcrts-midware-staging-env.herokuapp.com'
 };
